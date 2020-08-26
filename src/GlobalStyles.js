@@ -11,7 +11,7 @@ export default createGlobalStyle`
   @font-face {
     font-family: "GmarketSans";
     src: url(./res/fonts/GmarketSansTTFBold.ttf);
-    font-weight: bolder;
+    font-weight: 600;
   }
   a {
       text-decoration: none;
