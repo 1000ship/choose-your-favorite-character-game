@@ -4,11 +4,11 @@ import ChatBoxBackgroundImage from '../../Resources/Images/game_chat_box.png'
 
 const Container = styled.div`
   position: absolute;
-  left: 5%;
+  left: 10%;
   bottom: 30px;
   display: flex;
   justify-content: center;
-  width: 90%;
+  width: 80%;
 `;
 const ChatBoxImage = styled.img`
   width: 100%;
@@ -19,16 +19,16 @@ const Contents = styled.div`
   top: 0;
   display: flex;
   flex-direction: column;
-  padding: 3% 5%;
+  padding: 3% 10%;
 `;
 const NameText = styled.span`
   font-weight: bolder;
-  font-size: 30px;
+  font-size: 3vw;
   margin-bottom: 10px;
   color: #662d91;
 `;
 const TalkText = styled.span`
-  font-size: 20px;
+  font-size: 2vw;
   margin-left: 10px;
   color: black;
 `;
