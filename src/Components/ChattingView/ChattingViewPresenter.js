@@ -58,7 +58,7 @@ const ChattingViewPresenter = (props) => (
     <Contents>
       <DateText>오늘</DateText>
       <LeftMessage>당신의 이름은?</LeftMessage>
-      <RightMessage>나의 이름은 ( )</RightMessage>
+      <RightMessage>나의 이름은 <input type="text"></input></RightMessage>
     </Contents>
   </Container>
 );
