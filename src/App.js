@@ -1,10 +1,14 @@
 import React from 'react';
 import './App.css';
 import ChattingView from './Components/ChattingView/ChattingViewContainer'
+import GlobalStyles from './GlobalStyles';
 
 function App() {
   return (
-    <ChattingView></ChattingView>
+    <>
+      <GlobalStyles/>
+      <ChattingView></ChattingView>
+    </>
   );
 }
 
