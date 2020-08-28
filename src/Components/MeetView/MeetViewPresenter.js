@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ChatBox from "./ChatBox";
 
+
 const Container = styled.div``;
 
 const BackgroundImage = styled.div`
@@ -29,8 +30,7 @@ const CharacterImage = styled.div`
   transform: scale(0.9);
 `;
 
-const MeetViewPresenter = (props) => {
-  const { characterName, sceneScript } = props;
+const MeetViewPresenter = ({ scene }) => {
   return (
     <Container>
       <BackgroundImage
@@ -40,8 +40,7 @@ const MeetViewPresenter = (props) => {
         imageSrc={"./res/img/character/02 궁금.png"}
       ></CharacterImage>
       <ChatBox
-        characterName={characterName}
-        sceneScript={sceneScript}
+        scene={scene}
       ></ChatBox>
     </Container>
   );

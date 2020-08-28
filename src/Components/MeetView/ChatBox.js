@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import ChatBoxBackgroundImage from "../../Resources/Images/game_chat_box.png";
+import OptionSelector from "./OptionSelector";
 
 const Container = styled.div`
   position: absolute;
   left: 10%;
   bottom: 30px;
-  display: flex;
-  justify-content: center;
   width: 80%;
 `;
 const ChatBoxImage = styled.img`
@@ -33,14 +32,15 @@ const TalkText = styled.span`
   color: black;
 `;
 
-const ChatBox = (props) => {
-  const { characterName, sceneScript } = props;
+const ChatBox = ({scene}) => {
+  const { characterName, sceneScript, options } = scene;
   return (
     <Container>
       <ChatBoxImage src={ChatBoxBackgroundImage}></ChatBoxImage>
       <Contents>
         <NameText>{characterName}</NameText>
         <TalkText>{sceneScript}</TalkText>
+        <OptionSelector options={options}></OptionSelector>
       </Contents>
     </Container>
   );

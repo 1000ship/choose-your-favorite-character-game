@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const ScriptInterpreter = function (fileName) {
-  const currentSceneState = useState({ characterName: "", sceneScript: "" });
+  const currentSceneState = useState({ characterName: "", sceneScript: "", options:[] });
   const filePath = `./res/scenes/${fileName}`;
   this.scenes = [];
   this.currentScene = currentSceneState[0];
@@ -12,6 +12,8 @@ const ScriptInterpreter = function (fileName) {
     this.scenes = await data.json();
     this.setCurrentScene(this.scenes[0]);
   }, []);
+
+  useEffect(() => console.log(this.currentScene), [this.currentScene]);
 
   this.getNextScene = (optionIndex) => {
     const nextSceneId = this.currentScene.options[optionIndex].nextId;
