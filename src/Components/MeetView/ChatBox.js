@@ -40,28 +40,33 @@ const ChatBox = ({ scriptInterpreter }) => {
   const {
     characterName = "",
     sceneScript = "",
-    options = "",
+    options = [],
+    nextSceneId = "",
   } = scriptInterpreter.currentScene;
   const [chatState, setChatState] = useState({
     step: CHAT_STEP_SCRIPT,
   });
 
+  console.log( chatState.step )
+
+  const clickEvent = (e) => {
+    if (chatState.step === CHAT_STEP_OPTION) return;
+    setChatState((chatState) => {
+      const { step, nextId = null } = chatState;
+      if (step === CHAT_STEP_SCRIPT) {
+        return { step: CHAT_STEP_OPTION };
+      } else if (step === CHAT_STEP_REACTION) {
+        scriptInterpreter.getNextScene(nextId);
+        return {
+          step: CHAT_STEP_SCRIPT,
+        };
+      }
+      return chatState;
+    });
+    e.stopPropagation();
+  };
+
   useEffect(() => {
-    function clickEvent(e) {
-      if (chatState.step === CHAT_STEP_OPTION) return;
-      setChatState((chatState) => {
-        const { step, nextId = null } = chatState;
-        if (step === CHAT_STEP_SCRIPT) return { step: CHAT_STEP_OPTION };
-        else if (step === CHAT_STEP_REACTION) {
-          scriptInterpreter.getNextScene(nextId)
-          return ({
-            step: CHAT_STEP_SCRIPT
-          })
-        }
-        return chatState;
-      });
-      e.stopPropagation();
-    }
     window.addEventListener("click", clickEvent);
   }, []);
 
