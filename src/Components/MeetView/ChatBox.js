@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ChatBoxBackgroundImage from '../../Resources/Images/game_chat_box.png'
+import ChatBoxBackgroundImage from "../../Resources/Images/game_chat_box.png";
 
 const Container = styled.div`
   position: absolute;
@@ -34,13 +34,16 @@ const TalkText = styled.span`
 `;
 
 const ChatBox = (props) => {
-  return <Container>
-    <ChatBoxImage src={ChatBoxBackgroundImage}></ChatBoxImage>
-    <Contents>
-      <NameText>Amy</NameText>
-      <TalkText>my name is </TalkText>
-    </Contents>
-  </Container>;
+  const { characterName, sceneScript } = props;
+  return (
+    <Container>
+      <ChatBoxImage src={ChatBoxBackgroundImage}></ChatBoxImage>
+      <Contents>
+        <NameText>{characterName}</NameText>
+        <TalkText>{sceneScript}</TalkText>
+      </Contents>
+    </Container>
+  );
 };
 
 export default ChatBox;
