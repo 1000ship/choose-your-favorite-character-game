@@ -1,10 +1,10 @@
 import React from "react";
 import MeetViewPresenter from "./MeetViewPresenter";
 
-const MeetViewContainer = ({ scene }) => {
+const MeetViewContainer = ({ scriptInterpreter }) => {
   return (
     <MeetViewPresenter
-      scene={scene}
+      scriptInterpreter={scriptInterpreter}
     ></MeetViewPresenter>
   );
 };

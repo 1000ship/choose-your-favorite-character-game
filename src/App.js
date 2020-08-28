@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <GlobalStyles/>
-      <MeetView scene={scriptInterpreter.currentScene}></MeetView>
+      <MeetView scriptInterpreter={scriptInterpreter}></MeetView>
     </>
   );
 }

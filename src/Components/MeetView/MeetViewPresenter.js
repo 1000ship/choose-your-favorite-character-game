@@ -30,7 +30,7 @@ const CharacterImage = styled.div`
   transform: scale(0.9);
 `;
 
-const MeetViewPresenter = ({ scene }) => {
+const MeetViewPresenter = ({ scriptInterpreter }) => {
   return (
     <Container>
       <BackgroundImage
@@ -40,7 +40,7 @@ const MeetViewPresenter = ({ scene }) => {
         imageSrc={"./res/img/character/02 궁금.png"}
       ></CharacterImage>
       <ChatBox
-        scene={scene}
+        scriptInterpreter={scriptInterpreter}
       ></ChatBox>
     </Container>
   );
