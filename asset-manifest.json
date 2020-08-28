@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/choose-your-favorite-character-game/static/css/main.d1b05096.chunk.css",
-    "main.js": "/choose-your-favorite-character-game/static/js/main.00049866.chunk.js",
-    "main.js.map": "/choose-your-favorite-character-game/static/js/main.00049866.chunk.js.map",
+    "main.css": "/choose-your-favorite-character-game/static/css/main.5f361e03.chunk.css",
+    "main.js": "/choose-your-favorite-character-game/static/js/main.1a2e71cc.chunk.js",
+    "main.js.map": "/choose-your-favorite-character-game/static/js/main.1a2e71cc.chunk.js.map",
     "runtime-main.js": "/choose-your-favorite-character-game/static/js/runtime-main.cdf2f3ec.js",
     "runtime-main.js.map": "/choose-your-favorite-character-game/static/js/runtime-main.cdf2f3ec.js.map",
     "static/js/2.5ce09e79.chunk.js": "/choose-your-favorite-character-game/static/js/2.5ce09e79.chunk.js",
     "static/js/2.5ce09e79.chunk.js.map": "/choose-your-favorite-character-game/static/js/2.5ce09e79.chunk.js.map",
     "index.html": "/choose-your-favorite-character-game/index.html",
-    "precache-manifest.286f002735c952273dada960c9a2c99c.js": "/choose-your-favorite-character-game/precache-manifest.286f002735c952273dada960c9a2c99c.js",
+    "precache-manifest.b647f0135ca9ab46be65a6609e41671c.js": "/choose-your-favorite-character-game/precache-manifest.b647f0135ca9ab46be65a6609e41671c.js",
     "service-worker.js": "/choose-your-favorite-character-game/service-worker.js",
-    "static/css/main.d1b05096.chunk.css.map": "/choose-your-favorite-character-game/static/css/main.d1b05096.chunk.css.map",
+    "static/css/main.5f361e03.chunk.css.map": "/choose-your-favorite-character-game/static/css/main.5f361e03.chunk.css.map",
     "static/js/2.5ce09e79.chunk.js.LICENSE.txt": "/choose-your-favorite-character-game/static/js/2.5ce09e79.chunk.js.LICENSE.txt",
     "static/media/cyfc_top_logo.png": "/choose-your-favorite-character-game/static/media/cyfc_top_logo.5562f7f2.png",
     "static/media/game_chat_box.png": "/choose-your-favorite-character-game/static/media/game_chat_box.008fe626.png"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.cdf2f3ec.js",
     "static/js/2.5ce09e79.chunk.js",
-    "static/css/main.d1b05096.chunk.css",
-    "static/js/main.00049866.chunk.js"
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.1a2e71cc.chunk.js"
   ]
 }
