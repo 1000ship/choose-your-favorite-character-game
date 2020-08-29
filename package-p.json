@@ -21,6 +21,7 @@
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
+  "homepage": "https://1000ship.github.io/choose-your-favorite-character-game",
   "eslintConfig": {
     "extends": "react-app"
   },

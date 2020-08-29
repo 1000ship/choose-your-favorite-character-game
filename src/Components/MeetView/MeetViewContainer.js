@@ -28,18 +28,19 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       characterImage,
       sceneType,
       options,
-      nextSceneId
+      nextSceneId,
     } = newScene;
     let updateData = {
       step: MEET_STEP_SCRIPT,
       characterName,
       sceneScript,
       options,
-      nextSceneId
+      nextSceneId,
     };
     if (backgroundImage?.length > 0)
-      updateData.backgroundImage = backgroundImage;
-    if (characterImage?.length > 0) updateData.characterImage = characterImage;
+      updateData.backgroundImage = backgroundImage.trim();
+    if (characterImage?.length > 0)
+      updateData.characterImage = characterImage.trim();
     if (sceneType === SCENE_TYPE_ENDING) updateData.characterImage = "";
     if (sceneScript?.length === 0) updateData.step = MEET_STEP_OPTION;
     return Object.assign(Object.assign({}, data), updateData);
@@ -70,10 +71,11 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
 
   const stepFromReaction = () => {
     setMeetData((data) => {
-      const { options, nextSceneId } = scriptInterpreter.currentScene;
       const { optionIndex } = data;
       const nextId =
-        options?.length > 0 ? options[optionIndex].nextId : nextSceneId;
+        data.options?.length > 0
+          ? data.options[optionIndex].nextId
+          : data.nextSceneId;
       scriptInterpreter.getNextScene(nextId);
       return createInitScene(scriptInterpreter.currentScene, data);
     });
@@ -88,7 +90,9 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       };
       if (data.options[optionIndex].reaction?.length === 0) {
         const nextId =
-          data.options?.length > 0 ? data.options[optionIndex].nextId : data.nextSceneId;
+          data.options?.length > 0
+            ? data.options[optionIndex].nextId
+            : data.nextSceneId;
         scriptInterpreter.getNextScene(nextId);
         return createInitScene(scriptInterpreter.currentScene, data);
       }
