@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ChattingViewPresenter from "./ChattingViewPresenter";
-import { SCENE_TYPE_MEET } from "../../Utils/constant";
+import { SCENE_TYPE_MEET, SCENE_TYPE_CHANGE_DURATION } from "../../Utils/constant";
 
 const ChattingViewContainer = ({ scriptInterpreter, setSceneType }) => {
   const [chatList, setChatList] = useState([
@@ -13,7 +13,7 @@ const ChattingViewContainer = ({ scriptInterpreter, setSceneType }) => {
   const doCurrentScene = () => {
     const { sceneType, sceneScript, options, nextSceneId } = scriptInterpreter.currentScene;
     if(sceneType === SCENE_TYPE_MEET){
-      setSceneType(SCENE_TYPE_MEET)
+      setTimeout(() => setSceneType(SCENE_TYPE_MEET), SCENE_TYPE_CHANGE_DURATION);
       return
     }
     setChatList((chatList) => {

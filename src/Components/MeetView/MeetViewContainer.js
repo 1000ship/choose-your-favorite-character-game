@@ -5,6 +5,7 @@ import {
   MEET_STEP_OPTION,
   MEET_STEP_REACTION,
   MEET_STEP_SCRIPT,
+  SCENE_TYPE_CHANGE_DURATION,
 } from "../../Utils/constant";
 
 const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
@@ -31,10 +32,10 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       characterName,
       sceneScript,
     } = scriptInterpreter.currentScene;
-    // if (sceneType === SCENE_TYPE_TEXT) {
-    //   setSceneType(SCENE_TYPE_TEXT);
-    //   return;
-    // }
+    if (sceneType === SCENE_TYPE_TEXT) {
+      setTimeout(() => setSceneType(SCENE_TYPE_TEXT), SCENE_TYPE_CHANGE_DURATION);
+      return;
+    }
     setMeetData((data) => createInitScene(characterName, sceneScript));
   };
 
