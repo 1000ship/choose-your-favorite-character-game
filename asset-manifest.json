@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/choose-your-favorite-character-game/static/css/main.5f361e03.chunk.css",
-    "main.js": "/choose-your-favorite-character-game/static/js/main.e731bcff.chunk.js",
-    "main.js.map": "/choose-your-favorite-character-game/static/js/main.e731bcff.chunk.js.map",
+    "main.js": "/choose-your-favorite-character-game/static/js/main.32d82268.chunk.js",
+    "main.js.map": "/choose-your-favorite-character-game/static/js/main.32d82268.chunk.js.map",
     "runtime-main.js": "/choose-your-favorite-character-game/static/js/runtime-main.cdf2f3ec.js",
     "runtime-main.js.map": "/choose-your-favorite-character-game/static/js/runtime-main.cdf2f3ec.js.map",
     "static/js/2.55bd9814.chunk.js": "/choose-your-favorite-character-game/static/js/2.55bd9814.chunk.js",
     "static/js/2.55bd9814.chunk.js.map": "/choose-your-favorite-character-game/static/js/2.55bd9814.chunk.js.map",
     "index.html": "/choose-your-favorite-character-game/index.html",
-    "precache-manifest.95fe9b5f76cee998b370ede7bd7d531a.js": "/choose-your-favorite-character-game/precache-manifest.95fe9b5f76cee998b370ede7bd7d531a.js",
+    "precache-manifest.b91d8fa810f51524057d70e80eccdb96.js": "/choose-your-favorite-character-game/precache-manifest.b91d8fa810f51524057d70e80eccdb96.js",
     "service-worker.js": "/choose-your-favorite-character-game/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/choose-your-favorite-character-game/static/css/main.5f361e03.chunk.css.map",
     "static/js/2.55bd9814.chunk.js.LICENSE.txt": "/choose-your-favorite-character-game/static/js/2.55bd9814.chunk.js.LICENSE.txt",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.cdf2f3ec.js",
     "static/js/2.55bd9814.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.e731bcff.chunk.js"
+    "static/js/main.32d82268.chunk.js"
   ]
 }
