@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/choose-your-favorite-character-game/static/css/main.5f361e03.chunk.css",
-    "main.js": "/choose-your-favorite-character-game/static/js/main.d00c62d6.chunk.js",
-    "main.js.map": "/choose-your-favorite-character-game/static/js/main.d00c62d6.chunk.js.map",
+    "main.js": "/choose-your-favorite-character-game/static/js/main.206498b0.chunk.js",
+    "main.js.map": "/choose-your-favorite-character-game/static/js/main.206498b0.chunk.js.map",
     "runtime-main.js": "/choose-your-favorite-character-game/static/js/runtime-main.cdf2f3ec.js",
     "runtime-main.js.map": "/choose-your-favorite-character-game/static/js/runtime-main.cdf2f3ec.js.map",
-    "static/js/2.5ce09e79.chunk.js": "/choose-your-favorite-character-game/static/js/2.5ce09e79.chunk.js",
-    "static/js/2.5ce09e79.chunk.js.map": "/choose-your-favorite-character-game/static/js/2.5ce09e79.chunk.js.map",
+    "static/js/2.639108fd.chunk.js": "/choose-your-favorite-character-game/static/js/2.639108fd.chunk.js",
+    "static/js/2.639108fd.chunk.js.map": "/choose-your-favorite-character-game/static/js/2.639108fd.chunk.js.map",
     "index.html": "/choose-your-favorite-character-game/index.html",
-    "precache-manifest.4e050d1961d14463ea719550ab6401da.js": "/choose-your-favorite-character-game/precache-manifest.4e050d1961d14463ea719550ab6401da.js",
+    "precache-manifest.5b327c001ab1f7378eb3dc66e074d1e2.js": "/choose-your-favorite-character-game/precache-manifest.5b327c001ab1f7378eb3dc66e074d1e2.js",
     "service-worker.js": "/choose-your-favorite-character-game/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/choose-your-favorite-character-game/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.5ce09e79.chunk.js.LICENSE.txt": "/choose-your-favorite-character-game/static/js/2.5ce09e79.chunk.js.LICENSE.txt",
+    "static/js/2.639108fd.chunk.js.LICENSE.txt": "/choose-your-favorite-character-game/static/js/2.639108fd.chunk.js.LICENSE.txt",
     "static/media/cyfc_top_logo.png": "/choose-your-favorite-character-game/static/media/cyfc_top_logo.5562f7f2.png",
     "static/media/game_chat_box.png": "/choose-your-favorite-character-game/static/media/game_chat_box.008fe626.png"
   },
   "entrypoints": [
     "static/js/runtime-main.cdf2f3ec.js",
-    "static/js/2.5ce09e79.chunk.js",
+    "static/js/2.639108fd.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.d00c62d6.chunk.js"
+    "static/js/main.206498b0.chunk.js"
   ]
 }
