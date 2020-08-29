@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from "react";
 import ChattingViewPresenter from "./ChattingViewPresenter";
+import { SCENE_TYPE_MEET } from "../../Utils/constant";
 
-const ChattingViewContainer = ({ scriptInterpreter }) => {
+const ChattingViewContainer = ({ scriptInterpreter, setSceneType }) => {
   const [chatList, setChatList] = useState([
     { who: "left", message: "당신의 이름은?" },
     { who: "right", message: "나의 이름은 ..." },
   ]);
 
-  useEffect(() => stepNextStep(), []);
+  useEffect(() => doCurrentScene(), []);
 
-  const stepNextStep = () => {
-    const { sceneScript } = scriptInterpreter.currentScene;
+  const doCurrentScene = () => {
+    const { sceneType, sceneScript, options, nextSceneId } = scriptInterpreter.currentScene;
+    if(sceneType === SCENE_TYPE_MEET){
+      setSceneType(SCENE_TYPE_MEET)
+      return
+    }
     setChatList((chatList) => {
       const result = [...chatList]
       if(sceneScript?.length > 0) result.push({ who: "left", message: sceneScript })
       return result
     })
+    if( options?.length === 0 ){
+      scriptInterpreter.getNextScene( nextSceneId )
+      doCurrentScene()
+    }
   };
 
   const selectOption = (optionIndex) => {
@@ -27,7 +36,7 @@ const ChattingViewContainer = ({ scriptInterpreter }) => {
       return result
     })
     scriptInterpreter.getNextScene( nextId )
-    stepNextStep()
+    doCurrentScene()
   }
 
   return (

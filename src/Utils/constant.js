@@ -15,3 +15,7 @@ export const DEFAULT_SCENE = {
   ],
   sceneType: "meet",
 };
+
+export const SCENE_TYPE_TEXT = "text"
+export const SCENE_TYPE_MEET = "meet"
+export const SCENE_TYPE_ENDING = "ending"
