@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CYFCLogoImage from "../../Resources/Images/cyfc_top_logo.png";
+import OptionMessage from "./OptionMessage"
 
 const AppBarHeight = 64;
 
@@ -50,15 +51,21 @@ const RightMessage = styled.span`
   color: #662d91;
 `;
 
-const ChattingViewPresenter = (props) => (
+const ChattingViewPresenter = ({ chatList, scene, selectOption }) => (
   <Container>
     <AppBar>
       <LogoImage src={CYFCLogoImage} alt="CYFC"></LogoImage>
     </AppBar>
     <Contents>
       <DateText>오늘</DateText>
-      <LeftMessage>당신의 이름은?</LeftMessage>
-      <RightMessage>나의 이름은 <input type="text"></input></RightMessage>
+      {chatList.map(({who, message}) =>
+        who === "left" ? (
+          <LeftMessage>{message}</LeftMessage>
+        ) : (
+          <RightMessage>{message}</RightMessage>
+        )
+      )}
+      <OptionMessage options={scene.options} selectOption={selectOption}></OptionMessage>
     </Contents>
   </Container>
 );

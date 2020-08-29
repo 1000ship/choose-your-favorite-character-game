@@ -47,8 +47,6 @@ const ChatBox = ({ scriptInterpreter }) => {
     step: CHAT_STEP_SCRIPT,
   });
 
-  console.log( chatState.step )
-
   const clickEvent = (e) => {
     if (chatState.step === CHAT_STEP_OPTION) return;
     setChatState((chatState) => {
