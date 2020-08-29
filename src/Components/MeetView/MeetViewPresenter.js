@@ -29,23 +29,21 @@ const CharacterImage = styled.div`
   transform: scale(0.9);
 `;
 
-const MeetViewPresenter = ({
-  meetData,
-  stepEvent,
-  selectOption
-}) => {
+const MeetViewPresenter = ({ meetData, stepEvent, selectOption }) => {
+  const { backgroundImage, characterImage } = meetData;
   return (
     <Container onClick={stepEvent}>
-      <BackgroundImage
-        imageSrc={"./res/img/background/amy bar_final.png"}
-      ></BackgroundImage>
-      <CharacterImage
-        imageSrc={"./res/img/character/02 궁금.png"}
-      ></CharacterImage>
-      <ChatBox
-        meetData={meetData}
-        selectOption={selectOption}
-      ></ChatBox>
+      {backgroundImage?.length > 0 && (
+        <BackgroundImage
+          imageSrc={`./res/img/background/amy/${backgroundImage}`}
+        ></BackgroundImage>
+      )}
+      {characterImage?.length > 0 && (
+        <CharacterImage
+          imageSrc={`./res/img/character/amy/${characterImage}`}
+        ></CharacterImage>
+      )}
+      <ChatBox meetData={meetData} selectOption={selectOption}></ChatBox>
     </Container>
   );
 };

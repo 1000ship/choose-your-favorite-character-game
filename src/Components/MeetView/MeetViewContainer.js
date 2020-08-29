@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MeetViewPresenter from "./MeetViewPresenter";
 import {
   SCENE_TYPE_TEXT,
+  SCENE_TYPE_ENDING,
   MEET_STEP_OPTION,
   MEET_STEP_REACTION,
   MEET_STEP_SCRIPT,
@@ -19,24 +20,36 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
 
   useEffect(() => doCurrentScene(), []);
 
-  const createInitScene = (characterName, sceneScript, data = {}) =>
-    Object.assign(data, {
+  const createInitScene = (newScene, data = {}) => {
+    const {
+      characterName,
+      sceneScript,
+      backgroundImage,
+      characterImage,
+      sceneType,
+    } = newScene;
+    let updateData = {
       step: MEET_STEP_SCRIPT,
       characterName,
       sceneScript,
-    });
+    };
+    if (backgroundImage?.length > 0)
+      updateData.backgroundImage = backgroundImage;
+    if (characterImage?.length > 0) updateData.characterImage = characterImage;
+    if (sceneType === SCENE_TYPE_ENDING) updateData.characterImage = "";
+    return Object.assign(Object.assign({},data), updateData);
+  };
 
   const doCurrentScene = () => {
-    const {
-      sceneType,
-      characterName,
-      sceneScript,
-    } = scriptInterpreter.currentScene;
+    const { sceneType } = scriptInterpreter.currentScene;
     if (sceneType === SCENE_TYPE_TEXT) {
-      setTimeout(() => setSceneType(SCENE_TYPE_TEXT), SCENE_TYPE_CHANGE_DURATION);
+      setTimeout(
+        () => setSceneType(SCENE_TYPE_TEXT),
+        SCENE_TYPE_CHANGE_DURATION
+      );
       return;
     }
-    setMeetData((data) => createInitScene(characterName, sceneScript));
+    setMeetData((data) => createInitScene(scriptInterpreter.currentScene));
   };
 
   const stepFromScript = () => {
@@ -45,7 +58,7 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       if (options?.length === 0) {
         scriptInterpreter.getNextScene(nextSceneId);
         const { characterName, sceneScript } = scriptInterpreter.currentScene;
-        return { ...data, step: MEET_STEP_SCRIPT, characterName, sceneScript };
+        return createInitScene(scriptInterpreter.currentScene, data);
       } else {
         return { ...data, step: MEET_STEP_OPTION, options };
       }
@@ -61,7 +74,7 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       const { characterName, sceneScript } = scriptInterpreter.getNextScene(
         nextId
       );
-      return { ...data, step: MEET_STEP_SCRIPT, characterName, sceneScript };
+      return createInitScene(scriptInterpreter.currentScene, data);
     });
   };
 
