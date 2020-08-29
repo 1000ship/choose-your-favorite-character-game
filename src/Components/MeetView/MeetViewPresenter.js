@@ -23,7 +23,7 @@ const CharacterImage = styled.div`
   bottom: 0;
   background-image: url('${({ imageSrc }) => imageSrc}');
   background-position: bottom;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   transform-origin: bottom center;
   transform: scale(0.9);
