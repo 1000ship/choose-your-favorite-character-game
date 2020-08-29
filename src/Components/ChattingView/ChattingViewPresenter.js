@@ -65,7 +65,7 @@ const ChattingViewPresenter = ({ chatList, scene, selectOption }) => (
           <RightMessage key={i}>{message}</RightMessage>
         )
       )}
-      {scene.options?.length > 0 && scene.type !== "ending" && (
+      {scene.options?.length > 0 && scene.sceneType !== "ending" && (
         <OptionMessage
           options={scene.options}
           selectOption={selectOption}

@@ -19,6 +19,7 @@ const ScriptInterpreter = function () {
       return;
     }
     this.currentScene = this.scenes[nextSceneIndex];
+    console.log(this.currentScene)
   };
 };
 

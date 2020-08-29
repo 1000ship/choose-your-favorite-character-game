@@ -11,18 +11,19 @@ const ChattingViewContainer = ({ scriptInterpreter }) => {
 
   const stepNextStep = () => {
     const { sceneScript } = scriptInterpreter.currentScene;
-    setChatList((chatList) => [
-      ...chatList,
-      { who: "left", message: sceneScript },
-    ]);
+    setChatList((chatList) => {
+      const result = [...chatList]
+      if(sceneScript?.length > 0) result.push({ who: "left", message: sceneScript })
+      return result
+    })
   };
 
   const selectOption = (optionIndex) => {
     const {answer, reaction, nextId} = scriptInterpreter.currentScene.options[optionIndex]
     setChatList((chatList) => {
       const result = [...chatList]
-      if(answer) result.push({ who: "right", message: answer })
-      if(reaction) result.push({ who: "left", message: reaction })
+      if(answer?.length > 0) result.push({ who: "right", message: answer })
+      if(reaction?.length > 0) result.push({ who: "left", message: reaction })
       return result
     })
     scriptInterpreter.getNextScene( nextId )
