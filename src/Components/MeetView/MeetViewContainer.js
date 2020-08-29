@@ -37,7 +37,8 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       updateData.backgroundImage = backgroundImage;
     if (characterImage?.length > 0) updateData.characterImage = characterImage;
     if (sceneType === SCENE_TYPE_ENDING) updateData.characterImage = "";
-    return Object.assign(Object.assign({},data), updateData);
+    if (sceneScript?.length === 0) updateData.step = MEET_STEP_OPTION;
+    return Object.assign(Object.assign({}, data), updateData);
   };
 
   const doCurrentScene = () => {
@@ -57,7 +58,6 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       const { nextSceneId, options } = scriptInterpreter.currentScene;
       if (options?.length === 0) {
         scriptInterpreter.getNextScene(nextSceneId);
-        const { characterName, sceneScript } = scriptInterpreter.currentScene;
         return createInitScene(scriptInterpreter.currentScene, data);
       } else {
         return { ...data, step: MEET_STEP_OPTION, options };
@@ -71,19 +71,26 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       const { optionIndex } = data;
       const nextId =
         options?.length > 0 ? options[optionIndex].nextId : nextSceneId;
-      const { characterName, sceneScript } = scriptInterpreter.getNextScene(
-        nextId
-      );
+      scriptInterpreter.getNextScene(nextId);
       return createInitScene(scriptInterpreter.currentScene, data);
     });
   };
 
   const selectOption = (optionIndex) => {
-    setMeetData((data) => ({
-      ...data,
-      step: MEET_STEP_REACTION,
-      optionIndex,
-    }));
+    setMeetData((data) => {
+      let result = {
+        ...data,
+        step: MEET_STEP_REACTION,
+        optionIndex,
+      };
+      if (data.options[optionIndex].reaction?.length === 0) {
+        const nextId =
+          data.options?.length > 0 ? data.options[optionIndex].nextId : data.nextSceneId;
+        scriptInterpreter.getNextScene(nextId);
+        return createInitScene(scriptInterpreter.currentScene, data);
+      }
+      return result;
+    });
   };
 
   return (
