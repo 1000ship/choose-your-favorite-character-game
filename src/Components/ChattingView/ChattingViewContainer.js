@@ -19,11 +19,12 @@ const ChattingViewContainer = ({ scriptInterpreter }) => {
 
   const selectOption = (optionIndex) => {
     const {answer, reaction, nextId} = scriptInterpreter.currentScene.options[optionIndex]
-    setChatList((chatList) => [
-      ...chatList,
-      { who: "right", message: answer },
-      { who: "left", message: reaction },
-    ]);
+    setChatList((chatList) => {
+      const result = [...chatList]
+      if(answer) result.push({ who: "right", message: answer })
+      if(reaction) result.push({ who: "left", message: reaction })
+      return result
+    })
     scriptInterpreter.getNextScene( nextId )
     stepNextStep()
   }

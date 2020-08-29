@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CYFCLogoImage from "../../Resources/Images/cyfc_top_logo.png";
-import OptionMessage from "./OptionMessage"
+import OptionMessage from "./OptionMessage";
 
 const AppBarHeight = 64;
 
@@ -35,7 +35,7 @@ const DateText = styled.span`
 `;
 const LeftMessage = styled.span`
   align-self: flex-start;
-  margin: 15px;
+  margin: 5px;
   padding: 15px;
   border-radius: 15px 15px 15px 3px;
   background-image: linear-gradient(#e86ecb, #a21ccb);
@@ -43,7 +43,7 @@ const LeftMessage = styled.span`
 `;
 const RightMessage = styled.span`
   align-self: flex-end;
-  margin: 15px;
+  margin: 5px;
   padding: 12px;
   border: 3px solid #a21ccb;
   border-radius: 15px 15px 3px 15px;
@@ -58,14 +58,19 @@ const ChattingViewPresenter = ({ chatList, scene, selectOption }) => (
     </AppBar>
     <Contents>
       <DateText>오늘</DateText>
-      {chatList.map(({who, message}) =>
+      {chatList.map(({ who, message }, i) =>
         who === "left" ? (
-          <LeftMessage>{message}</LeftMessage>
+          <LeftMessage key={i}>{message}</LeftMessage>
         ) : (
-          <RightMessage>{message}</RightMessage>
+          <RightMessage key={i}>{message}</RightMessage>
         )
       )}
-      <OptionMessage options={scene.options} selectOption={selectOption}></OptionMessage>
+      {scene.options?.length > 0 && scene.type !== "ending" && (
+        <OptionMessage
+          options={scene.options}
+          selectOption={selectOption}
+        ></OptionMessage>
+      )}
     </Contents>
   </Container>
 );

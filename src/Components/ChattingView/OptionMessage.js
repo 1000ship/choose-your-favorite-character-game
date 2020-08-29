@@ -26,6 +26,7 @@ const OptionMessage = ({
   return (
     <RightMessage>
       <OptionList>
+        a
         {options.map((option, i) => (
           <OptionItem key={i} onClick={(e) => selectOption(i)}>
             {option.answer}
