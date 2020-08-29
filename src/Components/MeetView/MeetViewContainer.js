@@ -27,11 +27,15 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       backgroundImage,
       characterImage,
       sceneType,
+      options,
+      nextSceneId
     } = newScene;
     let updateData = {
       step: MEET_STEP_SCRIPT,
       characterName,
       sceneScript,
+      options,
+      nextSceneId
     };
     if (backgroundImage?.length > 0)
       updateData.backgroundImage = backgroundImage;
@@ -55,12 +59,11 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
 
   const stepFromScript = () => {
     setMeetData((data) => {
-      const { nextSceneId, options } = scriptInterpreter.currentScene;
-      if (options?.length === 0) {
-        scriptInterpreter.getNextScene(nextSceneId);
+      if (data.options?.length === 0) {
+        scriptInterpreter.getNextScene(data.nextSceneId);
         return createInitScene(scriptInterpreter.currentScene, data);
       } else {
-        return { ...data, step: MEET_STEP_OPTION, options };
+        return { ...data, step: MEET_STEP_OPTION };
       }
     });
   };
