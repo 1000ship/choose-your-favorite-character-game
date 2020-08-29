@@ -16,7 +16,9 @@ function App() {
   const [sceneType, setSceneType] = useState(SCENE_TYPE_TEXT);
   const [scriptLoaded, setScriptLoaded] = useState(false);
   useEffect(() => {
-    loadScript("amy_male.txt").then((data) => {
+    let what = window.prompt("amy_male.txt/amy_female.txt/bella.txt/clair.txt")
+    if(what?.length === 0 ) what = "amy_male.txt"
+    loadScript(what).then((data) => {
       scriptInterpreter.setScenes(data);
       setScriptLoaded(true);
       setSceneType(scriptInterpreter.currentScene.sceneType);
