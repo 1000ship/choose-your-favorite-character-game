@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import ChatBox from "./ChatBox";
 
-
 const Container = styled.div``;
 
 const BackgroundImage = styled.div`
@@ -30,9 +29,13 @@ const CharacterImage = styled.div`
   transform: scale(0.9);
 `;
 
-const MeetViewPresenter = ({ scriptInterpreter }) => {
+const MeetViewPresenter = ({
+  meetData,
+  stepEvent,
+  selectOption
+}) => {
   return (
-    <Container>
+    <Container onClick={stepEvent}>
       <BackgroundImage
         imageSrc={"./res/img/background/amy bar_final.png"}
       ></BackgroundImage>
@@ -40,7 +43,8 @@ const MeetViewPresenter = ({ scriptInterpreter }) => {
         imageSrc={"./res/img/character/02 궁금.png"}
       ></CharacterImage>
       <ChatBox
-        scriptInterpreter={scriptInterpreter}
+        meetData={meetData}
+        selectOption={selectOption}
       ></ChatBox>
     </Container>
   );

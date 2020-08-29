@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      {scriptLoaded &&
+      {/* {scriptLoaded &&
         (scriptInterpreter.currentScene.sceneType === SCENE_TYPE_TEXT ? (
           <ChattingView
             scriptInterpreter={scriptInterpreter}
@@ -37,7 +37,13 @@ function App() {
             scriptInterpreter={scriptInterpreter}
             setSceneType={setSceneType}
           ></MeetView>
-        ))}
+        ))} */}
+      {scriptLoaded && (
+        <MeetView
+          scriptInterpreter={scriptInterpreter}
+          setSceneType={setSceneType}
+        ></MeetView>
+      )}
     </>
   );
 }

@@ -14,16 +14,16 @@ const OptionItem = styled.li`
   }
 `;
 
-const OptionSelector = ({ options, setChatState }) => {
-  const onOptionClicked = (reaction, nextId) => (e) => {
-    e.stopPropagation()
-    setChatState({ step: CHAT_STEP_REACTION, reaction, nextId });
+const OptionSelector = ({ options, selectOption }) => {
+  const onOptionClicked = (i) => (e) => {
+    selectOption(i);
+    e.stopPropagation();
   };
   return (
     <Container>
       <OptionList>
-        {options.map(({ answer, reaction, nextId }, i) => (
-          <OptionItem key={i} onClick={onOptionClicked(reaction, nextId)}>
+        {options.map(({ answer }, i) => (
+          <OptionItem key={i} onClick={onOptionClicked(i)}>
             {answer}
           </OptionItem>
         ))}

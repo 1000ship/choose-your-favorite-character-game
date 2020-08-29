@@ -1,6 +1,3 @@
-import { useState, useEffect } from "react";
-import { DEFAULT_SCENE } from "../Utils/constant";
-
 const ScriptInterpreter = function () {
   this.scenes = [];
   this.currentScene = null;
@@ -20,6 +17,7 @@ const ScriptInterpreter = function () {
     }
     this.currentScene = this.scenes[nextSceneIndex];
     console.log(this.currentScene)
+    return this.currentScene
   };
 };
 

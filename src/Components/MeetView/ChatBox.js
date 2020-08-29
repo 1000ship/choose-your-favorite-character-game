@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import ChatBoxBackgroundImage from "../../Resources/Images/game_chat_box.png";
 import OptionSelector from "./OptionSelector";
+import ChatBoxBackgroundImage from "../../Resources/Images/game_chat_box.png";
+import { MEET_STEP_OPTION, MEET_STEP_REACTION } from "../../Utils/constant";
 
 const Container = styled.div`
   position: absolute;
@@ -32,59 +33,28 @@ const TalkText = styled.span`
   color: black;
 `;
 
-export const CHAT_STEP_SCRIPT = "script";
-export const CHAT_STEP_OPTION = "option";
-export const CHAT_STEP_REACTION = "reaction";
-
-const ChatBox = ({ scriptInterpreter }) => {
-  const {
-    characterName = "",
-    sceneScript = "",
-    options = [],
-    nextSceneId = "",
-  } = scriptInterpreter.currentScene;
-  const [chatState, setChatState] = useState({
-    step: CHAT_STEP_SCRIPT,
-  });
-
-  const clickEvent = (e) => {
-    if (chatState.step === CHAT_STEP_OPTION) return;
-    setChatState((chatState) => {
-      const { step, nextId = null } = chatState;
-      if (step === CHAT_STEP_SCRIPT) {
-        return { step: CHAT_STEP_OPTION };
-      } else if (step === CHAT_STEP_REACTION) {
-        scriptInterpreter.getNextScene(nextId);
-        return {
-          step: CHAT_STEP_SCRIPT,
-        };
-      }
-      return chatState;
-    });
-    e.stopPropagation();
-  };
-
-  useEffect(() => {
-    window.addEventListener("click", clickEvent);
-  }, []);
-
+const ChatBox = ({
+  meetData,
+  selectOption,
+}) => {
   return (
     <Container>
       <ChatBoxImage src={ChatBoxBackgroundImage}></ChatBoxImage>
       <Contents>
-        {chatState.step !== CHAT_STEP_OPTION ? (
+        {/* <span>step : {meetData.step}</span> */}
+        {meetData.step !== MEET_STEP_OPTION ? (
           <>
-            <NameText>{characterName}</NameText>
+            <NameText>{meetData.characterName}</NameText>
             <TalkText>
-              {chatState.step === CHAT_STEP_REACTION
-                ? chatState.reaction
-                : sceneScript}
+              {meetData.step === MEET_STEP_REACTION
+                ? meetData.options[meetData.optionIndex].reaction
+                : meetData.sceneScript}
             </TalkText>
           </>
         ) : (
           <OptionSelector
-            options={options}
-            setChatState={setChatState}
+            options={meetData.options}
+            selectOption={selectOption}
           ></OptionSelector>
         )}
       </Contents>
