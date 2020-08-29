@@ -36,12 +36,12 @@ const MeetViewPresenter = ({ meetData, stepEvent, selectOption }) => {
       {backgroundImage?.length > 0 && (
         <BackgroundImage
           imageSrc={`./res/img/background/amy/${backgroundImage}`}
-        ></BackgroundImage>
+        >{backgroundImage}</BackgroundImage>
       )}
       {characterImage?.length > 0 && (
         <CharacterImage
           imageSrc={`./res/img/character/amy/${characterImage}`}
-        ></CharacterImage>
+        >{characterImage}</CharacterImage>
       )}
       <ChatBox meetData={meetData} selectOption={selectOption}></ChatBox>
     </Container>
