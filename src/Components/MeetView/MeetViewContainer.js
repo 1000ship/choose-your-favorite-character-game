@@ -11,14 +11,13 @@ import {
 import ScriptParser from "../../Utils/ScriptParser";
 
 const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
-
   const [meetData, setMeetData] = useState({
     step: MEET_STEP_SCRIPT,
     characterName: "",
     sceneScript: "",
     options: [],
     optionIndex: 0,
-    folderName: scriptInterpreter.folderName
+    folderName: scriptInterpreter.folderName,
   });
 
   useEffect(() => doCurrentScene(), []);
@@ -44,7 +43,8 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       updateData.backgroundImage = backgroundImage.trim();
     if (characterImage?.length > 0)
       updateData.characterImage = characterImage.trim();
-    if (sceneType === SCENE_TYPE_ENDING) updateData.characterImage = "";
+    if (sceneType === SCENE_TYPE_TEXT) setSceneType(SCENE_TYPE_TEXT);
+    else if (sceneType === SCENE_TYPE_ENDING) updateData.characterImage = "";
     if (sceneScript?.length === 0) updateData.step = MEET_STEP_OPTION;
     return Object.assign(Object.assign({}, data), updateData);
   };
@@ -58,7 +58,9 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       );
       return;
     }
-    setMeetData((data) => createInitScene(scriptInterpreter.currentScene, data));
+    setMeetData((data) =>
+      createInitScene(scriptInterpreter.currentScene, data)
+    );
   };
 
   const stepFromScript = () => {
@@ -100,10 +102,10 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
         return createInitScene(scriptInterpreter.currentScene, data);
       }
       const script = data.options[optionIndex].reaction;
-      const specialData = ScriptParser.getSpecials(script)
-      if( specialData ) console.log( specialData )
-      if( specialData?.img ) result.characterImage = specialData.img
-      if( specialData?.bg ) result.backgroundImage = specialData.bg
+      const specialData = ScriptParser.getSpecials(script);
+      if (specialData) console.log(specialData);
+      if (specialData?.img) result.characterImage = specialData.img;
+      if (specialData?.bg) result.backgroundImage = specialData.bg;
       return result;
     });
   };
