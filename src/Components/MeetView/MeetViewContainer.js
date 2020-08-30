@@ -8,6 +8,7 @@ import {
   MEET_STEP_SCRIPT,
   SCENE_TYPE_CHANGE_DURATION,
 } from "../../Utils/constant";
+import ScriptParser from "../../Utils/ScriptParser";
 
 const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
 
@@ -98,6 +99,11 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
         scriptInterpreter.getNextScene(nextId);
         return createInitScene(scriptInterpreter.currentScene, data);
       }
+      const script = data.options[optionIndex].reaction;
+      const specialData = ScriptParser.getSpecials(script)
+      if( specialData ) console.log( specialData )
+      if( specialData?.img ) result.characterImage = specialData.img
+      if( specialData?.bg ) result.backgroundImage = specialData.bg
       return result;
     });
   };

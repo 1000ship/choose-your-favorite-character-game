@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { CHAT_STEP_REACTION } from "./ChatBox";
+import ScriptParser from "../../Utils/ScriptParser";
 
 const Container = styled.div``;
 const OptionList = styled.ul``;
@@ -23,9 +24,11 @@ const OptionSelector = ({ options, selectOption }) => {
     <Container>
       <OptionList>
         {options.map(({ answer }, i) => (
-          <OptionItem key={i} onClick={onOptionClicked(i)}>
-            {answer}
-          </OptionItem>
+          <OptionItem
+            key={i}
+            onClick={onOptionClicked(i)}
+            dangerouslySetInnerHTML={{ __html: ScriptParser.getText(answer) }}
+          ></OptionItem>
         ))}
       </OptionList>
     </Container>

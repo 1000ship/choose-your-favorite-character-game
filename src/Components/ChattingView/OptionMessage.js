@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ScriptParser from "../../Utils/ScriptParser";
 
 const RightMessage = styled.span`
   align-self: flex-end;
@@ -27,9 +28,13 @@ const OptionMessage = ({
     <RightMessage>
       <OptionList>
         {options.map((option, i) => (
-          <OptionItem key={i} onClick={(e) => selectOption(i)}>
-            {option.answer}
-          </OptionItem>
+          <OptionItem
+            key={i}
+            onClick={(e) => selectOption(i)}
+            dangerouslySetInnerHTML={{
+              __html: ScriptParser.getText(option.answer),
+            }}
+          ></OptionItem>
         ))}
       </OptionList>
     </RightMessage>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import OptionSelector from "./OptionSelector";
 import ChatBoxBackgroundImage from "../../Resources/Images/game_chat_box.png";
 import { MEET_STEP_OPTION, MEET_STEP_REACTION } from "../../Utils/constant";
+import ScriptParser from "../../Utils/ScriptParser";
 
 const Container = styled.div`
   position: absolute;
@@ -33,23 +34,27 @@ const TalkText = styled.span`
   color: black;
 `;
 
-const ChatBox = ({
-  meetData,
-  selectOption,
-}) => {
+const ChatBox = ({ meetData, selectOption }) => {
   return (
     <Container>
       <ChatBoxImage src={ChatBoxBackgroundImage}></ChatBoxImage>
       <Contents>
-        {/* <span>step : {meetData.step}</span> */}
         {meetData.step !== MEET_STEP_OPTION ? (
           <>
-            <NameText>{meetData.characterName}</NameText>
-            <TalkText>
-              {meetData.step === MEET_STEP_REACTION
-                ? meetData.options[meetData.optionIndex].reaction
-                : meetData.sceneScript}
-            </TalkText>
+            <NameText
+              dangerouslySetInnerHTML={{
+                __html: ScriptParser.getText(meetData.characterName),
+              }}
+            ></NameText>
+            <TalkText
+              dangerouslySetInnerHTML={{
+                __html: ScriptParser.getText(
+                  meetData.step === MEET_STEP_REACTION
+                    ? meetData.options[meetData.optionIndex].reaction
+                    : meetData.sceneScript
+                ),
+              }}
+            ></TalkText>
           </>
         ) : (
           <OptionSelector

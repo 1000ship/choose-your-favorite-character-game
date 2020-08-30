@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import CYFCLogoImage from "../../Resources/Images/cyfc_top_logo.png";
 import OptionMessage from "./OptionMessage";
+import ScriptParser from "../../Utils/ScriptParser";
 
 const AppBarHeight = 64;
 
@@ -60,9 +61,15 @@ const ChattingViewPresenter = ({ chatList, scene, selectOption }) => (
       <DateText>오늘</DateText>
       {chatList.map(({ who, message }, i) =>
         who === "left" ? (
-          <LeftMessage key={i}>{message}</LeftMessage>
+          <LeftMessage
+            key={i}
+            dangerouslySetInnerHTML={{ __html: ScriptParser.getText(message) }}
+          ></LeftMessage>
         ) : (
-          <RightMessage key={i}>{message}</RightMessage>
+          <RightMessage
+            key={i}
+            dangerouslySetInnerHTML={{ __html: ScriptParser.getText(message) }}
+          ></RightMessage>
         )
       )}
       {scene.options?.length > 0 && scene.sceneType !== "ending" && (
