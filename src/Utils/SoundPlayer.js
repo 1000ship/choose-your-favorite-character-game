@@ -1,14 +1,17 @@
 var sound;
 
 const SoundPlayer = {
-  play: (fileName) => {
+  play: (folderName, fileName) => {
+    try {
+      if (sound) sound.pause();
+    } catch {}
     sound = new Audio();
-    sound.src = `./res/sounds/${fileName}`;
-    sound.play()
+    sound.src = `./res/sounds/${folderName}/${fileName}`;
+    sound.play();
   },
   pause: () => {
-    sound.pause()
-  }
+    sound.pause();
+  },
 };
 
 export default SoundPlayer;

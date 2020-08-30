@@ -11,8 +11,6 @@ import ScriptParser from "./Utils/ScriptParser";
 
 // BGMPlayer.play('amy.mp3')
 
-console.log("PARSE:", ScriptParser.getText( "{name} Hello {world} {img:07 뿌듯.png}" ) )
-
 const scriptInterpreter = new ScriptInterpreter();
 
 function App() {

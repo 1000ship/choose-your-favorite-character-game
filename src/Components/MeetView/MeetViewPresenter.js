@@ -30,7 +30,7 @@ const CharacterImage = styled.div`
 `;
 
 const MeetViewPresenter = ({ meetData, stepEvent, selectOption }) => {
-  const { folderName, backgroundImage, characterImage } = meetData;
+  const { folderName, backgroundImage, characterImage, sceneSound } = meetData;
   return (
     <Container onClick={stepEvent}>
       {backgroundImage?.length > 0 && (
@@ -41,7 +41,7 @@ const MeetViewPresenter = ({ meetData, stepEvent, selectOption }) => {
       {characterImage?.length > 0 && (
         <CharacterImage
           imageSrc={`./res/img/character/${folderName}/${characterImage}`}
-        >{characterImage}</CharacterImage>
+        >{characterImage}<br></br>{sceneSound}</CharacterImage>
       )}
       <ChatBox meetData={meetData} selectOption={selectOption}></ChatBox>
     </Container>

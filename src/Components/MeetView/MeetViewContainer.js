@@ -9,6 +9,7 @@ import {
   SCENE_TYPE_CHANGE_DURATION,
 } from "../../Utils/constant";
 import ScriptParser from "../../Utils/ScriptParser";
+import SoundPlayer from "../../Utils/SoundPlayer";
 
 const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
   const [meetData, setMeetData] = useState({
@@ -23,6 +24,7 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
   useEffect(() => doCurrentScene(), []);
 
   const createInitScene = (newScene, data = {}) => {
+    const folderName = scriptInterpreter.folderName
     const {
       characterName,
       sceneScript,
@@ -31,6 +33,7 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       sceneType,
       options,
       nextSceneId,
+      sceneSound
     } = newScene;
     let updateData = {
       step: MEET_STEP_SCRIPT,
@@ -38,6 +41,7 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       sceneScript,
       options,
       nextSceneId,
+      sceneSound,
     };
     if (backgroundImage?.length > 0)
       updateData.backgroundImage = backgroundImage.trim();
@@ -46,6 +50,7 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
     if (sceneType === SCENE_TYPE_TEXT) setSceneType(SCENE_TYPE_TEXT);
     else if (sceneType === SCENE_TYPE_ENDING) updateData.characterImage = "";
     if (sceneScript?.length === 0) updateData.step = MEET_STEP_OPTION;
+    if (sceneSound?.length > 0) SoundPlayer.play(folderName, sceneSound);
     return Object.assign(Object.assign({}, data), updateData);
   };
 
