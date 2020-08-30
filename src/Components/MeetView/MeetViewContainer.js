@@ -10,12 +10,14 @@ import {
 } from "../../Utils/constant";
 
 const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
+
   const [meetData, setMeetData] = useState({
     step: MEET_STEP_SCRIPT,
     characterName: "",
     sceneScript: "",
     options: [],
     optionIndex: 0,
+    folderName: scriptInterpreter.folderName
   });
 
   useEffect(() => doCurrentScene(), []);
@@ -55,7 +57,7 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       );
       return;
     }
-    setMeetData((data) => createInitScene(scriptInterpreter.currentScene));
+    setMeetData((data) => createInitScene(scriptInterpreter.currentScene, data));
   };
 
   const stepFromScript = () => {

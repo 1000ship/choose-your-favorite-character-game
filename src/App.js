@@ -16,10 +16,24 @@ function App() {
   const [sceneType, setSceneType] = useState(SCENE_TYPE_TEXT);
   const [scriptLoaded, setScriptLoaded] = useState(false);
   useEffect(() => {
-    let what = window.prompt("amy_male.txt/amy_female.txt/bella.txt/clair.txt")
-    if(what?.length === 0 ) what = "amy_male.txt"
+    let what = window.prompt("amy_male.txt/amy_female.txt/bella.txt/clair.txt");
+    if (what?.length === 0) what = "amy_male.txt";
+    let folderName;
+    switch (what) {
+      case "amy_male.txt":
+      case "amy_female.txt":
+        folderName = "Amy";
+        break;
+      case "bella.txt":
+        folderName = "Bella";
+        break;
+      case "clair.txt":
+        folderName = "Clair";
+        break;
+    }
     loadScript(what).then((data) => {
       scriptInterpreter.setScenes(data);
+      scriptInterpreter.setFolderName(folderName);
       setScriptLoaded(true);
       setSceneType(scriptInterpreter.currentScene.sceneType);
     });

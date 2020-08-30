@@ -1,6 +1,16 @@
-const ScriptInterpreter = function () {
+export const SCRIPT_AMY_MALE = "amy_male.txt";
+export const SCRIPT_AMY_FEMALE = "amy_female.txt";
+export const SCRIPT_BELLA = "bella.txt";
+export const SCRIPT_CLAIR = "clair.txt";
+
+const ScriptInterpreter = function (folderName = "") {
+  this.folderName = folderName;
   this.scenes = [];
   this.currentScene = null;
+
+  this.setFolderName = (folderName) => {
+    this.folderName = folderName;
+  };
 
   this.setScenes = (scenes) => {
     this.scenes = scenes;
@@ -16,8 +26,8 @@ const ScriptInterpreter = function () {
       return;
     }
     this.currentScene = this.scenes[nextSceneIndex];
-    console.log(this.currentScene)
-    return this.currentScene
+    console.log(this.currentScene);
+    return this.currentScene;
   };
 };
 
