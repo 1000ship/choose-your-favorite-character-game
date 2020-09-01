@@ -24,7 +24,7 @@ function GamePage(props) {
       characterName = `${characterName}_${prompt("male/female", "male")}.txt`
     else
       characterName = `${characterName}.txt`
-    console.log( characterName )
+    console.log( characterName, folderName )
     loadScript(characterName).then((data) => {
       scriptInterpreter.setScenes(data);
       scriptInterpreter.setFolderName(folderName);
@@ -35,7 +35,6 @@ function GamePage(props) {
 
   return (
     <>
-      <GlobalStyles />
       {scriptLoaded &&
         (scriptInterpreter.currentScene.sceneType === SCENE_TYPE_TEXT ? (
           <ChattingView

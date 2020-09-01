@@ -18,13 +18,13 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
     sceneScript: "",
     options: [],
     optionIndex: 0,
-    folderName: scriptInterpreter.folderName,
+    data: scriptInterpreter.folderName,
   });
 
   useEffect(() => doCurrentScene(), []);
 
   const createInitScene = (newScene, data = {}) => {
-    const folderName = scriptInterpreter.folderName
+    const folderName = scriptInterpreter.folderName;
     const {
       characterName,
       sceneScript,
@@ -33,7 +33,7 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       sceneType,
       options,
       nextSceneId,
-      sceneSound
+      sceneSound,
     } = newScene;
     let updateData = {
       step: MEET_STEP_SCRIPT,
@@ -42,6 +42,7 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       options,
       nextSceneId,
       sceneSound,
+      folderName
     };
     if (backgroundImage?.length > 0)
       updateData.backgroundImage = backgroundImage.trim();
@@ -111,6 +112,9 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       if (specialData) console.log(specialData);
       if (specialData?.img) result.characterImage = specialData.img;
       if (specialData?.bg) result.backgroundImage = specialData.bg;
+      if (specialData?.snd) {
+        SoundPlayer.play(data.folderName, specialData.snd);
+      }
       return result;
     });
   };
