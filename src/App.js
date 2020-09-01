@@ -1,63 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import ChattingView from "./Components/ChattingView";
-import MeetView from "./Components/MeetView";
-import GlobalStyles from "./GlobalStyles";
-import ScriptInterpreter from "./Utils/ScriptInterpreter";
-import BGMPlayer from "./Utils/BGMPlayer";
-import { loadScript } from "./Utils/api";
-import { SCENE_TYPE_TEXT } from "./Utils/constant";
-import ScriptParser from "./Utils/ScriptParser";
-
-// BGMPlayer.play('amy.mp3')
-
-const scriptInterpreter = new ScriptInterpreter();
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import OpeningPage from './Pages/OpeningPage'
+import ChoicePage from './Pages/OpeningPage'
+import GamePage from './Pages/OpeningPage'
 
 function App() {
-  const [sceneType, setSceneType] = useState(SCENE_TYPE_TEXT);
-  const [scriptLoaded, setScriptLoaded] = useState(false);
-  useEffect(() => {
-    let what = ""
-    what = window.prompt("amy_male.txt/amy_female.txt/bella.txt/clair.txt");
-    if (what?.length === 0) what = "amy_male.txt";
-    let folderName;
-    switch (what) {
-      case "amy_male.txt":
-      case "amy_female.txt":
-        folderName = "Amy";
-        break;
-      case "bella.txt":
-        folderName = "Bella";
-        break;
-      case "clair.txt":
-        folderName = "Clair";
-        break;
-    }
-    loadScript(what).then((data) => {
-      scriptInterpreter.setScenes(data);
-      scriptInterpreter.setFolderName(folderName);
-      setScriptLoaded(true);
-      setSceneType(scriptInterpreter.currentScene.sceneType);
-    });
-  }, []);
-
-  return (
-    <>
-      <GlobalStyles />
-      {scriptLoaded &&
-        (scriptInterpreter.currentScene.sceneType === SCENE_TYPE_TEXT ? (
-          <ChattingView
-            scriptInterpreter={scriptInterpreter}
-            setSceneType={setSceneType}
-          ></ChattingView>
-        ) : (
-          <MeetView
-            scriptInterpreter={scriptInterpreter}
-            setSceneType={setSceneType}
-          ></MeetView>
-        ))}
-    </>
-  );
+  return <Router>
+    <Switch>
+      <Route path="/" exact component={OpeningPage}></Route>
+      <Route path="/choice" exact component={ChoicePage}></Route>
+      <Route path="/game" exact component={GamePage}></Route>
+      <Redirect to="/"></Redirect>
+    </Switch>
+  </Router>
 }
 
 export default App;
