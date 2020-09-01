@@ -5,12 +5,12 @@ export default createGlobalStyle`
   ${reset}
   @font-face {
     font-family: "GmarketSans";
-    src: url(/res/fonts/GmarketSansTTFMedium.ttf);
+    src: url(./res/fonts/GmarketSansTTFMedium.ttf);
     font-weight: 400;
   }
   @font-face {
     font-family: "GmarketSans";
-    src: url(/res/fonts/GmarketSansTTFBold.ttf);
+    src: url(./res/fonts/GmarketSansTTFBold.ttf);
     font-weight: 600;
   }
   a {

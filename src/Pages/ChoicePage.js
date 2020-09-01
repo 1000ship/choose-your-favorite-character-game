@@ -8,6 +8,8 @@ import ClairResource from "../Resources/Images/clair.png";
 import AmyNameResource from "../Resources/Images/amy_name.png";
 import BellaNameResource from "../Resources/Images/bella_name.png";
 import ClairNameResource from "../Resources/Images/clair_name.png";
+import { BGM_AMY, BGM_BELLA, BGM_CLAIR } from "../Utils/constant";
+import BGMPlayer from "../Utils/BGMPlayer";
 
 const Container = styled.div`
   display: flex;
@@ -54,6 +56,20 @@ const CharacterName = styled.img`
 const ChoicePage = ({ history }) => {
   const onCharacterClick = (name) => (e) => {
     history.push(`/game/${name}`);
+    let bgmFile;
+    switch( name ){
+      case "amy":
+        bgmFile = BGM_AMY;
+        break;
+      case "bella":
+        bgmFile = BGM_BELLA;
+        break;
+      case "clair":
+        bgmFile = BGM_CLAIR;
+        break;
+    }
+    if( bgmFile )
+      BGMPlayer.play(bgmFile)
   };
 
   return (

@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import PointerImage from "../Resources/Images/pointer.png";
 import { withRouter } from "react-router-dom";
+import BGMPlayer from "../Utils/BGMPlayer";
+import { BGM_MAIN } from "../Utils/constant";
 
 const Container = styled.div`
   display: flex;
@@ -21,6 +23,7 @@ const LogoImage = styled.img`
 const OpeningPage = ({ history }) => {
   const onClick = (e) => {
     history.push("/choice");
+    BGMPlayer.play(BGM_MAIN)
   };
   return (
     <Container onClick={onClick}>

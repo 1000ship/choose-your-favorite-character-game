@@ -6,7 +6,7 @@ const SoundPlayer = {
       if (sound) sound.pause();
     } catch {}
     sound = new Audio();
-    sound.src = `/res/sounds/${folderName}/${fileName}`;
+    sound.src = `./res/sounds/${folderName}/${fileName}`;
     sound.play();
   },
   pause: () => {

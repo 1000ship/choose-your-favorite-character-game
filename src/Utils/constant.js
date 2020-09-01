@@ -25,3 +25,8 @@ export const MEET_STEP_OPTION = "option";
 export const MEET_STEP_REACTION = "reaction";
 
 export const SCENE_TYPE_CHANGE_DURATION = 2000;
+
+export const BGM_MAIN = "main.mp3";
+export const BGM_AMY = "amy.mp3";
+export const BGM_BELLA = "bella.mp3";
+export const BGM_CLAIR = "clair.mp3";
