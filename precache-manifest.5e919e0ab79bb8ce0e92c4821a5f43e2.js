@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "17ab52518d7e52a237fdac5d4acc4810",
+    "revision": "f45a32b89959478ac241ba2fbe62b0a6",
     "url": "/choose-your-favorite-character-game/index.html"
   },
   {
-    "revision": "724869ce195b68ea42d5",
+    "revision": "4d89ff050621eb6148a0",
     "url": "/choose-your-favorite-character-game/static/css/main.5f361e03.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/choose-your-favorite-character-game/static/js/2.3b7ebfbf.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "724869ce195b68ea42d5",
-    "url": "/choose-your-favorite-character-game/static/js/main.2f692016.chunk.js"
+    "revision": "4d89ff050621eb6148a0",
+    "url": "/choose-your-favorite-character-game/static/js/main.775759f3.chunk.js"
   },
   {
     "revision": "013e563f83fb200ad84e",
