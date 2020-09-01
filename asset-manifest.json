@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/choose-your-favorite-character-game/static/css/main.5f361e03.chunk.css",
-    "main.js": "/choose-your-favorite-character-game/static/js/main.d2d1224c.chunk.js",
-    "main.js.map": "/choose-your-favorite-character-game/static/js/main.d2d1224c.chunk.js.map",
+    "main.js": "/choose-your-favorite-character-game/static/js/main.2f692016.chunk.js",
+    "main.js.map": "/choose-your-favorite-character-game/static/js/main.2f692016.chunk.js.map",
     "runtime-main.js": "/choose-your-favorite-character-game/static/js/runtime-main.cdf2f3ec.js",
     "runtime-main.js.map": "/choose-your-favorite-character-game/static/js/runtime-main.cdf2f3ec.js.map",
-    "static/js/2.d26dd56c.chunk.js": "/choose-your-favorite-character-game/static/js/2.d26dd56c.chunk.js",
-    "static/js/2.d26dd56c.chunk.js.map": "/choose-your-favorite-character-game/static/js/2.d26dd56c.chunk.js.map",
+    "static/js/2.3b7ebfbf.chunk.js": "/choose-your-favorite-character-game/static/js/2.3b7ebfbf.chunk.js",
+    "static/js/2.3b7ebfbf.chunk.js.map": "/choose-your-favorite-character-game/static/js/2.3b7ebfbf.chunk.js.map",
     "index.html": "/choose-your-favorite-character-game/index.html",
-    "precache-manifest.9d8c413cc82709876d3857d77e31d1f8.js": "/choose-your-favorite-character-game/precache-manifest.9d8c413cc82709876d3857d77e31d1f8.js",
+    "precache-manifest.c8e421508de0f7097ece5cff366ba319.js": "/choose-your-favorite-character-game/precache-manifest.c8e421508de0f7097ece5cff366ba319.js",
     "service-worker.js": "/choose-your-favorite-character-game/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/choose-your-favorite-character-game/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.d26dd56c.chunk.js.LICENSE.txt": "/choose-your-favorite-character-game/static/js/2.d26dd56c.chunk.js.LICENSE.txt",
+    "static/js/2.3b7ebfbf.chunk.js.LICENSE.txt": "/choose-your-favorite-character-game/static/js/2.3b7ebfbf.chunk.js.LICENSE.txt",
     "static/media/amy.png": "/choose-your-favorite-character-game/static/media/amy.06dae45f.png",
     "static/media/bella.png": "/choose-your-favorite-character-game/static/media/bella.a8fa5aee.png",
     "static/media/choice_alert.png": "/choose-your-favorite-character-game/static/media/choice_alert.45a25373.png",
@@ -22,8 +22,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.cdf2f3ec.js",
-    "static/js/2.d26dd56c.chunk.js",
+    "static/js/2.3b7ebfbf.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.d2d1224c.chunk.js"
+    "static/js/main.2f692016.chunk.js"
   ]
 }
