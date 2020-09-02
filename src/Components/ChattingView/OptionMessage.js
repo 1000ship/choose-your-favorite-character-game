@@ -24,13 +24,20 @@ const OptionMessage = ({
   selectOption,
   options = [{ answer: "ㅎㅇ", reaction: "?", nextId: "" }],
 }) => {
+  const onOptionClick = (i) => (e) => {
+    const specials = ScriptParser.getSpecials(options[i].answer);
+    if (specials?.input)
+      selectOption(i, { [specials.input]: prompt("입력해주세요") });
+    else selectOption(i);
+  };
+
   return (
     <RightMessage>
       <OptionList>
         {options.map((option, i) => (
           <OptionItem
             key={i}
-            onClick={(e) => selectOption(i)}
+            onClick={onOptionClick(i)}
             dangerouslySetInnerHTML={{
               __html: ScriptParser.getText(option.answer),
             }}

@@ -1,17 +1,22 @@
-function MemoryData() {
-  this.data = {}
+var data = {};
 
-  this.setData = (key, value) => {
-    this.data[key] = value
-  }
+const MemoryData = {
+  setData: (key, value) => {
+    data[key] = value;
+  },
 
-  this.getData = (key) => {
-    return this.data[key]
-  }
+  getData: (key, defaultValue) => {
+    return data[key] ?? defaultValue;
+  },
 
-  this.clearData = () => {
-    this.data = {}
-  }
-}
+  getWholeData: () => {
+    return data;
+  },
+
+  clearData: () => {
+    data = {};
+  },
+
+};
 
 export default MemoryData;

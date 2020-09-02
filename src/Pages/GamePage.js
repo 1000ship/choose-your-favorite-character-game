@@ -7,6 +7,7 @@ import BGMPlayer from "../Utils/BGMPlayer";
 import { loadScript } from "../Utils/api";
 import { SCENE_TYPE_TEXT } from "../Utils/constant";
 import { withRouter } from "react-router-dom";
+import MemoryData from "../Utils/MemoryData";
 
 // BGMPlayer.play('amy.mp3')
 
@@ -21,7 +22,7 @@ function GamePage(props) {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   useEffect(() => {
     if( characterName === "amy" )
-      characterName = `${characterName}_${prompt("male/female", "male")}.txt`
+      characterName = `${characterName}_${MemoryData.getData("gender", "male")}.txt`
     else
       characterName = `${characterName}.txt`
     console.log( characterName, folderName )

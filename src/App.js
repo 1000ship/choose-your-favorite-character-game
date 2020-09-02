@@ -10,6 +10,7 @@ import OpeningPage from "./Pages/OpeningPage";
 import ChoicePage from "./Pages/ChoicePage";
 import GamePage from "./Pages/GamePage";
 import GlobalStyles from "./GlobalStyles";
+import PreGamePage from "./Pages/PreGamePage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/choice" component={ChoicePage}></Route>
+          <Route path="/pre-game" component={PreGamePage}></Route>
           <Route path="/game" component={GamePage}></Route>
           <Route path="/" component={OpeningPage}></Route>
           <Redirect to="/" />
