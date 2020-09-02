@@ -30,8 +30,8 @@ const OptionMessage = ({
     if (specials?.input)
     {
       let inputData = prompt("입력해주세요")
-      while (!inputData || inputData?.length === 0) {
-        inputData = prompt("입력해주세요")
+      if (!inputData || inputData?.length === 0) {
+        return
       }
       MemoryData.setData(specials.input, inputData)
       selectOption(i, { [specials.input]: inputData });
