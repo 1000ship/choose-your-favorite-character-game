@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ScriptParser from "../../Utils/ScriptParser";
+import MemoryData from "../../Utils/MemoryData";
 
 const RightMessage = styled.span`
   align-self: flex-end;
@@ -27,7 +28,14 @@ const OptionMessage = ({
   const onOptionClick = (i) => (e) => {
     const specials = ScriptParser.getSpecials(options[i].answer);
     if (specials?.input)
-      selectOption(i, { [specials.input]: prompt("입력해주세요") });
+    {
+      let inputData = prompt("입력해주세요")
+      while (!inputData || inputData?.length === 0) {
+        inputData = prompt("입력해주세요")
+      }
+      MemoryData.setData(specials.input, inputData)
+      selectOption(i, { [specials.input]: inputData });
+    }
     else selectOption(i);
   };
 

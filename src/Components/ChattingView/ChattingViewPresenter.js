@@ -68,7 +68,7 @@ const ChattingViewPresenter = ({ chatList, scene, selectOption }) => (
         ) : (
           <RightMessage
             key={i}
-            dangerouslySetInnerHTML={{ __html: ScriptParser.getText(message) }}
+            dangerouslySetInnerHTML={{ __html: ScriptParser.getText(message, true) }}
           ></RightMessage>
         )
       )}

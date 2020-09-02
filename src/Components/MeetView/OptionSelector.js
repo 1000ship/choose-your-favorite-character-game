@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { CHAT_STEP_REACTION } from "./ChatBox";
 import ScriptParser from "../../Utils/ScriptParser";
+import MemoryData from "../../Utils/MemoryData";
 
 const Container = styled.div``;
 const OptionList = styled.ul``;
@@ -17,9 +18,18 @@ const OptionItem = styled.li`
 
 const OptionSelector = ({ options, selectOption }) => {
   const onOptionClicked = (i) => (e) => {
-    selectOption(i);
+    const specials = ScriptParser.getSpecials(options[i].answer);
+    if (specials?.input) {
+      let inputData = prompt("입력해주세요");
+      while (!inputData || inputData?.length === 0) {
+        inputData = prompt("입력해주세요")
+      }
+      MemoryData.setData(specials.input, inputData);
+      selectOption(i, { [specials.input]: inputData });
+    } else selectOption(i);
     e.stopPropagation();
   };
+
   return (
     <Container>
       <OptionList>
