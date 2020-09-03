@@ -4,6 +4,7 @@ import {
   SCENE_TYPE_MEET,
   SCENE_TYPE_CHANGE_DURATION,
 } from "../../Utils/constant";
+import SoundPlayer from "../../Utils/SoundPlayer";
 
 const ChattingViewContainer = ({ scriptInterpreter, setSceneType }) => {
   const [chatList, setChatList] = useState([]);

@@ -5,6 +5,7 @@ import BackButtonResource from "../Resources/Images/statement_back.png";
 import SkipButtonResource from "../Resources/Images/video_skip.png";
 import { BGM_AMY, BGM_BELLA, BGM_CLAIR } from "../Utils/constant";
 import BGMPlayer from "../Utils/BGMPlayer";
+import SoundPlayer from "../Utils/SoundPlayer";
 
 const Container = styled.div`
   width: 100vw;
@@ -58,6 +59,7 @@ const VideoPage = (props) => {
         break;
     }
     if (bgmFile) BGMPlayer.play(bgmFile);
+    SoundPlayer.play("Amy", "iphone sound.mp3");
   };
 
   return (
