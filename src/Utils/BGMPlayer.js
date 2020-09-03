@@ -11,7 +11,7 @@ const BGMPlayer = {
     bgm.play();
   },
   pause: () => {
-    bgm.pause();
+    if( bgm ) bgm.pause();
   },
 };
 
