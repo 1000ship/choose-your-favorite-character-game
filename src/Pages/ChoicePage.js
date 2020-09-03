@@ -55,7 +55,7 @@ const CharacterName = styled.img`
 
 const ChoicePage = ({ history }) => {
   const onCharacterClick = (name) => (e) => {
-    history.push(`/game/${name}`);
+    history.push(`/video/${name}`);
     let bgmFile;
     switch( name ){
       case "amy":

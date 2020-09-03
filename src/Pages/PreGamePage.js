@@ -50,9 +50,8 @@ const RightMessage = styled.span`
   color: #662d91;
 `;
 
-const PreGamePage = ( props ) => {
-
-  const {history, location: {pathname}} = props
+const PreGamePage = (props) => {
+  const { history } = props;
 
   let question = [
     "당신의 이름은?",
@@ -89,7 +88,7 @@ const PreGamePage = ( props ) => {
       MemoryData.setData("gender", i === 0 ? "male" : "female");
     } else if (state.step === 3) {
       // 카메라
-      document.getElementById("camera").click()
+      document.getElementById("camera").click();
       history.push(`/choice`);
     }
     setState((state) => ({
@@ -107,7 +106,14 @@ const PreGamePage = ( props ) => {
   const { chatList, options } = state;
   return (
     <Container>
-      <input hidden type="file" id="camera" name="camera" capture="camera" accept="image/*" />
+      <input
+        hidden
+        type="file"
+        id="camera"
+        name="camera"
+        capture="camera"
+        accept="image/*"
+      />
       <AppBar>
         <LogoImage src={CYFCLogoImage} alt="CYFC"></LogoImage>
       </AppBar>
