@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 import BackButtonResource from "../Resources/Images/statement_back.png";
 import SkipButtonResource from "../Resources/Images/video_skip.png";
-import { BGM_AMY, BGM_BELLA, BGM_CLAIR } from "../Utils/constant";
+import { BGM_AMY, BGM_BELLA, BGM_CLAIR, BGM_MAIN } from "../Utils/constant";
 import BGMPlayer from "../Utils/BGMPlayer";
 import SoundPlayer from "../Utils/SoundPlayer";
 
@@ -42,6 +42,7 @@ const VideoPage = (props) => {
 
   const onBackClick = (e) => {
     history.push("/choice");
+    BGMPlayer.play(BGM_MAIN);
   };
 
   const onSkipClick = (e) => {

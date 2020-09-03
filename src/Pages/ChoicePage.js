@@ -56,6 +56,7 @@ const CharacterName = styled.img`
 const ChoicePage = ({ history }) => {
   const onCharacterClick = (name) => (e) => {
     history.push(`/video/${name}`);
+    BGMPlayer.pause()
   };
 
   return (
