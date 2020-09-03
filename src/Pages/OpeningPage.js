@@ -22,7 +22,7 @@ const LogoImage = styled.img`
 
 const OpeningPage = ({ history }) => {
   const onClick = (e) => {
-    history.push("/choice");
+    history.push("/pre-game");
     BGMPlayer.play(BGM_MAIN)
   };
   return (

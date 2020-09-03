@@ -53,7 +53,7 @@ const RightMessage = styled.span`
 const PreGamePage = ( props ) => {
 
   const {history, location: {pathname}} = props
-  const characterName = pathname.replace("/pre-game/","").trim()
+  const characterName = pathname.replace("/pre-game","").trim()
 
   let question = [
     "당신의 이름은?",
@@ -90,7 +90,7 @@ const PreGamePage = ( props ) => {
       MemoryData.setData("gender", i === 0 ? "male" : "female");
     } else if (state.step === 3) {
       // 카메라
-      history.push(`/game/${characterName}`);
+      history.push(`/choice/${characterName}`);
     }
     setState((state) => ({
       ...state,
