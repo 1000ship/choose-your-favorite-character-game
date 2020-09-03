@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 import BackButtonResource from "../Resources/Images/statement_back.png";
 import SkipButtonResource from "../Resources/Images/video_skip.png";
+import { BGM_AMY, BGM_BELLA, BGM_CLAIR } from "../Utils/constant";
+import BGMPlayer from "../Utils/BGMPlayer";
 
 const Container = styled.div`
   width: 100vw;
@@ -30,7 +32,6 @@ const SkipButton = styled.img`
   width: 20vw;
   cursor: pointer;
 `;
-
 const VideoPage = (props) => {
   const {
     history,
@@ -44,6 +45,19 @@ const VideoPage = (props) => {
 
   const onSkipClick = (e) => {
     history.push(`/game/${characterName}`);
+    let bgmFile;
+    switch (characterName) {
+      case "amy":
+        bgmFile = BGM_AMY;
+        break;
+      case "bella":
+        bgmFile = BGM_BELLA;
+        break;
+      case "clair":
+        bgmFile = BGM_CLAIR;
+        break;
+    }
+    if (bgmFile) BGMPlayer.play(bgmFile);
   };
 
   return (

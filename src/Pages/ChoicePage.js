@@ -56,20 +56,6 @@ const CharacterName = styled.img`
 const ChoicePage = ({ history }) => {
   const onCharacterClick = (name) => (e) => {
     history.push(`/video/${name}`);
-    let bgmFile;
-    switch( name ){
-      case "amy":
-        bgmFile = BGM_AMY;
-        break;
-      case "bella":
-        bgmFile = BGM_BELLA;
-        break;
-      case "clair":
-        bgmFile = BGM_CLAIR;
-        break;
-    }
-    if( bgmFile )
-      BGMPlayer.play(bgmFile)
   };
 
   return (
