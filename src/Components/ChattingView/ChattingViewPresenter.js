@@ -41,7 +41,7 @@ const LeftMessage = styled.span`
   border-radius: 15px 15px 15px 3px;
   background-image: linear-gradient(#e86ecb, #a21ccb);
   color: white;
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     font-size: 2em;
   }
 `;
@@ -53,7 +53,25 @@ const RightMessage = styled.span`
   border-radius: 15px 15px 3px 15px;
   border-image-slice: 1;
   color: #662d91;
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
+    font-size: 2em;
+  }
+`;
+
+const EndingMessage = styled.span`
+  align-self: flex-end;
+  margin: 5px;
+  padding: 12px;
+  border: 3px solid #a21ccb;
+  border-radius: 40px 40px 10px 40px;
+  border-image-slice: 1;
+  color: #662d91;
+  width: calc(100% - 44px);
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 768px) {
     font-size: 2em;
   }
 `;
@@ -65,8 +83,13 @@ const ChattingViewPresenter = ({ chatList, scene, selectOption }) => (
     </AppBar>
     <Contents>
       <DateText>오늘</DateText>
-      {chatList.map(({ who, message }, i) =>
-        who === "left" ? (
+      {chatList.map(({ who, message, isEnding }, i) =>
+        isEnding ? (
+          <EndingMessage
+            key={i}
+            dangerouslySetInnerHTML={{ __html: ScriptParser.getText(message) }}
+          ></EndingMessage>
+        ) : who === "left" ? (
           <LeftMessage
             key={i}
             dangerouslySetInnerHTML={{ __html: ScriptParser.getText(message) }}
@@ -74,7 +97,9 @@ const ChattingViewPresenter = ({ chatList, scene, selectOption }) => (
         ) : (
           <RightMessage
             key={i}
-            dangerouslySetInnerHTML={{ __html: ScriptParser.getText(message, true) }}
+            dangerouslySetInnerHTML={{
+              __html: ScriptParser.getText(message, true),
+            }}
           ></RightMessage>
         )
       )}

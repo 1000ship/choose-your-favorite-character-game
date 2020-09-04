@@ -3,6 +3,7 @@ import ChattingViewPresenter from "./ChattingViewPresenter";
 import {
   SCENE_TYPE_MEET,
   SCENE_TYPE_CHANGE_DURATION,
+  SCENE_TYPE_ENDING,
 } from "../../Utils/constant";
 import SoundPlayer from "../../Utils/SoundPlayer";
 
@@ -32,6 +33,7 @@ const ChattingViewContainer = ({ scriptInterpreter, setSceneType }) => {
         result.push({
           who: characterName === "{name}" ? "right" : "left",
           message: sceneScript,
+          isEnding: sceneType === SCENE_TYPE_ENDING
         });
       return result;
     });
