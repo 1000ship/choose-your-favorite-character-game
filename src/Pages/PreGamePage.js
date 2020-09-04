@@ -42,6 +42,17 @@ const LeftMessage = styled.span`
   @media (min-width: 768px){
     font-size: 2em;
   }
+  animation-duration: 1.5s;
+  animation-name: slide-right;
+  @keyframes slide-right {
+    from {
+      transform: translate(-150%, 0);
+    }
+    80% {
+      transform: translate(-150%, 0);
+    }
+  }
+  
 `;
 const RightMessage = styled.span`
   align-self: flex-end;
@@ -53,6 +64,13 @@ const RightMessage = styled.span`
   color: #662d91;
   @media (min-width: 768px){
     font-size: 2em;
+  }
+  animation-duration: 0.5s;
+  animation-name: slide-left;
+  @keyframes slide-left {
+    from {
+      transform: translate(150%, 0);
+    }
   }
 `;
 
