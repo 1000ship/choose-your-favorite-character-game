@@ -15,18 +15,26 @@ import GameOverModal from "../Components/GameOverModal";
 const scriptInterpreter = new ScriptInterpreter();
 
 function GamePage(props) {
-  const {location: {pathname}} = props
-  let characterName = pathname.replace("/game/", "")
-  const folderName = `${characterName[0].toUpperCase()}${characterName.slice(1)}`
+  const {
+    location: { pathname },
+    history,
+  } = props;
+  let characterName = pathname.replace("/game/", "");
+  const folderName = `${characterName[0].toUpperCase()}${characterName.slice(
+    1
+  )}`;
 
   const [sceneType, setSceneType] = useState(SCENE_TYPE_TEXT);
   const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   useEffect(() => {
-    if( characterName === "amy" )
-      characterName = `${characterName}_${MemoryData.getData("gender", "male")}.txt`
-    else
-      characterName = `${characterName}.txt`
-    console.log( characterName, folderName )
+    if (characterName === "amy")
+      characterName = `${characterName}_${MemoryData.getData(
+        "gender",
+        "male"
+      )}.txt`;
+    else characterName = `${characterName}.txt`;
+    console.log(characterName, folderName);
     loadScript(characterName).then((data) => {
       scriptInterpreter.setScenes(data);
       scriptInterpreter.setFolderName(folderName);
@@ -35,21 +43,35 @@ function GamePage(props) {
     });
   }, []);
 
+  const resetGame = () => {
+    history.go(0);
+  };
+
+  const exitGame = () => {
+    history.push("/choice");
+  };
+
   return (
     <>
       {scriptLoaded &&
-        (scriptInterpreter.currentScene.sceneType === SCENE_TYPE_TEXT ? (
+        (sceneType === SCENE_TYPE_TEXT ? (
           <ChattingView
             scriptInterpreter={scriptInterpreter}
             setSceneType={setSceneType}
+            setGameOver={setGameOver}
           ></ChattingView>
         ) : (
           <MeetView
             scriptInterpreter={scriptInterpreter}
             setSceneType={setSceneType}
+            setGameOver={setGameOver}
           ></MeetView>
         ))}
-        <GameOverModal isOpened={false}></GameOverModal>
+      <GameOverModal
+        isOpened={gameOver}
+        resetGame={resetGame}
+        exitGame={exitGame}
+      ></GameOverModal>
     </>
   );
 }

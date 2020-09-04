@@ -11,7 +11,11 @@ import {
 import ScriptParser from "../../Utils/ScriptParser";
 import SoundPlayer from "../../Utils/SoundPlayer";
 
-const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
+const MeetViewContainer = ({
+  scriptInterpreter,
+  setSceneType,
+  setGameOver,
+}) => {
   const [meetData, setMeetData] = useState({
     step: MEET_STEP_SCRIPT,
     characterName: "",
@@ -42,14 +46,17 @@ const MeetViewContainer = ({ scriptInterpreter, setSceneType }) => {
       options,
       nextSceneId,
       sceneSound,
-      folderName
+      folderName,
     };
     if (backgroundImage?.length > 0)
       updateData.backgroundImage = backgroundImage.trim();
     if (characterImage?.length > 0)
       updateData.characterImage = characterImage.trim();
     if (sceneType === SCENE_TYPE_TEXT) setSceneType(SCENE_TYPE_TEXT);
-    else if (sceneType === SCENE_TYPE_ENDING) updateData.characterImage = "";
+    else if (sceneType === SCENE_TYPE_ENDING) {
+      updateData.characterImage = "";
+      setGameOver(true);
+    }
     if (sceneScript?.length === 0) updateData.step = MEET_STEP_OPTION;
     if (sceneSound?.length > 0) SoundPlayer.play(folderName, sceneSound);
     return Object.assign(Object.assign({}, data), updateData);

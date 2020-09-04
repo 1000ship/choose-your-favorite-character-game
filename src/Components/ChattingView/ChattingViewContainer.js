@@ -7,7 +7,11 @@ import {
 } from "../../Utils/constant";
 import SoundPlayer from "../../Utils/SoundPlayer";
 
-const ChattingViewContainer = ({ scriptInterpreter, setSceneType }) => {
+const ChattingViewContainer = ({
+  scriptInterpreter,
+  setSceneType,
+  setGameOver,
+}) => {
   const [chatList, setChatList] = useState([]);
 
   useEffect(() => doCurrentScene(), []);
@@ -33,10 +37,11 @@ const ChattingViewContainer = ({ scriptInterpreter, setSceneType }) => {
         result.push({
           who: characterName === "{name}" ? "right" : "left",
           message: sceneScript,
-          isEnding: sceneType === SCENE_TYPE_ENDING
+          isEnding: sceneType === SCENE_TYPE_ENDING,
         });
       return result;
     });
+    if (sceneType === SCENE_TYPE_ENDING) setGameOver(true);
     if (options?.length === 0) {
       scriptInterpreter.getNextScene(nextSceneId);
       doCurrentScene();
