@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "85e9cf4c6b33647e187e6432d8d836a6",
+    "revision": "0f5152b43d41004997fe614e19fe9c2d",
     "url": "/choose-your-favorite-character-game/index.html"
   },
   {
-    "revision": "eef25257d302411cbc51",
+    "revision": "0ccda37a05220ee0e631",
     "url": "/choose-your-favorite-character-game/static/css/main.dc0a14bb.chunk.css"
   },
   {
-    "revision": "7fab6b1a8fc86a16f899",
-    "url": "/choose-your-favorite-character-game/static/js/2.682b4994.chunk.js"
+    "revision": "119b2ad98053182a8621",
+    "url": "/choose-your-favorite-character-game/static/js/2.fb42f99b.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/choose-your-favorite-character-game/static/js/2.682b4994.chunk.js.LICENSE.txt"
+    "url": "/choose-your-favorite-character-game/static/js/2.fb42f99b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "eef25257d302411cbc51",
-    "url": "/choose-your-favorite-character-game/static/js/main.319a5be8.chunk.js"
+    "revision": "0ccda37a05220ee0e631",
+    "url": "/choose-your-favorite-character-game/static/js/main.d81ebe6f.chunk.js"
   },
   {
     "revision": "013e563f83fb200ad84e",
@@ -46,6 +46,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "008fe626e135358526bc4b3abf248a6e",
     "url": "/choose-your-favorite-character-game/static/media/game_chat_box.008fe626.png"
+  },
+  {
+    "revision": "4f4e0f83bc24fc51da9e68d8f40148d7",
+    "url": "/choose-your-favorite-character-game/static/media/gameover.4f4e0f83.png"
   },
   {
     "revision": "cd08c9aa6b91e8eec2c48419bfee4c58",
