@@ -13,6 +13,11 @@ export default createGlobalStyle`
     src: url(./res/fonts/GmarketSansTTFBold.ttf);
     font-weight: 600;
   }
+  @font-face {
+    font-family: "GmarketSans";
+    src: url(./res/fonts/GmarketSansTTFLight.ttf);
+    font-weight: 200;
+  }
   a {
       text-decoration: none;
       color: inherit;

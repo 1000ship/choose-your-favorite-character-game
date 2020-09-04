@@ -6,7 +6,7 @@ import OptionMessage from "../Components/ChattingView/OptionMessage";
 import ScriptParser from "../Utils/ScriptParser";
 import MemoryData from "../Utils/MemoryData";
 
-const AppBarHeight = 64;
+const AppBarHeight = 80;
 
 const Container = styled.div``;
 
@@ -23,7 +23,7 @@ const AppBar = styled.div`
   background-color: white;
 `;
 const LogoImage = styled.img`
-  height: 70%;
+  height: 80%;
 `;
 
 const Contents = styled.div`
@@ -39,6 +39,9 @@ const LeftMessage = styled.span`
   border-radius: 15px 15px 15px 3px;
   background-image: linear-gradient(#e86ecb, #a21ccb);
   color: white;
+  @media (min-width: 768px){
+    font-size: 2em;
+  }
 `;
 const RightMessage = styled.span`
   align-self: flex-end;
@@ -48,6 +51,9 @@ const RightMessage = styled.span`
   border-radius: 15px 15px 3px 15px;
   border-image-slice: 1;
   color: #662d91;
+  @media (min-width: 768px){
+    font-size: 2em;
+  }
 `;
 
 const PreGamePage = (props) => {

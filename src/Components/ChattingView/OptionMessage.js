@@ -11,6 +11,9 @@ const RightMessage = styled.span`
   border-radius: 15px 15px 3px 15px;
   border-image-slice: 1;
   color: #662d91;
+  @media (min-width: 768px){
+    font-size: 2em;
+  }
 `;
 
 const OptionList = styled.ul``;

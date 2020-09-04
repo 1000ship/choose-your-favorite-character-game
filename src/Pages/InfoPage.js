@@ -23,14 +23,15 @@ const MainText = styled.div`
 `;
 const SubText = styled.div`
   color: white;
-  font-size: 1em;
+  font-size: 1.2em;
   line-height: 1.2;
+  font-weight: 200;
 `;
 const BackButton = styled.img`
   position: absolute;
   left: 5vw;
   top: 5vh;
-  width: 20vw;
+  width: 18vw;
   cursor: pointer;
 `;
 

@@ -26,6 +26,7 @@ const CharacterImage = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   transform-origin: bottom center;
+  transform: scale(1.2);
 `;
 
 const MeetViewPresenter = ({ meetData, stepEvent, selectOption }) => {
