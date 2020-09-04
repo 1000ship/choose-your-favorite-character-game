@@ -13,6 +13,11 @@ import GlobalStyles from "./GlobalStyles";
 import PreGamePage from "./Pages/PreGamePage";
 import VideoPage from "./Pages/VideoPage";
 import InfoPage from "./Pages/InfoPage";
+import ScriptParser from "./Utils/ScriptParser";
+
+// for bug fix
+// const str = "아 저 그런 영화 딱 질색인데 ㅎㅎ 영화 취향 진짜 안 맞네요! {snd:17 아 저 그런 영화 딱 질색인데 ㅎㅎ 영화 취향 진짜 안 맞네요.mp3}  {img:16 띠껍.png}"
+// console.log(ScriptParser.getSpecials(str))
 
 function App() {
   return (

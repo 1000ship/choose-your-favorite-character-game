@@ -8,6 +8,7 @@ import { loadScript } from "../Utils/api";
 import { SCENE_TYPE_TEXT } from "../Utils/constant";
 import { withRouter } from "react-router-dom";
 import MemoryData from "../Utils/MemoryData";
+import GameOverModal from "../Components/GameOverModal";
 
 // BGMPlayer.play('amy.mp3')
 
@@ -48,6 +49,7 @@ function GamePage(props) {
             setSceneType={setSceneType}
           ></MeetView>
         ))}
+        <GameOverModal isOpened={false}></GameOverModal>
     </>
   );
 }
