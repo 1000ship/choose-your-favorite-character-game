@@ -44,7 +44,7 @@ function GamePage(props) {
   }, []);
 
   const resetGame = () => {
-    window.location.reload()
+    history.push(`/video/${characterName}`);
   };
 
   const exitGame = () => {
