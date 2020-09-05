@@ -31,6 +31,7 @@ const Contents = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: ${AppBarHeight}px;
+  overflow: hidden;
 `;
 const LeftMessage = styled.span`
   align-self: flex-start;
@@ -42,13 +43,11 @@ const LeftMessage = styled.span`
   @media (min-width: 768px){
     font-size: 2em;
   }
-  animation-duration: 1.5s;
+  position: relative;
+  animation-duration: 1s;
   animation-name: slide-right;
   @keyframes slide-right {
     from {
-      transform: translate(-150%, 0);
-    }
-    80% {
       transform: translate(-150%, 0);
     }
   }
@@ -65,7 +64,8 @@ const RightMessage = styled.span`
   @media (min-width: 768px){
     font-size: 2em;
   }
-  animation-duration: 0.5s;
+  position: relative;
+  animation-duration: 1s;
   animation-name: slide-left;
   @keyframes slide-left {
     from {

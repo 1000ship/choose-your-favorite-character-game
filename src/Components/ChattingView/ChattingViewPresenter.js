@@ -29,6 +29,7 @@ const Contents = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: ${AppBarHeight}px;
+  overflow: hidden;
 `;
 const DateText = styled.span`
   color: #939393;
@@ -45,13 +46,10 @@ const LeftMessage = styled.span`
     font-size: 2em;
   }
 
-  animation-duration: 1.5s;
+  animation-duration: 1s;
   animation-name: slide-right;
   @keyframes slide-right {
     from {
-      transform: translate(-150%, 0);
-    }
-    80% {
       transform: translate(-150%, 0);
     }
   }
