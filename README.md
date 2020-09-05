@@ -7,9 +7,13 @@
 <img src='./_readme/cyfc_top_logo.png' alt='CYFC Logo' width='200px'/>
 </p>
 
+ 2020 웹 게임 외주를 받아 개발하게 된 게임입니다. 9월 을지로삼가 소재 *가삼로지을*에서 '가삼 가명익명 기획전 5회'에 전시될 작품 중 하나로 관람자가 QRCode를 찍고 Github Page를 통해 배포된 사이트에 접속하면 해당 전시공간에서 즐길 수 있도록 하였습니다.
 
+ 기획자-개발자 간의 게임 개발 소통을 위해 게임 대본 작성 툴을 부수적으로 만들었으며 이를 통해 기획자가 게임 스토리를 구현하고 개발자는 오직 게임 개발에만 집중할 수 있게 되었습니다.
 
-게임 실행주소 : https://1000ship.github.io/choose-your-favorite-character-game/
+ - 게임 실행주소 : https://1000ship.github.io/choose-your-favorite-character-game/
+
+ - 대본작성 툴 주소 : https://1000ship.github.io/game-script-tool/
 
 ## 목차
 
@@ -29,18 +33,18 @@
   <img src='./_readme/exhibition-poster.png' width='600'/>
 </p>
 
-- 주최: @gasamrojieul 
-- 기획: @gasamrojieul, newcountrykid
+- 주최: [@gasamrojieul](https://www.instagram.com/p/CEsyxQFpX6h/)
+- 기획: [@gasamrojieul](https://www.instagram.com/p/CEsyxQFpX6h/), newcountrykid
 - 참여작가: newcountrykid 
 - 전시기간: 2020. 09. 09. ~ 2020. 09. 15, 2~8pm
 
 ### 제작자 <a name='maker'></a>
 
-- 노지원
+- newcountrykid
   - 기획
   - 디자인
   - 오디오, 영상 및 인물 이미지 리소스 촬영
-- 천성혁
+- 천성혁 ([1000ship](https://github.com/1000ship))
   - 메인게임 개발
   - 스크립트 작성 프로그램 개발
 
