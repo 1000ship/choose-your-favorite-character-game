@@ -44,7 +44,7 @@ function GamePage(props) {
   }, []);
 
   const resetGame = () => {
-    history.go(0);
+    window.location.reload()
   };
 
   const exitGame = () => {
