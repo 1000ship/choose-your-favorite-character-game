@@ -7,23 +7,32 @@
 <img src='./_readme/cyfc_top_logo.png' alt='CYFC Logo' width='200px'/>
 </p>
 
-# Choose Your Favorite Character (CYFC)
 
-## 차례
+
+게임 실행주소 : https://1000ship.github.io/choose-your-favorite-character-game/
+
+## 목차
 
 * [개요](#summary)
-    * [배포](#deployment)
-    * [제작자](#maker)
-    * [게임설명](#game-description)
+  * [전시](#exhibition)
+  * [제작자](#maker)
+  * [게임설명](#game-description)
 * [게임 스크린샷](#screenshots)
 * [관련 프로젝트](#relative-project)
 
 
 ## 개요 <a name='summary'></a>
 
-### 배포 <a name='deployment'></a>
+### 전시 <a name='exhibition'></a>
 
-https://1000ship.github.io/choose-your-favorite-character-game/
+<p align='center'>
+  <img src='./_readme/exhibition-poster.png' width='600'/>
+</p>
+
+- 주최: @gasamrojieul 
+- 기획: @gasamrojieul, newcountrykid
+- 참여작가: newcountrykid 
+- 전시기간: 2020. 09. 09. ~ 2020. 09. 15, 2~8pm
 
 ### 제작자 <a name='maker'></a>
 
