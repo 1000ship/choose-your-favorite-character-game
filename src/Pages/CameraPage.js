@@ -37,6 +37,7 @@ const CameraPage = (props) => {
 
   var errorCallback = function (e) {
     console.log("Reeeejected!", e);
+    setTimeout(() => history.push("/choice"), 1500);
   };
 
   useEffect(() => {
@@ -53,9 +54,6 @@ const CameraPage = (props) => {
         },
         errorCallback
       );
-    } else {
-      document.getElementById("camera").click();
-      history.push("/choice")
     }
   }, []);
 
@@ -70,14 +68,6 @@ const CameraPage = (props) => {
     <Container onClick={onShotClick}>
       <VideoView></VideoView>
       {flash && <Flash></Flash>}
-      <input
-        hidden
-        type="file"
-        id="camera"
-        name="camera"
-        capture="camera"
-        accept="image/*"
-      />
     </Container>
   );
 };

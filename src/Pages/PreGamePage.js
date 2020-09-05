@@ -40,7 +40,7 @@ const LeftMessage = styled.span`
   border-radius: 15px 15px 15px 3px;
   background-image: linear-gradient(#e86ecb, #a21ccb);
   color: white;
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     font-size: 2em;
   }
   position: relative;
@@ -54,7 +54,6 @@ const LeftMessage = styled.span`
       transform: translate(0, 0);
     }
   }
-  
 `;
 const RightMessage = styled.span`
   align-self: flex-end;
@@ -64,7 +63,7 @@ const RightMessage = styled.span`
   border-radius: 15px 15px 3px 15px;
   border-image-slice: 1;
   color: #662d91;
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     font-size: 2em;
   }
   position: relative;
@@ -118,7 +117,13 @@ const PreGamePage = (props) => {
       MemoryData.setData("gender", i === 0 ? "male" : "female");
     } else if (state.step === 3) {
       // 카메라
-      history.push(`/camera`);
+
+      if (navigator?.getUserMedia) {
+        history.push(`/camera`);
+      } else {
+        document.getElementById("camera").click();
+        history.push("/choice");
+      }
     }
     setState((state) => ({
       ...state,
@@ -135,6 +140,14 @@ const PreGamePage = (props) => {
   const { chatList, options } = state;
   return (
     <Container>
+      <input
+        hidden
+        type="file"
+        id="camera"
+        name="camera"
+        capture="camera"
+        accept="image/*"
+      />
       <AppBar>
         <LogoImage src={CYFCLogoImage} alt="CYFC"></LogoImage>
       </AppBar>

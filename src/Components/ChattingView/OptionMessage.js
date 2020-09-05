@@ -14,20 +14,6 @@ const RightMessage = styled.span`
   @media (min-width: 768px){
     font-size: 2em;
   }
-
-  animation-duration: 2s;
-  animation-name: slide-left;
-  @keyframes slide-left {
-    from {
-      transform: translate(150%, 0);
-    }
-    50% {
-      transform: translate(150%, 0);
-    }
-    to {
-      transform: translate(0, 0);
-    }
-  }
 `;
 
 const OptionList = styled.ul``;

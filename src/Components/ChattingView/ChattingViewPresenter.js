@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import CYFCLogoImage from "../../Resources/Images/cyfc_top_logo.png";
 import OptionMessage from "./OptionMessage";
@@ -29,7 +29,8 @@ const Contents = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: ${AppBarHeight}px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
 `;
 const DateText = styled.span`
   color: #939393;
@@ -99,41 +100,52 @@ const EndingMessage = styled.span`
   }
 `;
 
-const ChattingViewPresenter = ({ chatList, scene, selectOption }) => (
-  <Container>
-    <AppBar>
-      <LogoImage src={CYFCLogoImage} alt="CYFC"></LogoImage>
-    </AppBar>
-    <Contents>
-      <DateText>오늘</DateText>
-      {chatList.map(({ who, message, isEnding }, i) =>
-        isEnding ? (
-          <EndingMessage
-            key={i}
-            dangerouslySetInnerHTML={{ __html: ScriptParser.getText(message) }}
-          ></EndingMessage>
-        ) : who === "left" ? (
-          <LeftMessage
-            key={i}
-            dangerouslySetInnerHTML={{ __html: ScriptParser.getText(message) }}
-          ></LeftMessage>
-        ) : (
-          <RightMessage
-            key={i}
-            dangerouslySetInnerHTML={{
-              __html: ScriptParser.getText(message, true),
-            }}
-          ></RightMessage>
-        )
-      )}
-      {scene.options?.length > 0 && scene.sceneType !== "ending" && (
-        <OptionMessage
-          options={scene.options}
-          selectOption={selectOption}
-        ></OptionMessage>
-      )}
-    </Contents>
-  </Container>
-);
+const ChattingViewPresenter = ({ chatList, scene, selectOption }) => {
+  const messageContents = useRef();
+  useEffect(() => {
+    const el = messageContents?.current;
+    if (el) window.scrollTo( 0, window.outerHeight );
+  }, [chatList]);
+  return (
+    <Container>
+      <AppBar>
+        <LogoImage src={CYFCLogoImage} alt="CYFC"></LogoImage>
+      </AppBar>
+      <Contents ref={messageContents}>
+        <DateText>오늘</DateText>
+        {chatList.map(({ who, message, isEnding }, i) =>
+          isEnding ? (
+            <EndingMessage
+              key={i}
+              dangerouslySetInnerHTML={{
+                __html: ScriptParser.getText(message),
+              }}
+            ></EndingMessage>
+          ) : who === "left" ? (
+            <LeftMessage
+              key={i}
+              dangerouslySetInnerHTML={{
+                __html: ScriptParser.getText(message),
+              }}
+            ></LeftMessage>
+          ) : (
+            <RightMessage
+              key={i}
+              dangerouslySetInnerHTML={{
+                __html: ScriptParser.getText(message, true),
+              }}
+            ></RightMessage>
+          )
+        )}
+        {scene.options?.length > 0 && scene.sceneType !== "ending" && (
+          <OptionMessage
+            options={scene.options}
+            selectOption={selectOption}
+          ></OptionMessage>
+        )}
+      </Contents>
+    </Container>
+  );
+};
 
 export default ChattingViewPresenter;
