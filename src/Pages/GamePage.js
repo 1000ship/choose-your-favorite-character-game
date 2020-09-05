@@ -5,7 +5,7 @@ import GlobalStyles from "../GlobalStyles";
 import ScriptInterpreter from "../Utils/ScriptInterpreter";
 import BGMPlayer from "../Utils/BGMPlayer";
 import { loadScript } from "../Utils/api";
-import { SCENE_TYPE_TEXT } from "../Utils/constant";
+import { SCENE_TYPE_TEXT, BGM_MAIN } from "../Utils/constant";
 import { withRouter } from "react-router-dom";
 import MemoryData from "../Utils/MemoryData";
 import GameOverModal from "../Components/GameOverModal";
@@ -45,10 +45,12 @@ function GamePage(props) {
 
   const resetGame = () => {
     history.push(`/video/${characterName}`);
+    BGMPlayer.pause()
   };
 
   const exitGame = () => {
     history.push("/choice");
+    BGMPlayer.play(BGM_MAIN)
   };
 
   return (
