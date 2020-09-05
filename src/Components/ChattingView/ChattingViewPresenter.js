@@ -52,6 +52,9 @@ const LeftMessage = styled.span`
     from {
       transform: translate(-150%, 0);
     }
+    to {
+      transform: translate(0, 0);
+    }
   }
 `;
 const RightMessage = styled.span`
@@ -71,6 +74,9 @@ const RightMessage = styled.span`
   @keyframes slide-left {
     from {
       transform: translate(150%, 0);
+    }
+    to {
+      transform: translate(0, 0);
     }
   }
 `;

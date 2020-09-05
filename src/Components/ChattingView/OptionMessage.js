@@ -21,8 +21,11 @@ const RightMessage = styled.span`
     from {
       transform: translate(150%, 0);
     }
-    70% {
+    50% {
       transform: translate(150%, 0);
+    }
+    to {
+      transform: translate(0, 0);
     }
   }
 `;

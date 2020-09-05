@@ -50,6 +50,9 @@ const LeftMessage = styled.span`
     from {
       transform: translate(-150%, 0);
     }
+    to {
+      transform: translate(0, 0);
+    }
   }
   
 `;
@@ -70,6 +73,9 @@ const RightMessage = styled.span`
   @keyframes slide-left {
     from {
       transform: translate(150%, 0);
+    }
+    to {
+      transform: translate(0, 0);
     }
   }
 `;
@@ -112,8 +118,7 @@ const PreGamePage = (props) => {
       MemoryData.setData("gender", i === 0 ? "male" : "female");
     } else if (state.step === 3) {
       // 카메라
-      document.getElementById("camera").click();
-      history.push(`/choice`);
+      history.push(`/camera`);
     }
     setState((state) => ({
       ...state,
@@ -130,14 +135,6 @@ const PreGamePage = (props) => {
   const { chatList, options } = state;
   return (
     <Container>
-      <input
-        hidden
-        type="file"
-        id="camera"
-        name="camera"
-        capture="camera"
-        accept="image/*"
-      />
       <AppBar>
         <LogoImage src={CYFCLogoImage} alt="CYFC"></LogoImage>
       </AppBar>

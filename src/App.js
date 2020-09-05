@@ -13,6 +13,7 @@ import GlobalStyles from "./GlobalStyles";
 import PreGamePage from "./Pages/PreGamePage";
 import VideoPage from "./Pages/VideoPage";
 import InfoPage from "./Pages/InfoPage";
+import CameraPage from "./Pages/CameraPage";
 import ScriptParser from "./Utils/ScriptParser";
 
 // for bug fix
@@ -25,6 +26,7 @@ function App() {
       <GlobalStyles />
       <Router>
         <Switch>
+          <Route path="/camera" component={CameraPage}></Route>
           <Route path="/choice" component={ChoicePage}></Route>
           <Route path="/pre-game" component={PreGamePage}></Route>
           <Route path="/game" component={GamePage}></Route>
