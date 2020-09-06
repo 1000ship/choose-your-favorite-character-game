@@ -29,8 +29,22 @@ const CharacterImage = styled.div`
   transform: scale(1.1);
 `;
 
+const Debug = styled.div`
+  position: fixed;
+  background-color: white;
+  left: 0;
+  top: 0;
+  z-index: 1;
+`;
+
 const MeetViewPresenter = ({ meetData, stepEvent, selectOption }) => {
-  const { folderName, backgroundImage, characterImage, sceneSound } = meetData;
+  const {
+    folderName,
+    backgroundImage,
+    characterImage,
+    sceneSound,
+    sceneId,
+  } = meetData;
   return (
     <Container onClick={stepEvent}>
       {backgroundImage?.length > 0 && (
@@ -44,6 +58,12 @@ const MeetViewPresenter = ({ meetData, stepEvent, selectOption }) => {
         ></CharacterImage>
       )}
       <ChatBox meetData={meetData} selectOption={selectOption}></ChatBox>
+      <Debug>
+          ID: {sceneId}<br></br>
+          Background: {backgroundImage}<br></br>
+          Character: {characterImage}<br></br>
+          Sound: {sceneSound}
+        </Debug>
     </Container>
   );
 };

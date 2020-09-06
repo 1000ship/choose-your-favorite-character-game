@@ -38,6 +38,7 @@ const MeetViewContainer = ({
       options,
       nextSceneId,
       sceneSound,
+      sceneId
     } = newScene;
     let updateData = {
       step: MEET_STEP_SCRIPT,
@@ -47,6 +48,7 @@ const MeetViewContainer = ({
       nextSceneId,
       sceneSound,
       folderName,
+      sceneId
     };
     if (backgroundImage?.length > 0)
       updateData.backgroundImage = backgroundImage.trim();
