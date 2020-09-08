@@ -13,6 +13,7 @@ const EndingList = styled.ul`
   padding: 10px;
 `;
 const EndingItem = styled.li``;
+const ResetButton = styled.button``;
 
 const AdminPage = (props) => {
   const endingObject = endingCounter.getEndingCounter();
@@ -23,7 +24,14 @@ const AdminPage = (props) => {
   endingList.sort((left, right) =>
     left[0] > right[0] ? 1 : left[0] < right[0] ? -1 : 0
   );
-  console.log(endingList);
+
+  const onResetClick = (e) => {
+    if (!window.confirm("정말로 기록들을 삭제하겠습니까?")) return;
+    endingCounter.resetEndingCounter();
+    alert("삭제했습니다.");
+    window.location.reload();
+  };
+
   return (
     <Container>
       <Title>Ending Counter</Title>
@@ -34,6 +42,7 @@ const AdminPage = (props) => {
           </EndingItem>
         ))}
       </EndingList>
+      <ResetButton onClick={onResetClick}>Reset</ResetButton>
     </Container>
   );
 };
