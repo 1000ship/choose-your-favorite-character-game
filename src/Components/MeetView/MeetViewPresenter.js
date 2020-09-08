@@ -58,12 +58,12 @@ const MeetViewPresenter = ({ meetData, stepEvent, selectOption }) => {
         ></CharacterImage>
       )}
       <ChatBox meetData={meetData} selectOption={selectOption}></ChatBox>
-      <Debug>
+      {/* <Debug>
           ID: {sceneId}<br></br>
           Background: {backgroundImage}<br></br>
           Character: {characterImage}<br></br>
           Sound: {sceneSound}
-        </Debug>
+        </Debug> */}
     </Container>
   );
 };
