@@ -11,6 +11,7 @@ import ChoicePage from "./Pages/ChoicePage";
 import GamePage from "./Pages/GamePage";
 import GlobalStyles from "./GlobalStyles";
 import PreGamePage from "./Pages/PreGamePage";
+import AdminPage from "./Pages/AdminPage";
 import VideoPage from "./Pages/VideoPage";
 import InfoPage from "./Pages/InfoPage";
 import CameraPage from "./Pages/CameraPage";
@@ -32,6 +33,7 @@ function App() {
           <Route path="/game" component={GamePage}></Route>
           <Route path="/video" component={VideoPage}></Route>
           <Route path="/info" component={InfoPage}></Route>
+          <Route path="/admin" component={AdminPage}></Route>
           <Route path="/" component={OpeningPage}></Route>
           <Redirect to="/" />
         </Switch>
