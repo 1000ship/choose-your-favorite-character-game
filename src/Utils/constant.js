@@ -31,3 +31,5 @@ export const BGM_MAIN = "main.mp3";
 export const BGM_AMY = "amy.mp3";
 export const BGM_BELLA = "bella.mp3";
 export const BGM_CLAIR = "clair.mp3";
+
+export const ENDING_COUNTER_STORAGE_KEY = "ending-counter"

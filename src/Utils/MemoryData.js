@@ -20,7 +20,6 @@ const MemoryData = {
     data = {};
     sessionStorage.setItem("CYFC", JSON.stringify(data))
   },
-
 };
 
 export default MemoryData;

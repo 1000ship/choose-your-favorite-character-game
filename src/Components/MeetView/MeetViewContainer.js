@@ -11,11 +11,13 @@ import {
 } from "../../Utils/constant";
 import ScriptParser from "../../Utils/ScriptParser";
 import SoundPlayer from "../../Utils/SoundPlayer";
+import { endingCounter } from "../../Utils/api";
 
 const MeetViewContainer = ({
   scriptInterpreter,
   setSceneType,
   setGameOver,
+  currentCharacterName
 }) => {
   const [meetData, setMeetData] = useState({
     step: MEET_STEP_SCRIPT,
@@ -58,6 +60,7 @@ const MeetViewContainer = ({
     if (sceneType === SCENE_TYPE_TEXT) setSceneType(SCENE_TYPE_TEXT);
     else if (sceneType === SCENE_TYPE_ENDING) {
       updateData.characterImage = "";
+      endingCounter.countUp(currentCharacterName, sceneId)
     }
     if (sceneScript?.length === 0) updateData.step = MEET_STEP_OPTION;
     if (sceneSound?.length > 0) SoundPlayer.play(folderName, sceneSound);

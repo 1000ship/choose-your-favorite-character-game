@@ -61,12 +61,14 @@ function GamePage(props) {
             scriptInterpreter={scriptInterpreter}
             setSceneType={setSceneType}
             setGameOver={setGameOver}
+            currentCharacterName={characterName}
           ></ChattingView>
         ) : (
           <MeetView
             scriptInterpreter={scriptInterpreter}
             setSceneType={setSceneType}
             setGameOver={setGameOver}
+            currentCharacterName={characterName}
           ></MeetView>
         ))}
       <GameOverModal

@@ -6,11 +6,13 @@ import {
   SCENE_TYPE_ENDING,
 } from "../../Utils/constant";
 import SoundPlayer from "../../Utils/SoundPlayer";
+import { endingCounter } from "../../Utils/api";
 
 const ChattingViewContainer = ({
   scriptInterpreter,
   setSceneType,
   setGameOver,
+  currentCharacterName
 }) => {
   const [chatList, setChatList] = useState([]);
   const [isEnding, setEnding] = useState(false);
@@ -24,6 +26,7 @@ const ChattingViewContainer = ({
       options,
       nextSceneId,
       characterName,
+      sceneId,
     } = scriptInterpreter.currentScene;
     if (sceneType === SCENE_TYPE_MEET) {
       setTimeout(
@@ -42,7 +45,10 @@ const ChattingViewContainer = ({
         });
       return result;
     });
-    if (sceneType === SCENE_TYPE_ENDING) setEnding(true);
+    if (sceneType === SCENE_TYPE_ENDING){
+      setEnding(true);
+      endingCounter.countUp(currentCharacterName, sceneId)
+    }
     if (options?.length === 0) {
       scriptInterpreter.getNextScene(nextSceneId);
       doCurrentScene();
