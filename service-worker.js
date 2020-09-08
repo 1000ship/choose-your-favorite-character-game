@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/choose-your-favorite-character-game/precache-manifest.94afb0a4feff591496b83533ffa8108d.js"
+  "/choose-your-favorite-character-game/precache-manifest.98c8b82e746c213ccf684656ef52365f.js"
 );
 
 self.addEventListener('message', (event) => {
