@@ -13,6 +13,7 @@ const ChattingViewContainer = ({
   setGameOver,
 }) => {
   const [chatList, setChatList] = useState([]);
+  const [isEnding, setEnding] = useState(false);
 
   useEffect(() => doCurrentScene(), []);
 
@@ -41,7 +42,7 @@ const ChattingViewContainer = ({
         });
       return result;
     });
-    if (sceneType === SCENE_TYPE_ENDING) setGameOver(true);
+    if (sceneType === SCENE_TYPE_ENDING) setEnding(true);
     if (options?.length === 0) {
       scriptInterpreter.getNextScene(nextSceneId);
       doCurrentScene();
@@ -62,11 +63,16 @@ const ChattingViewContainer = ({
     doCurrentScene();
   };
 
+  const stepFromEnding = () => {
+    setGameOver(true);
+  };
+
   return (
     <ChattingViewPresenter
       chatList={chatList}
       scene={scriptInterpreter.currentScene}
       selectOption={selectOption}
+      stepFromEnding={isEnding ? stepFromEnding : null}
     ></ChattingViewPresenter>
   );
 };

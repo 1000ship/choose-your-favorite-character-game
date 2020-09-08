@@ -100,14 +100,14 @@ const EndingMessage = styled.span`
   }
 `;
 
-const ChattingViewPresenter = ({ chatList, scene, selectOption }) => {
+const ChattingViewPresenter = ({ chatList, scene, selectOption, stepFromEnding }) => {
   const messageContents = useRef();
   useEffect(() => {
     const el = messageContents?.current;
     if (el) window.scrollTo( 0, window.outerHeight );
   }, [chatList]);
   return (
-    <Container>
+    <Container onClick={stepFromEnding ? stepFromEnding : null}>
       <AppBar>
         <LogoImage src={CYFCLogoImage} alt="CYFC"></LogoImage>
       </AppBar>

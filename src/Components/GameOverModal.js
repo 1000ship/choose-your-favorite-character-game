@@ -12,15 +12,11 @@ const Container = styled.div`
     width: 600px;
   }
 
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-name: slidein;
 
   @keyframes slidein {
     from {
-      top: 150%;
-      opacity: 0;
-    }
-    50% {
       top: 150%;
       opacity: 0;
     }

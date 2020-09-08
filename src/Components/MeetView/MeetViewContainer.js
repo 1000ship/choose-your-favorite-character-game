@@ -7,6 +7,7 @@ import {
   MEET_STEP_REACTION,
   MEET_STEP_SCRIPT,
   SCENE_TYPE_CHANGE_DURATION,
+  MEET_STEP_ENDING,
 } from "../../Utils/constant";
 import ScriptParser from "../../Utils/ScriptParser";
 import SoundPlayer from "../../Utils/SoundPlayer";
@@ -57,7 +58,6 @@ const MeetViewContainer = ({
     if (sceneType === SCENE_TYPE_TEXT) setSceneType(SCENE_TYPE_TEXT);
     else if (sceneType === SCENE_TYPE_ENDING) {
       updateData.characterImage = "";
-      setGameOver(true);
     }
     if (sceneScript?.length === 0) updateData.step = MEET_STEP_OPTION;
     if (sceneSound?.length > 0) SoundPlayer.play(folderName, sceneSound);
@@ -101,6 +101,10 @@ const MeetViewContainer = ({
     });
   };
 
+  const stepFromEnding = () => {
+    setGameOver(true);
+  }
+
   const selectOption = (optionIndex) => {
     setMeetData((data) => {
       let result = {
@@ -136,6 +140,8 @@ const MeetViewContainer = ({
           ? stepFromScript
           : meetData.step === MEET_STEP_REACTION
           ? stepFromReaction
+          : meetData.step === MEET_STEP_ENDING
+          ? stepFromEnding
           : null
       }
       selectOption={selectOption}

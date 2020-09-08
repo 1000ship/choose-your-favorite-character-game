@@ -23,6 +23,7 @@ export const SCENE_TYPE_ENDING = "ending"
 export const MEET_STEP_SCRIPT = "script";
 export const MEET_STEP_OPTION = "option";
 export const MEET_STEP_REACTION = "reaction";
+export const MEET_STEP_ENDING = "ending";
 
 export const SCENE_TYPE_CHANGE_DURATION = 4000;
 
