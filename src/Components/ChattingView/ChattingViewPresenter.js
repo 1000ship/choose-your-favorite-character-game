@@ -22,6 +22,7 @@ const AppBar = styled.div`
 `;
 const LogoImage = styled.img`
   height: 80%;
+  cursor: pointer;
 `;
 
 const Contents = styled.div`
@@ -100,7 +101,7 @@ const EndingMessage = styled.span`
   }
 `;
 
-const ChattingViewPresenter = ({ chatList, scene, selectOption, stepFromEnding }) => {
+const ChattingViewPresenter = ({ chatList, scene, selectOption, stepFromEnding, onLogoClick }) => {
   const messageContents = useRef();
   useEffect(() => {
     const el = messageContents?.current;
@@ -109,7 +110,7 @@ const ChattingViewPresenter = ({ chatList, scene, selectOption, stepFromEnding }
   return (
     <Container onClick={stepFromEnding ? stepFromEnding : null}>
       <AppBar>
-        <LogoImage src={CYFCLogoImage} alt="CYFC"></LogoImage>
+        <LogoImage src={CYFCLogoImage} alt="CYFC" onClick={onLogoClick}></LogoImage>
       </AppBar>
       <Contents ref={messageContents}>
         <DateText>오늘</DateText>

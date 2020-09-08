@@ -24,6 +24,7 @@ const AppBar = styled.div`
 `;
 const LogoImage = styled.img`
   height: 80%;
+  cursor: pointer;
 `;
 
 const Contents = styled.div`
@@ -137,6 +138,10 @@ const PreGamePage = (props) => {
     }));
   };
 
+  const onLogoClick = (e) => {
+    history.push("/");
+  };
+
   const { chatList, options } = state;
   return (
     <Container>
@@ -149,7 +154,11 @@ const PreGamePage = (props) => {
         accept="image/*"
       />
       <AppBar>
-        <LogoImage src={CYFCLogoImage} alt="CYFC"></LogoImage>
+        <LogoImage
+          src={CYFCLogoImage}
+          alt="CYFC"
+          onClick={onLogoClick}
+        ></LogoImage>
       </AppBar>
       <Contents>
         {chatList.map(({ who, message }, i) =>

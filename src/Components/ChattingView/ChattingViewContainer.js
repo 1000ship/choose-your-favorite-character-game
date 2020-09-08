@@ -5,14 +5,15 @@ import {
   SCENE_TYPE_CHANGE_DURATION,
   SCENE_TYPE_ENDING,
 } from "../../Utils/constant";
-import SoundPlayer from "../../Utils/SoundPlayer";
 import { endingCounter } from "../../Utils/api";
+import { withRouter } from "react-router";
 
 const ChattingViewContainer = ({
   scriptInterpreter,
   setSceneType,
   setGameOver,
-  currentCharacterName
+  currentCharacterName,
+  history
 }) => {
   const [chatList, setChatList] = useState([]);
   const [isEnding, setEnding] = useState(false);
@@ -73,14 +74,19 @@ const ChattingViewContainer = ({
     setGameOver(true);
   };
 
+  const onLogoClick = (e) => {
+    history.push('/')
+  }
+
   return (
     <ChattingViewPresenter
       chatList={chatList}
       scene={scriptInterpreter.currentScene}
       selectOption={selectOption}
       stepFromEnding={isEnding ? stepFromEnding : null}
+      onLogoClick={onLogoClick}
     ></ChattingViewPresenter>
   );
 };
 
-export default ChattingViewContainer;
+export default withRouter(ChattingViewContainer);
