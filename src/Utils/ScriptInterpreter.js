@@ -15,6 +15,7 @@ const ScriptInterpreter = function (folderName = "") {
   this.setScenes = (scenes) => {
     this.scenes = scenes;
     this.currentScene = this.scenes[0];
+  //  this.getNextScene("##30") // for debugging
   };
 
   this.getNextScene = (nextSceneId) => {

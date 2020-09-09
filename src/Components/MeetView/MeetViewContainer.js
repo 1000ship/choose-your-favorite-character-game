@@ -60,6 +60,7 @@ const MeetViewContainer = ({
     if (sceneType === SCENE_TYPE_TEXT) setSceneType(SCENE_TYPE_TEXT);
     else if (sceneType === SCENE_TYPE_ENDING) {
       updateData.characterImage = "";
+      updateData.step = MEET_STEP_ENDING;
       endingCounter.countUp(currentCharacterName, sceneId)
     }
     if (sceneScript?.length === 0) updateData.step = MEET_STEP_OPTION;
