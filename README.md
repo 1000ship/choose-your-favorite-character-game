@@ -70,6 +70,16 @@
 
 
 
+## 전시 사진
+
+| <img src="_readme/exhibition/sample01.jpeg"/> | <img src="_readme/exhibition/sample08.jpeg"/> |
+| --------------------------------------------- | --------------------------------------------- |
+| <img src="_readme/exhibition/sample03.jpeg"/> | <img src="_readme/exhibition/sample04.jpeg"/> |
+| <img src="_readme/exhibition/sample05.jpeg"/> | <img src="_readme/exhibition/sample06.jpeg"/> |
+| <img src="_readme/exhibition/sample02.jpeg"/> | <img src="_readme/exhibition/sample07.jpeg"/> |
+
+
+
 ## 관련 프로젝트 <a name='relative-project'></a>
 
 ### 대본형식 게임을 만들기 위한 자체 개발 툴, 🛠game-script-tool 
