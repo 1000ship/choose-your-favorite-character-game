@@ -25,6 +25,7 @@ const BackButton = styled.img`
   top: 5vh;
   width: 20vw;
   cursor: pointer;
+  z-index: 1;
 `;
 const SkipButton = styled.img`
   position: absolute;
@@ -32,6 +33,7 @@ const SkipButton = styled.img`
   bottom: 5vh;
   width: 20vw;
   cursor: pointer;
+  z-index: 1;
 `;
 const VideoPage = (props) => {
   const {
