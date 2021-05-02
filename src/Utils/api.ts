@@ -1,13 +1,17 @@
-import { ENDING_COUNTER_STORAGE_KEY } from "../Constant";
+import { DEBUG_LINK, ENDING_COUNTER_STORAGE_KEY } from "../Constant";
 
 export const loadScript = async (fileName: string) => {
-  const filePath = `./res/scenes/${fileName}`;
-  console.log( filePath )
-  const data = await fetch(filePath);
-  const scenes = await data.json();
-  return scenes;
+  try {
+    let filePath = `./res/scenes/${fileName}.txt`;
+    if( fileName === "debug")
+      filePath = `${DEBUG_LINK}/${fileName}/script.json`
+    const data = await fetch(filePath);
+    const scenes = await data.json();
+    return scenes;
+  } catch ( error ) {
+    return {}
+  }
 };
-
 
 export const endingCounter = {
   countUp: (characterName: string, sceneId: string) => {

@@ -4,7 +4,8 @@ import OptionSelector from "./OptionSelector";
 import ChatBoxBackgroundImage from "../../Resources/Images/game_chat_box.png";
 import { MEET_STEP_OPTION, MEET_STEP_REACTION } from "../../Constant";
 import ScriptParser from "../../Utils/ScriptParser";
-import { MeetData } from "../../Constant/types";
+import { useRecoilValue } from "recoil";
+import { gameSceneSelector } from "../../Constant/selectors";
 
 const Container = styled.div`
   position: absolute;
@@ -36,34 +37,35 @@ const TalkText = styled.span`
 `;
 
 export interface ChatBoxProps {
-  meetData: MeetData;
   selectOption: Function;
 }
-const ChatBox: React.FC<ChatBoxProps> = ({ meetData, selectOption }) => {
+const ChatBox: React.FC<ChatBoxProps> = ({ selectOption }) => {
+  const gameScene = useRecoilValue(gameSceneSelector)
+
   return (
     <Container>
       <ChatBoxImage src={ChatBoxBackgroundImage}></ChatBoxImage>
       <Contents>
-        {meetData.step !== MEET_STEP_OPTION ? (
+        {gameScene.step !== MEET_STEP_OPTION ? (
           <>
             <NameText
               dangerouslySetInnerHTML={{
-                __html: ScriptParser.getText(meetData.characterName),
+                __html: ScriptParser.getText(gameScene.characterName),
               }}
             ></NameText>
             <TalkText
               dangerouslySetInnerHTML={{
                 __html: ScriptParser.getText(
-                  meetData.step === MEET_STEP_REACTION
-                    ? meetData.options[meetData.optionIndex].reaction
-                    : meetData.sceneScript
+                  gameScene?.step === MEET_STEP_REACTION
+                    ? gameScene.selectedOption?.reaction ?? ""
+                    : gameScene.sceneScript
                 ),
               }}
             ></TalkText>
           </>
         ) : (
           <OptionSelector
-            options={meetData.options}
+            options={gameScene.options}
             selectOption={selectOption}
           ></OptionSelector>
         )}

@@ -103,7 +103,6 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
         spaceBetween={50}
         slidesPerView={config.slidesPerView}
         centeredSlides
-        onSlideChange={(swiper) => console.log(swiper.activeIndex)}
         onSwiper={(swiper) => setConfig((config) => ({ ...config, swiper }))}
       >
         {characters.map(({ name, image, nameImage }) => (

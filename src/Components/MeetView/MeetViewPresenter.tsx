@@ -2,7 +2,6 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { gameSceneSelector } from "../../Constant/selectors";
-import { MeetData } from "../../Constant/types";
 import ChatBox from "./ChatBox";
 
 const Container = styled.div``;
@@ -33,15 +32,15 @@ const CharacterImage = styled.div<{imageSrc: string}>`
 `;
 
 export interface MeetViewPresenterProps {
-  meetData: MeetData;
-  stepEvent: any;
-  selectOption: any;
+  stepFromScript: React.MouseEventHandler;
+  stepFromReaction: React.MouseEventHandler;
+  selectOption: Function;
 }
-const MeetViewPresenter:React.FC<MeetViewPresenterProps> = ({ meetData, stepEvent, selectOption }) => {
+const MeetViewPresenter:React.FC<MeetViewPresenterProps> = ({ stepFromScript, stepFromReaction, selectOption }) => {
   const gameScene = useRecoilValue(gameSceneSelector)
 
   return (
-    <Container onClick={stepEvent}>
+    <Container onClick={gameScene.step === "script" ? stepFromScript : gameScene.step === "reaction" ? stepFromReaction : undefined }>
       {gameScene?.backgroundImagePath?.length && (
         <BackgroundImage
           imageSrc={gameScene?.backgroundImagePath || ""}
@@ -52,7 +51,7 @@ const MeetViewPresenter:React.FC<MeetViewPresenterProps> = ({ meetData, stepEven
           imageSrc={gameScene?.characterImagePath || ""}
         ></CharacterImage>
       )}
-      <ChatBox meetData={meetData} selectOption={selectOption}></ChatBox>
+      <ChatBox selectOption={selectOption}></ChatBox>
     </Container>
   );
 };

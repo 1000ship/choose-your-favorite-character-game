@@ -1,9 +1,6 @@
 import { Scene } from "./types";
 
-const dotenv = require("dotenv");
-dotenv.config();
-
-export const DEBUG_LINK: string = process.env.DEBUG_LINK || "";
+export const DEBUG_LINK: string = process.env.REACT_APP_DEBUG_LINK || "";
 
 export const DEFAULT_SCENE = {
   sceneId: "",
@@ -22,6 +19,8 @@ export const DEFAULT_SCENE = {
     },
   ],
   sceneType: "meet",
+  step: "script",
+  optionIndex: 0
 } as Scene;
 
 export const SCENE_TYPE_TEXT = "text"

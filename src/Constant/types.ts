@@ -1,5 +1,13 @@
-export type MeetStep = "script" | "option" | "reaction" | "ending"
-export type SceneType = "meet" | "text" | "ending"
+export type MeetStep = "script" | "option" | "reaction" | "ending";
+export type SceneType = "meet" | "text" | "ending";
+
+export interface IGameConfig {
+  characterName: string;
+  sceneType: SceneType;
+  scenes?: Scene[];
+  meetStep: MeetStep;
+  isGameOver?: boolean;
+}
 
 export interface SceneOption {
   answer?: string;
@@ -17,10 +25,13 @@ export interface Scene {
   nextSceneId: string;
   options: SceneOption[];
   sceneType: SceneType;
+  selectedOption?: SceneOption;
   characterImagePath?: string;
   backgroundImagePath?: string;
   sceneSoundPath?: string;
   backgroundSoundPath?: string;
+  step?: MeetStep;
+  optionIndex?: number;
 }
 
 export interface Chat {
@@ -28,16 +39,3 @@ export interface Chat {
   message: string;
   isEnding?: boolean;
 }
-
-export interface MeetData {
-  step: MeetStep;
-  characterName: string;
-  sceneScript: string;
-  options: any[];
-  optionIndex: number;
-  data: string;
-  nextSceneId?: string;
-  folderName?: string;
-}
-
-

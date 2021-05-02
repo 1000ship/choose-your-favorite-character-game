@@ -3,6 +3,8 @@ import styled from "styled-components";
 import ScriptParser from "../../Utils/ScriptParser";
 import MemoryData from "../../Utils/MemoryData";
 import { SceneOption } from "../../Constant/types";
+import { useRecoilValue } from "recoil";
+import { gameSceneSelector } from "../../Constant/selectors";
 
 const RightMessage = styled.span`
   align-self: flex-end;
@@ -27,12 +29,15 @@ const OptionItem = styled.li`
 
 export interface OptionMessageProps {
   selectOption: Function;
-  options: SceneOption[];
+  options?: SceneOption[];
 }
 const OptionMessage: React.FC<OptionMessageProps> = ({
   selectOption,
-  options = [{ answer: "ㅎㅇ", reaction: "?", nextId: "" }],
+  options: propsOptions
 }) => {
+  const gameScene = useRecoilValue(gameSceneSelector)
+  const options = propsOptions ? propsOptions : gameScene.options
+
   const onOptionClick = (i: number) => (e: React.MouseEvent) => {
     const specials = ScriptParser.getSpecials(options[i]?.answer);
     if (specials?.input)

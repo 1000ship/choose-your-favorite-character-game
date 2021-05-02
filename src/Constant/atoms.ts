@@ -1,6 +1,7 @@
 import { atom } from "recoil";
 import { DEFAULT_SCENE } from ".";
-import { Scene } from "./types";
+import { MeetStep, Scene, SceneType } from "./types";
+import { IGameConfig } from "./types";
 
 function getGameCharacter(): string {
   const hashRoute = window.location.hash.split("/");
@@ -10,16 +11,15 @@ function getGameCharacter(): string {
   return "";
 }
 
-interface IGameConfigAtom {
-  characterName: string;
-}
-export const gameConfigAtom = atom<IGameConfigAtom>({
+export const gameConfigAtom = atom<IGameConfig>({
   key: "gameConfig",
   default: {
     characterName: getGameCharacter(),
+    sceneType: "text" as SceneType,
+    meetStep: "script" as MeetStep,
+    isGameOver: false as boolean,
   },
 });
-
 
 export const gameSceneAtom = atom<Scene>({
   key: "gameScene",

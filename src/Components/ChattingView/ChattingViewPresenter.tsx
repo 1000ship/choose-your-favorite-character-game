@@ -3,7 +3,9 @@ import styled from "styled-components";
 import CYFCLogoImage from "../../Resources/Images/cyfc_top_logo.png";
 import OptionMessage from "./OptionMessage";
 import ScriptParser from "../../Utils/ScriptParser";
-import { Chat, Scene } from "../../Constant/types";
+import { Chat } from "../../Constant/types";
+import { useRecoilValue } from "recoil";
+import { gameSceneSelector } from "../../Constant/selectors";
 
 const AppBarHeight = 80;
 
@@ -104,26 +106,19 @@ const EndingMessage = styled.span`
 
 export interface ChattingViewPresenterProps {
   chatList: Chat[];
-  scene: Scene;
   selectOption: Function;
-  stepFromEnding: any;
   onLogoClick: React.MouseEventHandler<HTMLElement>;
 }
 const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({
   chatList,
-  scene,
   selectOption,
-  stepFromEnding,
   onLogoClick,
 }) => {
-  const messageContentsRef = useCallback(
-    (el) => {
-      if (el) window.scrollTo(0, window.outerHeight);
-    },
-    []
-  );
+  const scene = useRecoilValue(gameSceneSelector)
+  const messageContentsRef = useCallback( (el) => { if (el) window.scrollTo(0, window.outerHeight) }, [] );
+  
   return (
-    <Container onClick={stepFromEnding ? stepFromEnding : null}>
+    <Container>
       <AppBar>
         <LogoImage src={CYFCLogoImage} alt="CYFC" onClick={onLogoClick}></LogoImage>
       </AppBar>
@@ -153,8 +148,8 @@ const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({
             ></RightMessage>
           )
         )}
-        {scene.options?.length > 0 && scene.sceneType !== "ending" && (
-          <OptionMessage options={scene.options} selectOption={selectOption}></OptionMessage>
+        {scene.options?.length && scene.sceneType !== "ending" && (
+          <OptionMessage selectOption={selectOption}></OptionMessage>
         )}
       </Contents>
     </Container>

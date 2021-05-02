@@ -36,7 +36,6 @@ const CameraPage:React.FC<RouteComponentProps> = (props) => {
   const [flash, setFlash] = useState(false);
 
   var errorCallback :NavigatorUserMediaErrorCallback = function (e: MediaStreamError) {
-    console.log("Reeeejected!", e);
     setTimeout(() => history.push("/choice"), 1500);
   };
 
