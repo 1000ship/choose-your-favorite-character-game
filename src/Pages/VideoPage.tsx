@@ -63,7 +63,7 @@ const VideoPage: React.FC<RouteComponentProps> = (props) => {
         break;
     }
     if (bgmFile) BGMPlayer.play(bgmFile);
-    SoundPlayer.play("Amy", "iphone sound.mp3");
+    SoundPlayer.play_old("Amy", "iphone sound.mp3");
   };
 
   return (

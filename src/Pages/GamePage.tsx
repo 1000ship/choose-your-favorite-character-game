@@ -7,12 +7,14 @@ import MeetView from "../Components/MeetView";
 import { BGM_MAIN } from "../Constant";
 import { gameConfigSelector, gameSceneSelector } from "../Constant/selectors";
 import BGMPlayer from "../Utils/BGMPlayer";
+import { useSound } from "../Utils/Hook";
 
 const GamePage: React.FC<RouteComponentProps> = (props) => {
   const { history } = props;
   const gameConfig = useRecoilValue(gameConfigSelector);
   const [gameScene, setGameScene] = useRecoilState(gameSceneSelector);
 
+  useSound()
   useEffect(() => {
     const initScene = gameConfig?.scenes?.length ? gameConfig.scenes[0] : null;
     if (initScene) {
