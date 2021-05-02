@@ -1,7 +1,6 @@
-import MemoryData from "./MemoryData";
-import { ENDING_COUNTER_STORAGE_KEY } from "./constant";
+import { ENDING_COUNTER_STORAGE_KEY } from "../Constant";
 
-export const loadScript = async (fileName) => {
+export const loadScript = async (fileName: string) => {
   const filePath = `./res/scenes/${fileName}`;
   console.log( filePath )
   const data = await fetch(filePath);
@@ -11,9 +10,8 @@ export const loadScript = async (fileName) => {
 
 
 export const endingCounter = {
-  countUp: (characterName, sceneId) => {
+  countUp: (characterName: string, sceneId: string) => {
     const key = `${characterName}${sceneId}`
-    console.log( key, "counted up");
     const endingCounter = JSON.parse(localStorage.getItem(ENDING_COUNTER_STORAGE_KEY) ?? "{}");
     if( endingCounter[key] )
       endingCounter[key] = parseInt(endingCounter[key]) + 1;

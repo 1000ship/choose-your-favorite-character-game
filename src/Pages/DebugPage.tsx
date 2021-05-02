@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { gameConfig } from '../Recoil/atoms';
 
 const DebugPage = () => {
   const dirRef = useCallback( input => {

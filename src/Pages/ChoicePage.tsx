@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import ChoiceAlertResource from "../Resources/Images/choice_alert.png";
 import AmyResource from "../Resources/Images/amy.png";
 import BellaResource from "../Resources/Images/bella.png";
@@ -8,13 +8,12 @@ import ClairResource from "../Resources/Images/clair.png";
 import AmyNameResource from "../Resources/Images/amy_name.png";
 import BellaNameResource from "../Resources/Images/bella_name.png";
 import ClairNameResource from "../Resources/Images/clair_name.png";
-import { BGM_AMY, BGM_BELLA, BGM_CLAIR } from "../Utils/constant";
 import BGMPlayer from "../Utils/BGMPlayer";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import 'swiper/swiper.scss';
-import 'swiper/components/navigation/navigation.scss';
-import 'swiper/components/pagination/pagination.scss';
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
+import "swiper/components/pagination/pagination.scss";
 
 const Container = styled.div`
   display: flex;
@@ -38,7 +37,7 @@ const CharacterSet = styled(Swiper)`
   height: 100%;
 `;
 
-const CharacterImage = styled.div`
+const CharacterImage = styled.div<{ imageSrc: string }>`
   cursor: pointer;
   background-image: url(${({ imageSrc }) => imageSrc});
   background-repeat: no-repeat;
@@ -57,63 +56,63 @@ const CharacterName = styled.img`
   transform: translate(-50%, -100%);
 `;
 
-const ChoicePage = ({ history }) => {
-
+const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
   const [config, setConfig] = useState({
-    swiper: null,
-    slidesPerView: window.innerWidth / 375
-  })
+    swiper: null as any,
+    slidesPerView: (window.innerWidth / 375) as number,
+  });
 
-  const onCharacterClick = (characterName) => (e) => {
-    if( !config?.swiper ) return;
-    const {activeIndex} = config?.swiper
-    const targetIndex = characters.findIndex( ({name}) => name === characterName )
-    if( targetIndex < 0 ) return;
-    if( activeIndex !== targetIndex ) {
-      config.swiper.slideTo( targetIndex )
-    } else if ( characterName === "debug") {
-      history.push(`/game/debug`)
+  const onCharacterClick = (characterName: string) => (e: React.MouseEvent) => {
+    if (!config?.swiper) return;
+    const { activeIndex } = config?.swiper as any;
+    const targetIndex = characters.findIndex(({ name }) => name === characterName);
+    if (targetIndex < 0) return;
+    if (activeIndex !== targetIndex) {
+      config.swiper.slideTo(targetIndex);
+    } else if (characterName === "debug") {
+      history.push(`/game/debug`);
       BGMPlayer.pause();
-    } else { 
+    } else {
       history.push(`/video/${characterName}`);
       BGMPlayer.pause();
     }
   };
 
-  useEffect( () => {
+  useEffect(() => {
     window.addEventListener("resize", (e) => {
-      setConfig( config => ({...config, slidesPerView: window.innerWidth / 375})) 
-    })
-  }, [])
+      setConfig((config) => ({ ...config, slidesPerView: window.innerWidth / 375 }));
+    });
+  }, []);
 
-  const characters = useMemo( () => [
-    { name: "amy", image: AmyResource, nameImage: AmyNameResource },
-    { name: "bella", image: BellaResource, nameImage: BellaNameResource },
-    { name: "clair", image: ClairResource, nameImage: ClairNameResource },
-    { name: "debug", image: AmyResource, nameImage: AmyNameResource },
-  ], [])
+  const characters = useMemo(
+    () => [
+      { name: "amy", image: AmyResource, nameImage: AmyNameResource },
+      { name: "bella", image: BellaResource, nameImage: BellaNameResource },
+      { name: "clair", image: ClairResource, nameImage: ClairNameResource },
+      { name: "debug", image: AmyResource, nameImage: AmyNameResource },
+    ],
+    []
+  );
 
   return (
     <Container>
       <ChoiceAlert src={ChoiceAlertResource}></ChoiceAlert>
       <CharacterSet
         // navigation
-        pagination={{clickable: true}}
+        pagination={{ clickable: true }}
         spaceBetween={50}
         slidesPerView={config.slidesPerView}
         centeredSlides
         onSlideChange={(swiper) => console.log(swiper.activeIndex)}
-        onSwiper={(swiper => setConfig(config => ({...config, swiper})))}
+        onSwiper={(swiper) => setConfig((config) => ({ ...config, swiper }))}
       >
-        {
-          characters.map( ({name, image, nameImage}) =>
-            <SwiperSlide key={name}>
-              <CharacterImage onClick={onCharacterClick(name)} imageSrc={image}>
-                <CharacterName src={nameImage}></CharacterName>
-              </CharacterImage>
-            </SwiperSlide>
-          )
-        }
+        {characters.map(({ name, image, nameImage }) => (
+          <SwiperSlide key={name}>
+            <CharacterImage onClick={onCharacterClick(name)} imageSrc={image}>
+              <CharacterName src={nameImage}></CharacterName>
+            </CharacterImage>
+          </SwiperSlide>
+        ))}
       </CharacterSet>
     </Container>
   );

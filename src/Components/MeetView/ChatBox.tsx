@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import OptionSelector from "./OptionSelector";
 import ChatBoxBackgroundImage from "../../Resources/Images/game_chat_box.png";
-import { MEET_STEP_OPTION, MEET_STEP_REACTION } from "../../Utils/constant";
+import { MEET_STEP_OPTION, MEET_STEP_REACTION } from "../../Constant";
 import ScriptParser from "../../Utils/ScriptParser";
+import { MeetData } from "../../Constant/types";
 
 const Container = styled.div`
   position: absolute;
@@ -34,7 +35,11 @@ const TalkText = styled.span`
   color: black;
 `;
 
-const ChatBox = ({ meetData, selectOption }) => {
+export interface ChatBoxProps {
+  meetData: MeetData;
+  selectOption: Function;
+}
+const ChatBox: React.FC<ChatBoxProps> = ({ meetData, selectOption }) => {
   return (
     <Container>
       <ChatBoxImage src={ChatBoxBackgroundImage}></ChatBoxImage>

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ScriptParser from "../../Utils/ScriptParser";
 import MemoryData from "../../Utils/MemoryData";
+import { SceneOption } from "../../Constant/types";
 
 const RightMessage = styled.span`
   align-self: flex-end;
@@ -24,12 +25,16 @@ const OptionItem = styled.li`
   }
 `;
 
-const OptionMessage = ({
+export interface OptionMessageProps {
+  selectOption: Function;
+  options: SceneOption[];
+}
+const OptionMessage: React.FC<OptionMessageProps> = ({
   selectOption,
   options = [{ answer: "ㅎㅇ", reaction: "?", nextId: "" }],
 }) => {
-  const onOptionClick = (i) => (e) => {
-    const specials = ScriptParser.getSpecials(options[i].answer);
+  const onOptionClick = (i: number) => (e: React.MouseEvent) => {
+    const specials = ScriptParser.getSpecials(options[i]?.answer);
     if (specials?.input)
     {
       let inputData = prompt("입력해주세요")
@@ -50,7 +55,7 @@ const OptionMessage = ({
             key={i}
             onClick={onOptionClick(i)}
             dangerouslySetInnerHTML={{
-              __html: ScriptParser.getText(option.answer),
+              __html: ScriptParser.getText(option?.answer ?? ""),
             }}
           ></OptionItem>
         ))}

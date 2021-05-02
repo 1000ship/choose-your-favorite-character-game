@@ -1,27 +1,32 @@
+import { Scene } from "../Constant/types";
+
 export const SCRIPT_AMY_MALE = "amy_male.txt";
 export const SCRIPT_AMY_FEMALE = "amy_female.txt";
 export const SCRIPT_BELLA = "bella.txt";
 export const SCRIPT_CLAIR = "clair.txt";
 
-const ScriptInterpreter = function (folderName = "") {
-  this.folderName = folderName;
-  this.scenes = [];
-  this.currentScene = null;
+class ScriptInterpreter {
+  folderName: string;
+  scenes: Scene[];
+  currentScene: Scene | null;
 
-  this.setFolderName = (folderName) => {
+  constructor(folderName: string = "") {
+    this.folderName = folderName as string;
+    this.scenes = [] as Scene[];
+    this.currentScene = null;
+  }
+
+  setFolderName(folderName: string) {
     this.folderName = folderName;
-  };
+  }
 
-  this.setScenes = (scenes) => {
+  setScenes(scenes: Scene[]) {
     this.scenes = scenes;
     this.currentScene = this.scenes[0];
-  //  this.getNextScene("##30") // for debugging
-  };
+  }
 
-  this.getNextScene = (nextSceneId) => {
-    const nextSceneIndex = this.scenes.findIndex(
-      (scene) => scene.sceneId === nextSceneId
-    );
+  getNextScene(nextSceneId: string) {
+    const nextSceneIndex = this.scenes.findIndex((scene) => scene.sceneId === nextSceneId);
     if (nextSceneIndex === -1) {
       alert(`${nextSceneId}이 존재하지 않음`);
       return;
@@ -29,7 +34,7 @@ const ScriptInterpreter = function (folderName = "") {
     this.currentScene = this.scenes[nextSceneIndex];
     console.log(this.currentScene);
     return this.currentScene;
-  };
-};
+  }
+}
 
 export default ScriptInterpreter;

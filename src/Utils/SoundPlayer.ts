@@ -1,7 +1,8 @@
-var sound;
+var sound: HTMLAudioElement;
 
 const SoundPlayer = {
-  play: (folderName, fileName) => {
+  play: (folderName?: string, fileName?: string) => {
+    if( !folderName || !fileName ) return;
     try {
       if (sound) sound.pause();
     } catch {}

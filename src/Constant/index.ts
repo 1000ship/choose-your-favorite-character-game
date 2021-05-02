@@ -1,7 +1,9 @@
+import { Scene } from "./types";
+
 const dotenv = require("dotenv");
 dotenv.config();
 
-export const DEBUG_LINK = process.env.DEBUG_LINK;
+export const DEBUG_LINK: string = process.env.DEBUG_LINK || "";
 
 export const DEFAULT_SCENE = {
   sceneId: "",
@@ -20,11 +22,12 @@ export const DEFAULT_SCENE = {
     },
   ],
   sceneType: "meet",
-};
+} as Scene;
 
 export const SCENE_TYPE_TEXT = "text"
 export const SCENE_TYPE_MEET = "meet"
 export const SCENE_TYPE_ENDING = "ending"
+
 
 export const MEET_STEP_SCRIPT = "script";
 export const MEET_STEP_OPTION = "option";

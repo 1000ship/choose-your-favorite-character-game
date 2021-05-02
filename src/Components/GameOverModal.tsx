@@ -69,10 +69,15 @@ const Button = styled.div`
   }
 `;
 
-const GameOverModal = (props) => {
+export interface GameOverModalProps {
+  isOpened: boolean;
+  resetGame: Function;
+  exitGame: Function;
+}
+const GameOverModal: React.FC<GameOverModalProps> = (props) => {
   const { isOpened, resetGame, exitGame } = props;
-  const onResetClick = (e) => resetGame();
-  const onOtherGameClick = (e) => exitGame();
+  const onResetClick = (e: React.MouseEvent) => resetGame();
+  const onOtherGameClick = (e: React.MouseEvent) => exitGame();
   return (
     <>
       {isOpened && (

@@ -1,10 +1,13 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { gameSceneSelector } from "../../Constant/selectors";
+import { MeetData } from "../../Constant/types";
 import ChatBox from "./ChatBox";
 
 const Container = styled.div``;
 
-const BackgroundImage = styled.div`
+const BackgroundImage = styled.div<{imageSrc: string}>`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -15,7 +18,7 @@ const BackgroundImage = styled.div`
   background-size: cover;
 `;
 
-const CharacterImage = styled.div`
+const CharacterImage = styled.div<{imageSrc: string}>`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -29,40 +32,27 @@ const CharacterImage = styled.div`
   transform: scale(1.1);
 `;
 
-const Debug = styled.div`
-  position: fixed;
-  background-color: white;
-  left: 0;
-  top: 0;
-  z-index: 1;
-`;
+export interface MeetViewPresenterProps {
+  meetData: MeetData;
+  stepEvent: any;
+  selectOption: any;
+}
+const MeetViewPresenter:React.FC<MeetViewPresenterProps> = ({ meetData, stepEvent, selectOption }) => {
+  const gameScene = useRecoilValue(gameSceneSelector)
 
-const MeetViewPresenter = ({ meetData, stepEvent, selectOption }) => {
-  const {
-    folderName,
-    backgroundImage,
-    characterImage,
-  } = meetData;
   return (
     <Container onClick={stepEvent}>
-      {backgroundImage?.length > 0 && (
+      {gameScene?.backgroundImagePath?.length && (
         <BackgroundImage
-          imageSrc={`./res/img/background/${folderName}/${backgroundImage}`}
-          // imageSrc={getCharacterImagePath(cbackgroundImage)}
+          imageSrc={gameScene?.backgroundImagePath || ""}
         ></BackgroundImage>
       )}
-      {characterImage?.length > 0 && (
+      {gameScene?.characterImagePath?.length && (
         <CharacterImage
-          imageSrc={`./res/img/character/${folderName}/${characterImage}`}
+          imageSrc={gameScene?.characterImagePath || ""}
         ></CharacterImage>
       )}
       <ChatBox meetData={meetData} selectOption={selectOption}></ChatBox>
-      {/* <Debug>
-          ID: {sceneId}<br></br>
-          Background: {backgroundImage}<br></br>
-          Character: {characterImage}<br></br>
-          Sound: {sceneSound}
-        </Debug> */}
     </Container>
   );
 };

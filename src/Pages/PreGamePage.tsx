@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import CYFCLogoImage from "../Resources/Images/cyfc_top_logo.png";
 import OptionMessage from "../Components/ChattingView/OptionMessage";
 import ScriptParser from "../Utils/ScriptParser";
 import MemoryData from "../Utils/MemoryData";
+import { SceneOption } from "../Constant/types";
 
 const AppBarHeight = 80;
 
@@ -80,24 +81,19 @@ const RightMessage = styled.span`
   }
 `;
 
-const PreGamePage = (props) => {
+const PreGamePage: React.FC<RouteComponentProps> = (props) => {
   const { history } = props;
 
-  let question = [
+  let question: string[] = [
     "당신의 이름은?",
     "당신의 성별은?",
     "당신의 직업은?",
     "당신의 사진을 찍어주세요.",
   ];
-  let optionList = [
+  let optionList: SceneOption[][] = [
     [{ answer: "나의 이름은 {input:name}" }],
     [{ answer: "남자" }, { answer: "여자" }],
-    [
-      { answer: "직장인" },
-      { answer: "대학생" },
-      { answer: "취준생" },
-      { answer: "유학생" },
-    ],
+    [{ answer: "직장인" }, { answer: "대학생" }, { answer: "취준생" }, { answer: "유학생" }],
     [{ answer: "📷" }],
   ];
   const [state, setState] = useState({
@@ -111,18 +107,17 @@ const PreGamePage = (props) => {
     step: 0,
   });
 
-  const selectOption = (i, inputData = {}) => {
+  const selectOption = (i: number, inputData: any = {}) => {
     for (let key in inputData) MemoryData.setData(key, inputData[key]);
     if (state.step === 1) {
       // 성별
       MemoryData.setData("gender", i === 0 ? "male" : "female");
     } else if (state.step === 3) {
       // 카메라
-
-      if (navigator?.getUserMedia) {
+      if (!!navigator?.getUserMedia) {
         history.push(`/camera`);
       } else {
-        document.getElementById("camera").click();
+        (document.getElementById("camera") as HTMLInputElement).click();
         history.push("/choice");
       }
     }
@@ -138,27 +133,16 @@ const PreGamePage = (props) => {
     }));
   };
 
-  const onLogoClick = (e) => {
+  const onLogoClick = (e: React.MouseEvent) => {
     history.push("/");
   };
 
   const { chatList, options } = state;
   return (
     <Container>
-      <input
-        hidden
-        type="file"
-        id="camera"
-        name="camera"
-        capture="camera"
-        accept="image/*"
-      />
+      <input hidden type="file" id="camera" name="camera" capture="camera" accept="image/*" />
       <AppBar>
-        <LogoImage
-          src={CYFCLogoImage}
-          alt="CYFC"
-          onClick={onLogoClick}
-        ></LogoImage>
+        <LogoImage src={CYFCLogoImage} alt="CYFC" onClick={onLogoClick}></LogoImage>
       </AppBar>
       <Contents>
         {chatList.map(({ who, message }, i) =>
@@ -179,10 +163,7 @@ const PreGamePage = (props) => {
           )
         )}
         {options?.length > 0 && (
-          <OptionMessage
-            options={options}
-            selectOption={selectOption}
-          ></OptionMessage>
+          <OptionMessage options={options} selectOption={selectOption}></OptionMessage>
         )}
       </Contents>
     </Container>

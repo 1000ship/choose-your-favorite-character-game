@@ -1,7 +1,7 @@
-var bgm;
+var bgm: HTMLAudioElement;
 
 const BGMPlayer = {
-  play: (fileName) => {
+  play: (fileName: string) => {
     try {
       if (bgm) bgm.pause();
     } catch {}

@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import CYFCLogoImage from "../../Resources/Images/cyfc_top_logo.png";
 import OptionMessage from "./OptionMessage";
 import ScriptParser from "../../Utils/ScriptParser";
+import { Chat, Scene } from "../../Constant/types";
 
 const AppBarHeight = 80;
 
@@ -101,18 +102,32 @@ const EndingMessage = styled.span`
   }
 `;
 
-const ChattingViewPresenter = ({ chatList, scene, selectOption, stepFromEnding, onLogoClick }) => {
-  const messageContents = useRef();
-  useEffect(() => {
-    const el = messageContents?.current;
-    if (el) window.scrollTo( 0, window.outerHeight );
-  }, [chatList]);
+export interface ChattingViewPresenterProps {
+  chatList: Chat[];
+  scene: Scene;
+  selectOption: Function;
+  stepFromEnding: any;
+  onLogoClick: React.MouseEventHandler<HTMLElement>;
+}
+const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({
+  chatList,
+  scene,
+  selectOption,
+  stepFromEnding,
+  onLogoClick,
+}) => {
+  const messageContentsRef = useCallback(
+    (el) => {
+      if (el) window.scrollTo(0, window.outerHeight);
+    },
+    []
+  );
   return (
     <Container onClick={stepFromEnding ? stepFromEnding : null}>
       <AppBar>
         <LogoImage src={CYFCLogoImage} alt="CYFC" onClick={onLogoClick}></LogoImage>
       </AppBar>
-      <Contents ref={messageContents}>
+      <Contents ref={messageContentsRef}>
         <DateText>오늘</DateText>
         {chatList.map(({ who, message, isEnding }, i) =>
           isEnding ? (
@@ -139,10 +154,7 @@ const ChattingViewPresenter = ({ chatList, scene, selectOption, stepFromEnding, 
           )
         )}
         {scene.options?.length > 0 && scene.sceneType !== "ending" && (
-          <OptionMessage
-            options={scene.options}
-            selectOption={selectOption}
-          ></OptionMessage>
+          <OptionMessage options={scene.options} selectOption={selectOption}></OptionMessage>
         )}
       </Contents>
     </Container>

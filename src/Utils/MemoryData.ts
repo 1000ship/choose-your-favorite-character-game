@@ -1,18 +1,18 @@
-var data = {};
+var data: any = {};
 
 const MemoryData = {
-  setData: (key, value) => {
+  setData: (key: string, value: string) => {
     data[key] = value;
     sessionStorage.setItem("CYFC", JSON.stringify(data))
   },
 
-  getData: (key, defaultValue) => {
-    data = JSON.parse(sessionStorage.getItem("CYFC"))
+  getData: (key: string, defaultValue?: string) => {
+    data = JSON.parse(sessionStorage.getItem("CYFC") || "{}")
     return data[key] ?? defaultValue;
   },
 
   getWholeData: () => {
-    data = JSON.parse(sessionStorage.getItem("CYFC"))
+    data = JSON.parse(sessionStorage.getItem("CYFC") || "{}")
     return data;
   },
 

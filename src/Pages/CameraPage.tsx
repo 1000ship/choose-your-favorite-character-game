@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -31,11 +31,11 @@ const Flash = styled.div`
   }
 `;
 
-const CameraPage = (props) => {
+const CameraPage:React.FC<RouteComponentProps> = (props) => {
   const { history } = props;
   const [flash, setFlash] = useState(false);
 
-  var errorCallback = function (e) {
+  var errorCallback :NavigatorUserMediaErrorCallback = function (e: MediaStreamError) {
     console.log("Reeeejected!", e);
     setTimeout(() => history.push("/choice"), 1500);
   };
@@ -45,7 +45,7 @@ const CameraPage = (props) => {
       navigator.getUserMedia(
         { video: true },
         function (localMediaStream) {
-          var video = document.querySelector("video");
+          var video = document.querySelector("video") as HTMLVideoElement;
           video.srcObject = localMediaStream;
           video.onloadedmetadata = function (e) {
             // Ready to go. Do some stuff.
@@ -55,10 +55,10 @@ const CameraPage = (props) => {
         errorCallback
       );
     }
-  }, []);
+  });
 
   const onShotClick = () => {
-    var video = document.querySelector("video");
+    var video = document.querySelector("video") as HTMLVideoElement;
     video.pause();
     setFlash(true);
     setTimeout(() => history.push("/choice"), 1500);

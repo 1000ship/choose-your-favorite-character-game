@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { CHAT_STEP_REACTION } from "./ChatBox";
 import ScriptParser from "../../Utils/ScriptParser";
 import MemoryData from "../../Utils/MemoryData";
+import { SceneOption } from "../../Constant/types";
 
 const Container = styled.div``;
 const OptionList = styled.ul``;
@@ -16,8 +16,12 @@ const OptionItem = styled.li`
   }
 `;
 
-const OptionSelector = ({ options, selectOption }) => {
-  const onOptionClicked = (i) => (e) => {
+export interface OptionSelectorProps {
+  options: SceneOption[];
+  selectOption: Function;
+}
+const OptionSelector: React.FC<OptionSelectorProps> = ({ options, selectOption }) => {
+  const onOptionClicked = (i: number) => (e: React.MouseEvent) => {
     const specials = ScriptParser.getSpecials(options[i].answer);
     if (specials?.input) {
       let inputData = prompt("입력해주세요");
@@ -37,7 +41,7 @@ const OptionSelector = ({ options, selectOption }) => {
           <OptionItem
             key={i}
             onClick={onOptionClicked(i)}
-            dangerouslySetInnerHTML={{ __html: ScriptParser.getText(answer) }}
+            dangerouslySetInnerHTML={{ __html: ScriptParser.getText(answer ?? "") }}
           ></OptionItem>
         ))}
       </OptionList>

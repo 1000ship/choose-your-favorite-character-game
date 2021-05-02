@@ -4,21 +4,29 @@ import {
   SCENE_TYPE_MEET,
   SCENE_TYPE_CHANGE_DURATION,
   SCENE_TYPE_ENDING,
-} from "../../Utils/constant";
+} from "../../Constant";
 import { endingCounter } from "../../Utils/api";
-import { withRouter } from "react-router";
+import { RouteComponentProps, withRouter } from "react-router";
+import { Chat } from "../../Constant/types";
 
-const ChattingViewContainer = ({
+interface ChattingViewContainerProps extends RouteComponentProps {
+  scriptInterpreter: any;
+  setSceneType: any;
+  setGameOver: any;
+  currentCharacterName: any;
+  history: any;
+}
+const ChattingViewContainer: React.FC<ChattingViewContainerProps> = ({
   scriptInterpreter,
   setSceneType,
   setGameOver,
   currentCharacterName,
-  history
+  history,
 }) => {
-  const [chatList, setChatList] = useState([]);
+  const [chatList, setChatList] = useState<Chat[]>([]);
   const [isEnding, setEnding] = useState(false);
 
-  useEffect(() => doCurrentScene(), []);
+  useEffect(() => doCurrentScene());
 
   const doCurrentScene = () => {
     const {
@@ -56,7 +64,7 @@ const ChattingViewContainer = ({
     }
   };
 
-  const selectOption = (optionIndex) => {
+  const selectOption = (optionIndex: number) => {
     const { answer, reaction, nextId } = scriptInterpreter.currentScene.options[
       optionIndex
     ];
@@ -74,7 +82,7 @@ const ChattingViewContainer = ({
     setGameOver(true);
   };
 
-  const onLogoClick = (e) => {
+  const onLogoClick = () => {
     history.push('/')
   }
 

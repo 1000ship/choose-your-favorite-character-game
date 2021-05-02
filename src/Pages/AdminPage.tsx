@@ -15,7 +15,7 @@ const EndingList = styled.ul`
 const EndingItem = styled.li``;
 const ResetButton = styled.button``;
 
-const AdminPage = (props) => {
+const AdminPage = () => {
   const endingObject = endingCounter.getEndingCounter();
   const endingList = [];
   for (let ending in endingObject) {
@@ -25,7 +25,7 @@ const AdminPage = (props) => {
     left[0] > right[0] ? 1 : left[0] < right[0] ? -1 : 0
   );
 
-  const onResetClick = (e) => {
+  const onResetClick = (e: React.MouseEvent) => {
     if (!window.confirm("정말로 기록들을 삭제하겠습니까?")) return;
     endingCounter.resetEndingCounter();
     alert("삭제했습니다.");
@@ -38,7 +38,7 @@ const AdminPage = (props) => {
       <EndingList>
         {endingList.map(([ending, count], i) => (
           <EndingItem key={i}>
-            {ending} -> {count}번
+            {ending}{" -> "}{count}{"번"}
           </EndingItem>
         ))}
       </EndingList>
