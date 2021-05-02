@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
+import { gameConfig } from '../Recoil/atoms';
 
 const DebugPage = () => {
-
   const dirRef = useCallback( input => {
     input.setAttribute("webkitdirectory", "webkitdirectory")
     input.addEventListener('change', showTextFile);

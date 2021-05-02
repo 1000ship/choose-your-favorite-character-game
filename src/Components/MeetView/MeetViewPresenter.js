@@ -42,14 +42,13 @@ const MeetViewPresenter = ({ meetData, stepEvent, selectOption }) => {
     folderName,
     backgroundImage,
     characterImage,
-    sceneSound,
-    sceneId,
   } = meetData;
   return (
     <Container onClick={stepEvent}>
       {backgroundImage?.length > 0 && (
         <BackgroundImage
           imageSrc={`./res/img/background/${folderName}/${backgroundImage}`}
+          // imageSrc={getCharacterImagePath(cbackgroundImage)}
         ></BackgroundImage>
       )}
       {characterImage?.length > 0 && (

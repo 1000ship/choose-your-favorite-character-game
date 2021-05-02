@@ -1,3 +1,8 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
+export const DEBUG_LINK = process.env.DEBUG_LINK;
+
 export const DEFAULT_SCENE = {
   sceneId: "",
   characterName: "",
@@ -5,6 +10,7 @@ export const DEFAULT_SCENE = {
   characterImage: "",
   backgroundImage: "",
   sceneSound: "",
+  backgroundSound: "",
   nextSceneId: "",
   options: [
     {
