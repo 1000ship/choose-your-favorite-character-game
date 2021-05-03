@@ -9,8 +9,8 @@ export const gameConfigSelector = selector<IGameConfig>({
   async get({ get }) {
     const gameConfig = get(gameConfigAtom);
     let scenes = [];
-    if (gameConfig.characterName.length > 0)
-      scenes = await loadScript(gameConfig.characterName);
+    if (gameConfig?.scenes?.length) scenes = gameConfig.scenes
+    else if (gameConfig.characterName.length > 0) scenes = await loadScript(gameConfig.characterName);
     return {
       ...gameConfig,
       scenes,
@@ -27,17 +27,17 @@ export const gameSceneSelector = selector<Scene>({
     const gameConfig = get(gameConfigAtom);
     const gameScene = get(gameSceneAtom);
 
-    let characterImagePath = `./res/img/character/${gameConfig.characterName}/${gameScene.characterImage}`
-    let backgroundImagePath = `./res/img/background/${gameConfig.characterName}/${gameScene.backgroundImage}`
-    let sceneSoundPath = `./res/sounds/${gameConfig.characterName}/${gameScene.sceneSound}`
-    let backgroundSoundPath = `./res/bgm/${gameConfig.characterName}/${gameScene.backgroundSound}`
+    let characterImagePath = `./res/img/character/${gameConfig.characterName}/${gameScene.characterImage}`;
+    let backgroundImagePath = `./res/img/background/${gameConfig.characterName}/${gameScene.backgroundImage}`;
+    let sceneSoundPath = `./res/sounds/${gameConfig.characterName}/${gameScene.sceneSound}`;
+    let backgroundSoundPath = `./res/bgm/${gameConfig.characterName}/${gameScene.backgroundSound}`;
 
     // 디버깅 처리
-    if( gameConfig.characterName === "debug" ) {
-      characterImagePath = `${DEBUG_LINK}/${gameConfig.characterName}/character/${gameScene.characterImage}`
-      backgroundImagePath = `${DEBUG_LINK}/${gameConfig.characterName}/background/${gameScene.backgroundImage}`
-      sceneSoundPath = `${DEBUG_LINK}/${gameConfig.characterName}/sound/${gameScene.sceneSound}`
-      backgroundSoundPath = `${DEBUG_LINK}/${gameConfig.characterName}/bgm/${gameScene.backgroundSound}`
+    if (gameConfig.characterName === "debug") {
+      characterImagePath = `${DEBUG_LINK}/${gameConfig.characterName}/character/${gameScene.characterImage}`;
+      backgroundImagePath = `${DEBUG_LINK}/${gameConfig.characterName}/background/${gameScene.backgroundImage}`;
+      sceneSoundPath = `${DEBUG_LINK}/${gameConfig.characterName}/sound/${gameScene.sceneSound}`;
+      backgroundSoundPath = `${DEBUG_LINK}/${gameConfig.characterName}/bgm/${gameScene.backgroundSound}`;
     }
 
     return {

@@ -11,6 +11,8 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
   const [chatList, setChatList] = useState<Chat[]>([]);
   
   const selectOption = (optionIndex: number) => {
+    if( gameConfig.isGameOver ) return;
+
     const { answer, reaction, nextId } = gameScene.options[optionIndex];
 
     // 채팅 렌더링
@@ -28,6 +30,8 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
   };
 
   const onLogoClick = (e: React.MouseEvent) => {
+    if( gameConfig.isGameOver ) return;
+    
     history.push('/')
   }
 

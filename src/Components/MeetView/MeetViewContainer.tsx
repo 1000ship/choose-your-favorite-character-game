@@ -7,8 +7,9 @@ const MeetViewContainer: React.FC = () => {
   const gameConfig = useRecoilValue(gameConfigSelector);
   const [gameScene, setGameScene] = useRecoilState(gameSceneSelector);
 
-  const stepFromScript = useCallback(
-    (e: React.MouseEvent) => {
+  const stepFromScript = useCallback( (e: React.MouseEvent) => {
+      if (gameConfig.isGameOver) return;
+
       if (gameScene?.options?.length === 0) {
         // console.log( "케이스 #1 첫 대사 후 선택지 없으면 바로 다음 대사로 이동" )
         const nextScene = gameConfig.scenes?.find(
@@ -20,11 +21,12 @@ const MeetViewContainer: React.FC = () => {
         setGameScene((gameScene) => ({ ...gameScene, step: "option" }));
       }
     },
-    [gameScene, gameConfig.scenes, setGameScene]
+    [gameScene, gameConfig.scenes, setGameScene, gameConfig.isGameOver]
   );
 
-  const selectOption = useCallback(
-    (optionIndex: number) => {
+  const selectOption = useCallback( (optionIndex: number) => {
+      if (gameConfig.isGameOver) return;
+
       // 케이스 #3 선택한 선택지로 재생
       if (gameScene.options[optionIndex].reaction?.length === 0) {
         // 선택지에 대한 리액션이 없을 경우, 바로 다음 씬으로 이동
@@ -36,11 +38,12 @@ const MeetViewContainer: React.FC = () => {
         setGameScene((gameScene) => ({ ...gameScene, step: "reaction", optionIndex }));
       }
     },
-    [gameScene, gameConfig.scenes, setGameScene]
+    [gameScene, gameConfig.scenes, setGameScene, gameConfig.isGameOver]
   );
 
-  const stepFromReaction = useCallback(
-    (e: React.MouseEvent) => {
+  const stepFromReaction = useCallback( (e: React.MouseEvent) => {
+      if( gameConfig.isGameOver ) return;
+
       setGameScene((gameScene) => {
         if (typeof gameScene?.optionIndex === "number" && gameScene.optionIndex >= 0) {
           const nextId = gameScene.selectedOption?.nextId;
@@ -50,7 +53,7 @@ const MeetViewContainer: React.FC = () => {
         return gameScene;
       });
     },
-    [gameConfig.scenes, setGameScene]
+    [gameConfig.scenes, setGameScene, gameConfig.isGameOver]
   );
 
   return (

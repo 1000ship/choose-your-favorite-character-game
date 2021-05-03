@@ -5,7 +5,7 @@ import OptionMessage from "./OptionMessage";
 import ScriptParser from "../../Utils/ScriptParser";
 import { Chat } from "../../Constant/types";
 import { useRecoilValue } from "recoil";
-import { gameSceneSelector } from "../../Constant/selectors";
+import { gameConfigSelector, gameSceneSelector } from "../../Constant/selectors";
 
 const AppBarHeight = 80;
 
@@ -114,9 +114,12 @@ const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({
   selectOption,
   onLogoClick,
 }) => {
-  const scene = useRecoilValue(gameSceneSelector)
-  const messageContentsRef = useCallback( (el) => { if (el) window.scrollTo(0, window.outerHeight) }, [] );
-  
+  const gameConfig = useRecoilValue(gameConfigSelector);
+  const gameScene = useRecoilValue(gameSceneSelector);
+  const messageContentsRef = useCallback((el) => {
+    if (el) window.scrollTo(0, window.outerHeight);
+  }, []);
+
   return (
     <Container>
       <AppBar>
@@ -148,9 +151,11 @@ const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({
             ></RightMessage>
           )
         )}
-        {scene.options?.length && scene.sceneType !== "ending" && (
-          <OptionMessage selectOption={selectOption}></OptionMessage>
-        )}
+        {!gameConfig.isGameOver &&
+          gameScene.options?.length &&
+          gameScene.sceneType !== "ending" && (
+            <OptionMessage selectOption={selectOption}></OptionMessage>
+          )}
       </Contents>
     </Container>
   );

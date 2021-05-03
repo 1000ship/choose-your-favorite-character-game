@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import ChattingView from "../Components/ChattingView";
 import GameOverModal from "../Components/GameOverModal";
 import MeetView from "../Components/MeetView";
@@ -11,8 +11,12 @@ import { useSound } from "../Utils/Hook";
 
 const GamePage: React.FC<RouteComponentProps> = (props) => {
   const { history } = props;
-  const gameConfig = useRecoilValue(gameConfigSelector);
+  const [gameConfig, setGameConfig] = useRecoilState(gameConfigSelector);
   const [gameScene, setGameScene] = useRecoilState(gameSceneSelector);
+  const resetGameConfig = useResetRecoilState(gameConfigSelector)
+  const [layoutConfig, setLayoutConfig] = useState({
+    viewType: "text" as "text" | "meet",
+  })
 
   useSound()
   useEffect(() => {
@@ -21,8 +25,18 @@ const GamePage: React.FC<RouteComponentProps> = (props) => {
       setGameScene((gameScene) => ({ ...gameScene, ...initScene }));
     }
   }, [gameConfig, setGameScene]);
+  useEffect(() => {
+    if( gameScene.sceneType === "text" ) {
+      setLayoutConfig( layoutConfig => ({...layoutConfig, viewType: "text"}));
+    } else if ( gameScene.sceneType === "meet" ) {
+      setLayoutConfig( layoutConfig => ({...layoutConfig, viewType: "meet"}));
+    } else if ( gameScene.sceneType === "ending") {
+      setGameConfig( gameConfig => ({...gameConfig, isGameOver: true}))
+    }
+  }, [gameScene.sceneType, setLayoutConfig, setGameConfig])
 
   const resetGame = () => {
+    resetGameConfig()
     if (!gameConfig?.characterName) {
       history.push("/");
     } else {
@@ -32,19 +46,16 @@ const GamePage: React.FC<RouteComponentProps> = (props) => {
   };
 
   const exitGame = () => {
+    resetGameConfig()
     history.push("/choice");
     BGMPlayer.play(BGM_MAIN);
   };
 
   return (
     <>
-      {gameScene.sceneType === "text" ? (
-        <ChattingView />
-      ) : gameScene.sceneType === "meet" ? (
-        <MeetView />
-      ) : (
-        <GameOverModal isOpened={true} resetGame={resetGame} exitGame={exitGame}></GameOverModal>
-      )}
+      {layoutConfig.viewType === "text" ? <ChattingView />
+      : layoutConfig.viewType === "meet" ? <MeetView /> : null }
+      <GameOverModal isOpened={gameConfig.isGameOver ?? false} resetGame={resetGame} exitGame={exitGame} />
     </>
   );
 };
