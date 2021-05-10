@@ -6,6 +6,8 @@ import SkipButtonResource from "../Resources/Images/video_skip.png";
 import { BGM_AMY, BGM_BELLA, BGM_CLAIR, BGM_MAIN } from "../Constant";
 import BGMPlayer from "../Utils/BGMPlayer";
 import SoundPlayer from "../Utils/SoundPlayer";
+import { useSetRecoilState } from "recoil";
+import { gameConfigAtom } from "../Constant/atoms";
 
 const Container = styled.div`
   width: 100vw;
@@ -42,6 +44,7 @@ const VideoPage: React.FC<RouteComponentProps> = (props) => {
     location: { pathname },
   } = props;
   const characterName = pathname.replace("/video/", "");
+  const setGameConfig = useSetRecoilState(gameConfigAtom);
 
   const onBackClick = (e: React.MouseEvent) => {
     history.push("/choice");
@@ -49,7 +52,6 @@ const VideoPage: React.FC<RouteComponentProps> = (props) => {
   };
 
   const onSkipClick = (e: React.MouseEvent) => {
-    history.push(`/game/${characterName}`);
     let bgmFile;
     switch (characterName) {
       case "amy":
@@ -62,8 +64,10 @@ const VideoPage: React.FC<RouteComponentProps> = (props) => {
         bgmFile = BGM_CLAIR;
         break;
     }
+    setGameConfig((gameConfig) => ({ ...gameConfig, characterName }));
     if (bgmFile) BGMPlayer.play(bgmFile);
     SoundPlayer.play_old("Amy", "iphone sound.mp3");
+    history.push(`/game/${characterName}`);
   };
 
   return (
