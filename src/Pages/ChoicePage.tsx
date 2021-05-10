@@ -91,7 +91,8 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
 
   const characters = useMemo(
     () => [
-      { name: "amy", image: AmyResource, nameImage: AmyNameResource },
+      { name: "amy_male", image: AmyResource, nameImage: AmyNameResource },
+      { name: "amy_female", image: AmyResource, nameImage: AmyNameResource },
       { name: "bella", image: BellaResource, nameImage: BellaNameResource },
       { name: "clair", image: ClairResource, nameImage: ClairNameResource },
       { name: "debug", image: AmyResource, nameImage: AmyNameResource },
