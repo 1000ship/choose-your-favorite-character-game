@@ -14,6 +14,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
+import { useSetRecoilState } from "recoil";
+import { gameConfigAtom } from "../Constant/atoms";
 
 const Container = styled.div`
   display: flex;
@@ -57,6 +59,7 @@ const CharacterName = styled.img`
 `;
 
 const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
+  const setGameConfig = useSetRecoilState(gameConfigAtom);
   const [config, setConfig] = useState({
     swiper: null as any,
     slidesPerView: (window.innerWidth / 375) as number,
@@ -70,9 +73,11 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
     if (activeIndex !== targetIndex) {
       config.swiper.slideTo(targetIndex);
     } else if (characterName === "debug") {
+      setGameConfig((gameConfig) => ({ ...gameConfig, characterName }));
       history.push(`/game/debug`);
       BGMPlayer.pause();
     } else {
+      setGameConfig((gameConfig) => ({ ...gameConfig, characterName }));
       history.push(`/video/${characterName}`);
       BGMPlayer.pause();
     }

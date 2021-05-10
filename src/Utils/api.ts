@@ -4,7 +4,7 @@ export const loadScript = async (fileName: string) => {
   try {
     let filePath = `./res/scenes/${fileName}.txt`;
     if( fileName === "debug")
-      filePath = `${DEBUG_LINK}/${fileName}/script.json`
+      filePath = `${DEBUG_LINK}/${fileName}/script.txt`
     const data = await fetch(filePath);
     const scenes = await data.json();
     return scenes;
