@@ -12,28 +12,50 @@ const Container = styled.div`
   left: 10%;
   bottom: 30px;
   width: 80%;
+  @media (max-width: 768px) {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
 `;
 const ChatBoxImage = styled.img`
   width: 100%;
 `;
 const Contents = styled.div`
-  position: absolute;
+  /* position: absolute;
   left: 0;
-  top: 0;
+  top: 0; */
+  border: 3px solid #a21ccb;
+  border-radius: 32px;
+  border-image-slice: 1;
+  color: #662d91;
+  background-color: rgba(255,255,255,0.4);
+  padding: 16px;
+
   display: flex;
   flex-direction: column;
-  padding: 3% 10%;
+  margin: 3% 10%;
+  @media (max-width: 768px) {
+    margin: 3% 6px;
+  }
 `;
 const NameText = styled.span`
   font-weight: bolder;
-  font-size: 3vw;
-  margin-bottom: 10px;
+  font-size: 44px;
+  margin-bottom: 20px;
   color: #662d91;
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
 `;
 const TalkText = styled.span`
-  font-size: 2vw;
+  font-size: 36px;
   margin-left: 10px;
   color: black;
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export interface ChatBoxProps {
@@ -44,7 +66,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ selectOption }) => {
 
   return (
     <Container>
-      <ChatBoxImage src={ChatBoxBackgroundImage}></ChatBoxImage>
+      {/* <ChatBoxImage src={ChatBoxBackgroundImage}></ChatBoxImage> */}
       <Contents>
         {gameScene.step !== MEET_STEP_OPTION ? (
           <>

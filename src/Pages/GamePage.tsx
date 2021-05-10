@@ -7,6 +7,7 @@ import MeetView from "../Components/MeetView";
 import { BGM_MAIN } from "../Constant";
 import { gameOverAtom } from "../Constant/atoms";
 import { gameConfigSelector, gameSceneSelector } from "../Constant/selectors";
+import { Scene } from "../Constant/types";
 import BGMPlayer from "../Utils/BGMPlayer";
 import { useSound } from "../Utils/Hook";
 
@@ -20,6 +21,23 @@ const GamePage: React.FC<RouteComponentProps> = (props) => {
   const [layoutConfig, setLayoutConfig] = useState({
     viewType: "text" as "text" | "meet",
   });
+
+  // for debug
+  // useEffect( () => {
+  //   setGameScene({
+  //     backgroundSound: "",
+  //     sceneId: "###14",
+  //     characterName: "{name}",
+  //     sceneScript: "뭔가 쑥쓰럽네요",
+  //     characterImage: "26 안녕.png",
+  //     backgroundImage: "amy house_close.png",
+  //     sceneSound: "",
+  //     nextSceneId: "###14-1",
+  //     options: [],
+  //     sceneType: "meet",
+  //   } as Scene)
+  // }, [gameScene])
+  // ----------
 
   useSound();
   useEffect(() => {

@@ -7,12 +7,15 @@ import { SceneOption } from "../../Constant/types";
 const Container = styled.div``;
 const OptionList = styled.ul``;
 const OptionItem = styled.li`
-  font-size: 2.2vw;
+  font-size: 36px;
   cursor: pointer;
   font-weight: 400;
-  margin-bottom: 0.5vw;
+  margin: 8px 0px;
   &:hover {
     font-weight: 600;
+  }
+  @media (max-width: 768px) {
+    font-size: 20px;
   }
 `;
 

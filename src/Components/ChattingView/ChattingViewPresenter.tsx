@@ -91,7 +91,7 @@ const EndingMessage = styled.span`
   align-self: flex-end;
   margin: 5px;
   padding: 12px;
-  border: 3px solid #a21ccb;
+  border: 3px solid #662d91;
   border-radius: 40px 40px 10px 40px;
   border-image-slice: 1;
   color: #662d91;
