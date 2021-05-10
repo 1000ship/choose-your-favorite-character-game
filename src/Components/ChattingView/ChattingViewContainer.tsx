@@ -4,14 +4,16 @@ import { RouteComponentProps, withRouter } from "react-router";
 import { Chat } from "../../Constant/types";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { gameConfigSelector, gameSceneSelector } from "../../Constant/selectors";
+import { gameOverAtom } from "../../Constant/atoms";
 
 const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
   const gameConfig = useRecoilValue(gameConfigSelector);
   const [gameScene, setGameScene] = useRecoilState(gameSceneSelector);
   const [chatList, setChatList] = useState<Chat[]>([]);
+  const isGameOver = useRecoilValue(gameOverAtom);
 
   const selectOption = (optionIndex: number) => {
-    if (gameConfig.isGameOver) return;
+    if (isGameOver) return;
 
     const { answer, reaction, nextId } = gameScene.options[optionIndex];
 
@@ -30,14 +32,14 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
   };
 
   useEffect(() => {
-    setChatList((chatList) => gameScene?.sceneScript?.length
+    setChatList((chatList) => !isGameOver && gameScene?.sceneScript?.length
       ? [...chatList, { who: "left", message: gameScene.sceneScript }]
       : chatList
     );
-  }, [gameScene?.sceneScript]);
+  }, [gameScene.sceneScript, isGameOver]);
 
   const onLogoClick = (e: React.MouseEvent) => {
-    if (gameConfig.isGameOver) return;
+    if (isGameOver) return;
     history.push("/");
   };
 

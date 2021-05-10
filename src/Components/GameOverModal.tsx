@@ -6,14 +6,15 @@ const Container = styled.div`
   position: fixed;
   left: 50%;
   top: 50%;
+
   transform: translate(-50%, -50%);
-  width: 400px;
+  width: 350px;
   @media (min-width: 768px) {
     width: 600px;
   }
 
-  animation-duration: 1s;
   animation-name: slidein;
+  animation-duration: 5s;
 
   @keyframes slidein {
     from {
@@ -43,7 +44,7 @@ const Content = styled.div`
 `;
 const GameOverText = styled.div`
   font-weight: 600;
-  font-size: 2.8em;
+  font-size: 2.4em;
   margin-bottom: 40px;
   @media (min-width: 768px) {
     font-size: 4em;
@@ -51,7 +52,6 @@ const GameOverText = styled.div`
 `;
 const ButtonGroup = styled.div`
   display: flex;
-  width: 80%;
 `;
 const Button = styled.div`
   background-image: linear-gradient(#ee609c, #b565d9);
@@ -61,7 +61,7 @@ const Button = styled.div`
   color: white;
   font-size: 1em;
   flex: 1;
-  margin: 10px;
+  margin: 4px;
   text-align: center;
   cursor: pointer;
   @media (min-width: 768px) {

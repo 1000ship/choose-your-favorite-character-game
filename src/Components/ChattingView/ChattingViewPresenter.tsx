@@ -6,6 +6,7 @@ import ScriptParser from "../../Utils/ScriptParser";
 import { Chat } from "../../Constant/types";
 import { useRecoilValue } from "recoil";
 import { gameConfigSelector, gameSceneSelector } from "../../Constant/selectors";
+import { gameOverAtom } from "../../Constant/atoms";
 
 const AppBarHeight = 80;
 
@@ -116,6 +117,7 @@ const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({
 }) => {
   const gameConfig = useRecoilValue(gameConfigSelector);
   const gameScene = useRecoilValue(gameSceneSelector);
+  const isGameOver = useRecoilValue(gameOverAtom)
   const messageContentsRef = useCallback((el) => {
     if (el) window.scrollTo(0, window.outerHeight);
   }, []);
@@ -151,7 +153,7 @@ const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({
             ></RightMessage>
           )
         )}
-        {!gameConfig.isGameOver &&
+        {!isGameOver &&
           gameScene.options?.length &&
           gameScene.sceneType !== "ending" && (
             <OptionMessage selectOption={selectOption}></OptionMessage>

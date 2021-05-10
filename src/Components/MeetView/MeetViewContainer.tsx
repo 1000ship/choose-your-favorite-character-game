@@ -2,13 +2,15 @@ import React, { useCallback } from "react";
 import MeetViewPresenter from "./MeetViewPresenter";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { gameConfigSelector, gameSceneSelector } from "../../Constant/selectors";
+import { gameOverAtom } from "../../Constant/atoms";
 
 const MeetViewContainer: React.FC = () => {
   const gameConfig = useRecoilValue(gameConfigSelector);
   const [gameScene, setGameScene] = useRecoilState(gameSceneSelector);
+  const gameOver = useRecoilValue(gameOverAtom)
 
   const stepFromScript = useCallback( (e: React.MouseEvent) => {
-      if (gameConfig.isGameOver) return;
+      if (gameOver) return;
 
       if (gameScene?.options?.length === 0) {
         // console.log( "케이스 #1 첫 대사 후 선택지 없으면 바로 다음 대사로 이동" )
@@ -21,11 +23,11 @@ const MeetViewContainer: React.FC = () => {
         setGameScene((gameScene) => ({ ...gameScene, step: "option" }));
       }
     },
-    [gameScene, gameConfig.scenes, setGameScene, gameConfig.isGameOver]
+    [gameScene, gameConfig.scenes, setGameScene, gameOver]
   );
 
   const selectOption = useCallback( (optionIndex: number) => {
-      if (gameConfig.isGameOver) return;
+      if (gameOver) return;
 
       // 케이스 #3 선택한 선택지로 재생
       if (gameScene.options[optionIndex].reaction?.length === 0) {
@@ -38,11 +40,11 @@ const MeetViewContainer: React.FC = () => {
         setGameScene((gameScene) => ({ ...gameScene, step: "reaction", optionIndex }));
       }
     },
-    [gameScene, gameConfig.scenes, setGameScene, gameConfig.isGameOver]
+    [gameScene, gameConfig.scenes, setGameScene, gameOver]
   );
 
   const stepFromReaction = useCallback( (e: React.MouseEvent) => {
-      if( gameConfig.isGameOver ) return;
+      if( gameOver ) return;
 
       setGameScene((gameScene) => {
         if (typeof gameScene?.optionIndex === "number" && gameScene.optionIndex >= 0) {
@@ -53,7 +55,7 @@ const MeetViewContainer: React.FC = () => {
         return gameScene;
       });
     },
-    [gameConfig.scenes, setGameScene, gameConfig.isGameOver]
+    [gameConfig.scenes, setGameScene, gameOver]
   );
 
   return (

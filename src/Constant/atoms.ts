@@ -17,7 +17,6 @@ export const gameConfigAtom = atom<IGameConfig>({
     characterName: getGameCharacter(),
     sceneType: "text" as SceneType,
     meetStep: "script" as MeetStep,
-    isGameOver: false as boolean,
   },
 });
 
@@ -25,3 +24,8 @@ export const gameSceneAtom = atom<Scene>({
   key: "gameScene",
   default: DEFAULT_SCENE as Scene,
 });
+
+export const gameOverAtom = atom<boolean>({
+  key: "gameOver",
+  default: false as boolean,
+})
