@@ -7,40 +7,40 @@ import { Chat } from "../../Constant/types"
 import ChattingViewPresenter from "./ChattingViewPresenter"
 
 const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
-	const gameConfig = useRecoilValue(gameConfigSelector)
-	const [gameScene, setGameScene] = useRecoilState(gameSceneSelector)
-	const [chatList, setChatList] = useState<Chat[]>([])
-	const isGameOver = useRecoilValue(gameOverAtom)
+  const gameConfig = useRecoilValue(gameConfigSelector)
+  const [gameScene, setGameScene] = useRecoilState(gameSceneSelector)
+  const [chatList, setChatList] = useState<Chat[]>([])
+  const isGameOver = useRecoilValue(gameOverAtom)
 
-	const selectOption = (optionIndex: number) => {
-		if (isGameOver) return
+  const selectOption = (optionIndex: number) => {
+    if (isGameOver) return
 
-		const { answer, reaction, nextId } = gameScene.options[optionIndex]
+    const { answer, reaction, nextId } = gameScene.options[optionIndex]
 
-		// 채팅 렌더링
-		setChatList((chatList) => {
-			const result = [...chatList]
-			if (answer?.length) result.push({ who: "right", message: answer })
-			if (reaction?.length) result.push({ who: "left", message: reaction })
-			return result
-		})
+    // 채팅 렌더링
+    setChatList((chatList) => {
+      const result = [...chatList]
+      if (answer?.length) result.push({ who: "right", message: answer })
+      if (reaction?.length) result.push({ who: "left", message: reaction })
+      return result
+    })
 
-		// 게임 씬 이동
-		const nextScene = gameConfig.scenes?.find((scene) => scene.sceneId === nextId)
-		if (!nextScene) throw new Error("nextScene is not present")
-		setGameScene((gameScene) => ({ ...gameScene, ...nextScene }))
-	}
+    // 게임 씬 이동
+    const nextScene = gameConfig.scenes?.find((scene) => scene.sceneId === nextId)
+    if (!nextScene) throw new Error("nextScene is not present")
+    setGameScene((gameScene) => ({ ...gameScene, ...nextScene }))
+  }
 
-	useEffect(() => {
-		setChatList((chatList) => (!isGameOver && gameScene?.sceneScript?.length ? [...chatList, { who: "left", message: gameScene.sceneScript }] : chatList))
-	}, [gameScene, isGameOver])
+  useEffect(() => {
+    setChatList((chatList) => (!isGameOver && gameScene?.sceneScript?.length ? [...chatList, { who: "left", message: gameScene.sceneScript }] : chatList))
+  }, [gameScene, isGameOver])
 
-	const onLogoClick = (e: React.MouseEvent) => {
-		if (isGameOver) return
-		history.push("/")
-	}
+  const onLogoClick = (e: React.MouseEvent) => {
+    if (isGameOver) return
+    history.push("/")
+  }
 
-	return <ChattingViewPresenter chatList={chatList} selectOption={selectOption} onLogoClick={onLogoClick}></ChattingViewPresenter>
+  return <ChattingViewPresenter chatList={chatList} selectOption={selectOption} onLogoClick={onLogoClick}></ChattingViewPresenter>
 }
 
 export default withRouter(ChattingViewContainer)

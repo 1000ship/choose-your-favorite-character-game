@@ -3,24 +3,24 @@ import { Scene } from "./types"
 export const DEBUG_LINK: string = process.env.REACT_APP_DEBUG_LINK || ""
 
 export const DEFAULT_SCENE = {
-	sceneId: "",
-	characterName: "",
-	sceneScript: "",
-	characterImage: "",
-	backgroundImage: "",
-	sceneSound: "",
-	backgroundSound: "",
-	nextSceneId: "",
-	options: [
-		{
-			answer: "",
-			reaction: "",
-			nextId: "",
-		},
-	],
-	sceneType: "meet",
-	step: "script",
-	optionIndex: 0,
+  sceneId: "",
+  characterName: "",
+  sceneScript: "",
+  characterImage: "",
+  backgroundImage: "",
+  sceneSound: "",
+  backgroundSound: "",
+  nextSceneId: "",
+  options: [
+    {
+      answer: "",
+      reaction: "",
+      nextId: "",
+    },
+  ],
+  sceneType: "meet",
+  step: "script",
+  optionIndex: 0,
 } as Scene
 
 export const SCENE_TYPE_TEXT = "text"
