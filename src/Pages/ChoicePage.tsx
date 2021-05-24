@@ -3,9 +3,11 @@ import styled from "styled-components"
 import { RouteComponentProps, withRouter } from "react-router-dom"
 import ChoiceAlertResource from "../Resources/Images/choice_alert.png"
 import AmyResource from "../Resources/Images/amy.png"
+import DebugResource from "../Resources/Images/debug.png"
 import BellaResource from "../Resources/Images/bella.png"
 import ClairResource from "../Resources/Images/clair.png"
 import AmyNameResource from "../Resources/Images/amy_name.png"
+import DebugNameResource from "../Resources/Images/debug_name.png"
 import BellaNameResource from "../Resources/Images/bella_name.png"
 import ClairNameResource from "../Resources/Images/clair_name.png"
 import BGMPlayer from "../Utils/BGMPlayer"
@@ -91,11 +93,11 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
 
   const characters = useMemo(
     () => [
+      { name: "debug", image: DebugResource, nameImage: DebugNameResource },
       { name: "amy_male", image: AmyResource, nameImage: AmyNameResource },
       { name: "amy_female", image: AmyResource, nameImage: AmyNameResource },
       { name: "bella", image: BellaResource, nameImage: BellaNameResource },
       { name: "clair", image: ClairResource, nameImage: ClairNameResource },
-      { name: "debug", image: AmyResource, nameImage: AmyNameResource },
     ],
     [],
   )
