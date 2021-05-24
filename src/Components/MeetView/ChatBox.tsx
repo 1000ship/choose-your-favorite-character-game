@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 import styled from "styled-components"
 import { MEET_STEP_OPTION, MEET_STEP_REACTION } from "../../Constant"
 import { gameSceneSelector } from "../../Constant/selectors"
-import ScriptParser from "../../Utils/ScriptParser"
+import useScriptParser from "../../Utils/useScriptParser"
 import OptionSelector from "./OptionSelector"
 
 const Container = styled.div`
@@ -56,6 +56,7 @@ export interface ChatBoxProps {
 }
 const ChatBox: React.FC<ChatBoxProps> = ({ selectOption }) => {
   const gameScene = useRecoilValue(gameSceneSelector)
+  const scriptParser = useScriptParser()
 
   return (
     <Container>
@@ -65,12 +66,12 @@ const ChatBox: React.FC<ChatBoxProps> = ({ selectOption }) => {
           <>
             <NameText
               dangerouslySetInnerHTML={{
-                __html: ScriptParser.getText(gameScene.characterName),
+                __html: scriptParser.getText(gameScene.characterName),
               }}
             ></NameText>
             <TalkText
               dangerouslySetInnerHTML={{
-                __html: ScriptParser.getText(gameScene?.step === MEET_STEP_REACTION ? gameScene.selectedOption?.reaction ?? "" : gameScene.sceneScript),
+                __html: scriptParser.getText(gameScene?.step === MEET_STEP_REACTION ? gameScene.selectedOption?.reaction ?? "" : gameScene.sceneScript),
               }}
             ></TalkText>
           </>

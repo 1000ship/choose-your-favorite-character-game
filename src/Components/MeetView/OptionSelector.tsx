@@ -1,8 +1,9 @@
 import React from "react"
+import { useSetRecoilState } from "recoil"
 import styled from "styled-components"
-import ScriptParser from "../../Utils/ScriptParser"
-import MemoryData from "../../Utils/MemoryData"
+import { userConfigSelector } from "../../Constant/selectors"
 import { SceneOption } from "../../Constant/types"
+import useScriptParser from "../../Utils/useScriptParser"
 
 const Container = styled.div``
 const OptionList = styled.ul``
@@ -24,14 +25,17 @@ export interface OptionSelectorProps {
   selectOption: Function
 }
 const OptionSelector: React.FC<OptionSelectorProps> = ({ options, selectOption }) => {
+  const setUserConfig = useSetRecoilState(userConfigSelector)
+  const scriptParser = useScriptParser()
+
   const onOptionClicked = (i: number) => (e: React.MouseEvent) => {
-    const specials = ScriptParser.getSpecials(options[i].answer)
+    const specials = scriptParser.getSpecials(options[i].answer)
     if (specials?.input) {
       let inputData = prompt("입력해주세요")
       if (!inputData || inputData?.length === 0) {
         return
       }
-      MemoryData.setData(specials.input, inputData)
+      setUserConfig((userConfig) => ({ ...userConfig, [specials.input]: inputData }))
       selectOption(i, { [specials.input]: inputData })
     } else selectOption(i)
     e.stopPropagation()
@@ -41,7 +45,7 @@ const OptionSelector: React.FC<OptionSelectorProps> = ({ options, selectOption }
     <Container>
       <OptionList>
         {options.map(({ answer }, i) => (
-          <OptionItem key={i} onClick={onOptionClicked(i)} dangerouslySetInnerHTML={{ __html: ScriptParser.getText(answer ?? "") }}></OptionItem>
+          <OptionItem key={i} onClick={onOptionClicked(i)} dangerouslySetInnerHTML={{ __html: scriptParser.getText(answer ?? "") }}></OptionItem>
         ))}
       </OptionList>
     </Container>

@@ -3,6 +3,8 @@ import { DEBUG_LINK } from "."
 import { loadScript } from "../Utils/api"
 import { gameConfigAtom, gameSceneAtom } from "./atoms"
 import { IGameConfig, Scene } from "./types"
+import MemoryData from "../Utils/MemoryData"
+import { UserConfig, userConfigAtom } from "./atoms"
 
 export const gameConfigSelector = selector<IGameConfig>({
   key: "gameConfigSelector",
@@ -51,5 +53,16 @@ export const gameSceneSelector = selector<Scene>({
   },
   set({ set }, value: Scene | DefaultValue) {
     set(gameSceneAtom, value)
+  },
+})
+
+export const userConfigSelector = selector<UserConfig>({
+  key: "userConfigSelector",
+  get({ get }) {
+    return get(userConfigAtom)
+  },
+  set({ set }, newValue) {
+    MemoryData.setData(newValue)
+    set(userConfigAtom, newValue)
   },
 })

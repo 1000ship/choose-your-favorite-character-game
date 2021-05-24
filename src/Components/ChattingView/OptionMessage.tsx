@@ -1,10 +1,9 @@
 import React from "react"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import styled from "styled-components"
-import ScriptParser from "../../Utils/ScriptParser"
-import MemoryData from "../../Utils/MemoryData"
+import { gameSceneSelector, userConfigSelector } from "../../Constant/selectors"
 import { SceneOption } from "../../Constant/types"
-import { useRecoilValue } from "recoil"
-import { gameSceneSelector } from "../../Constant/selectors"
+import useScriptParser from "../../Utils/useScriptParser"
 
 const RightMessage = styled.span`
   align-self: flex-end;
@@ -33,16 +32,18 @@ export interface OptionMessageProps {
 }
 const OptionMessage: React.FC<OptionMessageProps> = ({ selectOption, options: propsOptions }) => {
   const gameScene = useRecoilValue(gameSceneSelector)
+  const setUserConfig = useSetRecoilState(userConfigSelector)
+  const scriptParser = useScriptParser()
   const options = propsOptions ? propsOptions : gameScene.options
 
   const onOptionClick = (i: number) => (e: React.MouseEvent) => {
-    const specials = ScriptParser.getSpecials(options[i]?.answer)
+    const specials = scriptParser.getSpecials(options[i]?.answer)
     if (specials?.input) {
       let inputData = prompt("입력해주세요")
       if (!inputData || inputData?.length === 0) {
         return
       }
-      MemoryData.setData(specials.input, inputData)
+      setUserConfig((userConfig) => ({ ...userConfig, [specials.input]: inputData }))
       selectOption(i, { [specials.input]: inputData })
     } else selectOption(i)
   }
@@ -55,7 +56,7 @@ const OptionMessage: React.FC<OptionMessageProps> = ({ selectOption, options: pr
             key={i}
             onClick={onOptionClick(i)}
             dangerouslySetInnerHTML={{
-              __html: ScriptParser.getText(option?.answer ?? ""),
+              __html: scriptParser.getText(option?.answer ?? ""),
             }}
           ></OptionItem>
         ))}

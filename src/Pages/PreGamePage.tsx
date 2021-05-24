@@ -1,11 +1,11 @@
 import React, { useState } from "react"
-import styled from "styled-components"
 import { RouteComponentProps, withRouter } from "react-router-dom"
-import CYFCLogoImage from "../Resources/Images/cyfc_top_logo.png"
+import { useSetRecoilState } from "recoil"
+import styled from "styled-components"
 import OptionMessage from "../Components/ChattingView/OptionMessage"
-import ScriptParser from "../Utils/ScriptParser"
-import MemoryData from "../Utils/MemoryData"
-import { SceneOption } from "../Constant/types"
+import { userConfigSelector } from "../Constant/selectors"
+import CYFCLogoImage from "../Resources/Images/cyfc_top_logo.png"
+import useScriptParser from "../Utils/useScriptParser"
 
 const AppBarHeight = 80
 
@@ -82,51 +82,73 @@ const RightMessage = styled.span`
 `
 
 const PreGamePage: React.FC<RouteComponentProps> = (props) => {
+  const setUserConfig = useSetRecoilState(userConfigSelector)
   const { history } = props
+  const scriptParser = useScriptParser()
 
-  let question: string[] = ["당신의 이름은?", "당신의 성별은?", "당신의 직업은?", "당신의 사진을 찍어주세요."]
-  let optionList: SceneOption[][] = [
-    [{ answer: "나의 이름은 {input:name}" }],
-    [{ answer: "남자" }, { answer: "여자" }],
-    [{ answer: "직장인" }, { answer: "대학생" }, { answer: "취준생" }, { answer: "유학생" }],
-    [{ answer: "📷" }],
+  let qna = [
+    { question: "당신의 이름은?", options: [{ answer: "나의 이름은 {input:name}" }] },
+    {
+      question: "당신의 성별은?",
+      options: [
+        { answer: "남자", key: "gender", value: "male" },
+        { answer: "여자", key: "gender", value: "female" },
+      ],
+    },
+    {
+      question: "당신의 성향은?",
+      options: [
+        { answer: "동성애", key: "sexualOrientation", value: "same" },
+        { answer: "이성애", key: "sexualOrientation", value: "opposite" },
+        { answer: "양성애", key: "sexualOrientation", value: "both" },
+      ],
+    },
+    {
+      question: "당신의 직업은?",
+      options: [
+        { answer: "직장인", key: "job", value: "officer" },
+        { answer: "대학생", key: "job", value: "student" },
+        { answer: "취준생", key: "job", value: "yet" },
+        { answer: "유학생", key: "job", value: "international" },
+      ],
+    },
+    { question: "당신의 사진을 찍어주세요.", options: [{ answer: "📷", camera: true }] },
   ]
+
   const [state, setState] = useState({
     chatList: [
       {
         who: "left",
-        message: question[0],
+        message: qna[0].question,
       },
     ],
-    options: optionList[0],
-    step: 0,
+    options: qna[0].options,
+    step: 0 as number,
   })
 
   const selectOption = (i: number, inputData: any = {}) => {
-    for (let key in inputData) MemoryData.setData(key, inputData[key])
-    if (state.step === 1) {
-      // 성별
-      MemoryData.setData("gender", i === 0 ? "male" : "female")
-    } else if (state.step === 3) {
+    for (let key in inputData) setUserConfig((userConfig) => ({ ...userConfig, [key]: inputData[key] }))
+    const selectedOption = state.options[i]
+    if (["key", "value"].every((each) => each in selectOption)) {
+      const { key, value } = selectOption as any
+      setUserConfig((userConfig) => ({ ...userConfig, [key]: value }))
+    } else if ("camera" in selectedOption) {
       // 카메라
-      if (!!navigator?.getUserMedia) {
-        history.push(`/camera`)
-      } else {
+      if (!!navigator?.getUserMedia) history.push(`/camera`)
+      else {
         ;(document.getElementById("camera") as HTMLInputElement).click()
         history.push("/choice")
       }
     }
     setState((state) => ({
       ...state,
-      chatList: [...state.chatList, { who: "right", message: `${state.options[i].answer}` }, { who: "left", message: `${question[state.step + 1]}` }],
-      options: optionList[state.step + 1],
+      chatList: [...state.chatList, { who: "right", message: `${state.options[i].answer}` }, { who: "left", message: `${qna[state.step + 1].question}` }],
+      options: qna[state.step + 1].options,
       step: state.step + 1,
     }))
   }
 
-  const onLogoClick = (e: React.MouseEvent) => {
-    history.push("/")
-  }
+  const onLogoClick = (e: React.MouseEvent) => history.push("/")
 
   const { chatList, options } = state
   return (
@@ -141,14 +163,14 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
             <LeftMessage
               key={i}
               dangerouslySetInnerHTML={{
-                __html: ScriptParser.getText(message),
+                __html: scriptParser.getText(message),
               }}
             ></LeftMessage>
           ) : (
             <RightMessage
               key={i}
               dangerouslySetInnerHTML={{
-                __html: ScriptParser.getText(message, true),
+                __html: scriptParser.getText(message, true),
               }}
             ></RightMessage>
           ),

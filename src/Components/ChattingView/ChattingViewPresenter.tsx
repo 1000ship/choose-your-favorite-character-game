@@ -5,7 +5,7 @@ import { gameOverAtom } from "../../Constant/atoms"
 import { gameSceneSelector } from "../../Constant/selectors"
 import { Chat } from "../../Constant/types"
 import CYFCLogoImage from "../../Resources/Images/cyfc_top_logo.png"
-import ScriptParser from "../../Utils/ScriptParser"
+import useScriptParser from "../../Utils/useScriptParser"
 import OptionMessage from "./OptionMessage"
 
 const AppBarHeight = 80
@@ -113,6 +113,8 @@ export interface ChattingViewPresenterProps {
 const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({ chatList, selectOption, onLogoClick }) => {
   const gameScene = useRecoilValue(gameSceneSelector)
   const isGameOver = useRecoilValue(gameOverAtom)
+  const scriptParser = useScriptParser()
+
   const messageContentsRef = useCallback((el) => {
     if (el) window.scrollTo(0, window.outerHeight)
   }, [])
@@ -129,21 +131,21 @@ const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({ chatList,
             <EndingMessage
               key={i}
               dangerouslySetInnerHTML={{
-                __html: ScriptParser.getText(message),
+                __html: scriptParser.getText(message),
               }}
             ></EndingMessage>
           ) : who === "left" ? (
             <LeftMessage
               key={i}
               dangerouslySetInnerHTML={{
-                __html: ScriptParser.getText(message),
+                __html: scriptParser.getText(message),
               }}
             ></LeftMessage>
           ) : (
             <RightMessage
               key={i}
               dangerouslySetInnerHTML={{
-                __html: ScriptParser.getText(message, true),
+                __html: scriptParser.getText(message, true),
               }}
             ></RightMessage>
           ),

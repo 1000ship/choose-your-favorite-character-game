@@ -2,6 +2,7 @@ import { atom } from "recoil"
 import { DEFAULT_SCENE } from "."
 import { MeetStep, Scene, SceneType } from "./types"
 import { IGameConfig } from "./types"
+import MemoryData from "../Utils/MemoryData"
 
 function getGameCharacter(): string {
   const hashRoute = window.location.hash.split("/")
@@ -28,4 +29,22 @@ export const gameSceneAtom = atom<Scene>({
 export const gameOverAtom = atom<boolean>({
   key: "gameOver",
   default: false as boolean,
+})
+
+export interface UserConfig {
+  gender: "male" | "female"
+  name: string
+  job: "officer" | "student" | "yet" | "international"
+  sexualOrientation: "opposite" | "same" | "both"
+  [key: string]: any
+}
+
+export const userConfigAtom = atom<UserConfig>({
+  key: "userConfigAtom",
+  default: MemoryData.getData() ?? {
+    gender: "male",
+    name: "",
+    job: "student",
+    sexualOrientation: "opposite",
+  },
 })
