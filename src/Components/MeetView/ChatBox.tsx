@@ -23,7 +23,7 @@ const Contents = styled.div`
   border-image-slice: 1;
   color: #662d91;
   background-color: rgba(255, 255, 255, 0.4);
-  padding: 16px;
+  padding: 16px 24px;
 
   display: flex;
   flex-direction: column;
@@ -64,11 +64,13 @@ const ChatBox: React.FC<ChatBoxProps> = ({ selectOption }) => {
       <Contents>
         {gameScene.step !== MEET_STEP_OPTION ? (
           <>
-            <NameText
-              dangerouslySetInnerHTML={{
-                __html: scriptParser.getText(gameScene.characterName),
-              }}
-            ></NameText>
+            {gameScene.characterName?.length > 0 && (
+              <NameText
+                dangerouslySetInnerHTML={{
+                  __html: scriptParser.getText(gameScene.characterName),
+                }}
+              ></NameText>
+            )}
             <TalkText
               dangerouslySetInnerHTML={{
                 __html: scriptParser.getText(gameScene?.step === MEET_STEP_REACTION ? gameScene.selectedOption?.reaction ?? "" : gameScene.sceneScript),

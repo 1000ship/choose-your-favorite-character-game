@@ -35,6 +35,10 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
     setChatList((chatList) => (!isGameOver && gameScene?.sceneScript?.length ? [...chatList, { who: "left", message: gameScene.sceneScript }] : chatList))
   }, [gameScene, isGameOver])
 
+  useEffect(() => {
+    window.scrollTo({ top: document.body.scrollHeight })
+  }, [chatList])
+
   const onLogoClick = (e: React.MouseEvent) => {
     if (isGameOver) return
     history.push("/")

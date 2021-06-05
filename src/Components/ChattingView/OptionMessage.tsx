@@ -18,8 +18,11 @@ const RightMessage = styled.span`
   }
 `
 
-const OptionList = styled.ul``
+const OptionList = styled.ul`
+  list-style: inside;
+`
 const OptionItem = styled.li`
+  margin: 5px;
   cursor: pointer;
   &:hover {
     font-weight: 600;
