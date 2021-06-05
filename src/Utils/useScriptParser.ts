@@ -11,7 +11,12 @@ const useScriptParser = () => {
       const originals: string[] = result.match(/{\w*}/g) ?? []
       const keys: any = originals.map((str) => str.match(/\w*/g)?.join("")?.trim()) || []
       originals.forEach((original, i) => (result = result.replace(original, userConfig[keys[i]])))
-      result = result.replace(/{input:\w*}/g, "<input type='text'/>")
+      result = result.replace(
+        /{input:\w*}/g,
+        `
+        <input type='text' placeholder='직접 입력' style='font-size: 16px;'/>
+      `,
+      )
       result = result.replace(/{\w*:[^{:}]+\.?\w*}/g, "")
       return result
     },

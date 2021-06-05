@@ -23,11 +23,12 @@ const GamePage: React.FC<RouteComponentProps> = (props) => {
 
   useSound()
   useEffect(() => {
-    const initScene = gameConfig?.scenes?.length ? gameConfig.scenes[0] : null
+    const initScene = gameConfig?.scenes?.length ? gameConfig.scenes[20] : null
     if (initScene) {
       setGameScene((gameScene) => ({ ...gameScene, ...initScene }))
     }
   }, [gameConfig, setGameScene])
+
   useEffect(() => {
     if (gameScene.sceneType === "text") {
       setLayoutConfig((layoutConfig) => ({ ...layoutConfig, viewType: "text" }))
