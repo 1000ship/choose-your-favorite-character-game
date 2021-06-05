@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { useRecoilValue } from "recoil"
 import styled from "styled-components"
 import { gameSceneSelector } from "../../Constant/selectors"
@@ -38,11 +38,35 @@ export interface MeetViewPresenterProps {
 }
 const MeetViewPresenter: React.FC<MeetViewPresenterProps> = ({ stepFromScript, stepFromReaction, selectOption }) => {
   const gameScene = useRecoilValue(gameSceneSelector)
+  const [state, setState] = useState({
+    backgroundImagePath: "",
+    characterImagePath: "",
+  })
+
+  useEffect(() => {
+    if (gameScene.characterImagePath && gameScene.characterImagePath.length > 0) {
+      const imgTag = document.createElement("img")
+      imgTag.src = gameScene.characterImagePath as string
+      imgTag.onload = (e) => setState((state) => ({ ...state, characterImagePath: gameScene?.characterImagePath ?? "" }))
+    } else {
+      setState((state) => ({ ...state, characterImagePath: "" }))
+    }
+  }, [gameScene.characterImagePath])
+
+  useEffect(() => {
+    if (gameScene.backgroundImagePath && gameScene.backgroundImagePath.length > 0) {
+      const imgTag = document.createElement("img")
+      imgTag.src = gameScene.backgroundImagePath as string
+      imgTag.onload = (e) => setState((state) => ({ ...state, backgroundImagePath: gameScene?.backgroundImagePath ?? "" }))
+    } else {
+      setState((state) => ({ ...state, backgroundImagePath: "" }))
+    }
+  }, [gameScene.backgroundImagePath])
 
   return (
     <Container onClick={gameScene.step === "script" ? stepFromScript : gameScene.step === "reaction" ? stepFromReaction : undefined}>
-      {gameScene?.backgroundImagePath?.length && <BackgroundImage imageSrc={gameScene?.backgroundImagePath || ""}></BackgroundImage>}
-      {gameScene?.characterImagePath?.length && <CharacterImage imageSrc={gameScene?.characterImagePath || ""}></CharacterImage>}
+      {state.backgroundImagePath.length && <BackgroundImage imageSrc={state.backgroundImagePath || ""}></BackgroundImage>}
+      {state.characterImagePath.length && <CharacterImage imageSrc={state.characterImagePath || ""}></CharacterImage>}
       <ChatBox selectOption={selectOption}></ChatBox>
     </Container>
   )

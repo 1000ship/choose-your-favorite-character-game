@@ -24,6 +24,7 @@ const GamePage: React.FC<RouteComponentProps> = (props) => {
   useBGM()
   useSound()
   useEffect(() => {
+    //  for debug
     const initScene = gameConfig?.scenes?.length ? gameConfig.scenes[0] : null
     if (initScene) {
       setGameScene((gameScene) => ({ ...gameScene, ...initScene }))
