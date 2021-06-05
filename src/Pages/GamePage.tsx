@@ -8,7 +8,7 @@ import { BGM_MAIN } from "../Constant"
 import { gameOverAtom } from "../Constant/atoms"
 import { gameConfigSelector, gameSceneSelector } from "../Constant/selectors"
 import BGMPlayer from "../Utils/BGMPlayer"
-import { useSound } from "../Utils/Hook"
+import { useBGM, useSound } from "../Utils/Hook"
 
 const GamePage: React.FC<RouteComponentProps> = (props) => {
   const { history } = props
@@ -21,9 +21,10 @@ const GamePage: React.FC<RouteComponentProps> = (props) => {
     viewType: "text" as "text" | "meet",
   })
 
+  useBGM()
   useSound()
   useEffect(() => {
-    const initScene = gameConfig?.scenes?.length ? gameConfig.scenes[20] : null
+    const initScene = gameConfig?.scenes?.length ? gameConfig.scenes[0] : null
     if (initScene) {
       setGameScene((gameScene) => ({ ...gameScene, ...initScene }))
     }

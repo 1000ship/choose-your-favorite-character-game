@@ -14,7 +14,12 @@ const useScriptParser = () => {
       result = result.replace(
         /{input:\w*}/g,
         `
-        <input type='text' placeholder='직접 입력' style='font-size: 16px;'/>
+        <span style='
+          border: 1px solid #777; color: #777; border-radius: 4px; margin: 2px 4px; padding: 2px 4px;
+          text-align: center; cursor: text;
+        '>
+         직접 입력
+        </span>
       `,
       )
       result = result.replace(/{\w*:[^{:}]+\.?\w*}/g, "")

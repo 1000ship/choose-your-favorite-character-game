@@ -1,9 +1,9 @@
 import { DEBUG_LINK, ENDING_COUNTER_STORAGE_KEY } from "../Constant"
 
-export const loadScript = async (fileName: string) => {
+export const loadScript = async (characterName: string) => {
   try {
-    let filePath = `./res/scenes/${fileName}.txt`
-    if (fileName === "debug") filePath = `${DEBUG_LINK}/${fileName}/script.txt`
+    let filePath = `./res/${characterName}/script.txt`
+    if (characterName === "debug") filePath = `${DEBUG_LINK}/${characterName}/script.txt`
     const data = await fetch(filePath)
     const scenes = await data.json()
     return scenes
