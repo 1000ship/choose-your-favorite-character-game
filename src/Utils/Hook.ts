@@ -17,9 +17,8 @@ export function useSound() {
 export function useBGM() {
   const gameScene = useRecoilValue(gameSceneSelector)
   useEffect(() => {
-    const path = gameScene.backgroundSoundPath ?? ""
-    if (!path.length) return
-    // console.log(gameScene.backgroundSoundPath, "배경음악 재생");
-    BGMPlayer.play(path)
-  }, [gameScene.backgroundSoundPath])
+    if (!gameScene.backgroundSound.length) return
+    // console.log(gameScene.backgroundSoundPath, "배경음악 재생")
+    BGMPlayer.play(gameScene.backgroundSoundPath as string)
+  }, [gameScene.backgroundSoundPath, gameScene.backgroundSound])
 }
