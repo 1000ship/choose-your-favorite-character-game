@@ -28,6 +28,7 @@ export const gameSceneSelector = selector<Scene>({
   get({ get }) {
     const gameConfig = get(gameConfigAtom)
     const gameScene = get(gameSceneAtom)
+    console.log(gameScene)
 
     let characterImagePath = `./res/${gameConfig.characterName}/character/${gameScene.characterImage}`
     let backgroundImagePath = `./res/${gameConfig.characterName}/background/${gameScene.backgroundImage}`

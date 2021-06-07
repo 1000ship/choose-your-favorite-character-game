@@ -32,8 +32,12 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
   }
 
   useEffect(() => {
-    setChatList((chatList) => (!isGameOver && gameScene?.sceneScript?.length ? [...chatList, { who: "left", message: gameScene.sceneScript }] : chatList))
-  }, [gameScene, isGameOver])
+    setChatList((chatList) => (gameScene.sceneScript?.length ? [...chatList, { who: "left", message: gameScene.sceneScript }] : chatList))
+    if (gameScene.options.length === 0) {
+      const nextScene = gameConfig?.scenes?.find((each) => each.sceneId === gameScene.nextSceneId)
+      if (nextScene) setGameScene(nextScene)
+    }
+  }, [gameScene.sceneScript])
 
   useEffect(() => {
     window.scrollTo({ top: document.body.scrollHeight })
