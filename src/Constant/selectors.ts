@@ -28,12 +28,11 @@ export const gameSceneSelector = selector<Scene>({
   get({ get }) {
     const gameConfig = get(gameConfigAtom)
     const gameScene = get(gameSceneAtom)
-    console.log(gameScene)
 
-    let characterImagePath = `./res/${gameConfig.characterName}/character/${gameScene.characterImage}`
-    let backgroundImagePath = `./res/${gameConfig.characterName}/background/${gameScene.backgroundImage}`
-    let sceneSoundPath = `./res/${gameConfig.characterName}/sound/${gameScene.sceneSound}`
-    let backgroundSoundPath = `./res/${gameConfig.characterName}/bgm/${gameScene.backgroundSound}`
+    let characterImagePath = `./res/characters/${gameConfig.characterName}/character/${gameScene.characterImage}`
+    let backgroundImagePath = `./res/characters/${gameConfig.characterName}/background/${gameScene.backgroundImage}`
+    let sceneSoundPath = `./res/characters/${gameConfig.characterName}/sound/${gameScene.sceneSound}`
+    let backgroundSoundPath = `./res/characters/${gameConfig.characterName}/bgm/${gameScene.backgroundSound}`
 
     // 디버깅 처리
     if (gameConfig.characterName === "debug") {

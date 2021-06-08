@@ -1,23 +1,29 @@
 import React, { useEffect, useMemo, useState } from "react"
-import styled from "styled-components"
 import { RouteComponentProps, withRouter } from "react-router-dom"
-import ChoiceAlertResource from "../Resources/Images/choice_alert.png"
-import AmyResource from "../Resources/Images/amy.png"
-import DebugResource from "../Resources/Images/debug.png"
-import BellaResource from "../Resources/Images/bella.png"
-import ClairResource from "../Resources/Images/clair.png"
-import AmyNameResource from "../Resources/Images/amy_name.png"
-import DebugNameResource from "../Resources/Images/debug_name.png"
-import BellaNameResource from "../Resources/Images/bella_name.png"
-import ClairNameResource from "../Resources/Images/clair_name.png"
-import BGMPlayer from "../Utils/BGMPlayer"
-import { Swiper, SwiperSlide } from "swiper/react"
-
-import "swiper/swiper.scss"
+import { useRecoilValue, useSetRecoilState } from "recoil"
+import styled from "styled-components"
 import "swiper/components/navigation/navigation.scss"
 import "swiper/components/pagination/pagination.scss"
-import { useSetRecoilState } from "recoil"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/swiper.scss"
 import { gameConfigAtom } from "../Constant/atoms"
+import { userConfigSelector } from "../Constant/selectors"
+import AmyResource from "../Resources/Images/amy.png"
+import AmyNameResource from "../Resources/Images/amy_name.png"
+import AndrewResource from "../Resources/Images/andrew.png"
+import AndrewNameResource from "../Resources/Images/andrew_name.png"
+import BellaResource from "../Resources/Images/bella.png"
+import BellaNameResource from "../Resources/Images/bella_name.png"
+import BrianResource from "../Resources/Images/brian.png"
+import BrianNameResource from "../Resources/Images/brian_name.png"
+import CarlResource from "../Resources/Images/carl.png"
+import CarlNameResource from "../Resources/Images/carl_name.png"
+import ChoiceAlertResource from "../Resources/Images/choice_alert.png"
+import ClairResource from "../Resources/Images/clair.png"
+import ClairNameResource from "../Resources/Images/clair_name.png"
+import DebugResource from "../Resources/Images/debug.png"
+import DebugNameResource from "../Resources/Images/debug_name.png"
+import BGMPlayer from "../Utils/BGMPlayer"
 
 const Container = styled.div`
   display: flex;
@@ -41,18 +47,24 @@ const CharacterSet = styled(Swiper)`
   height: 100%;
 `
 
-const CharacterImage = styled.div<{ imageSrc: string }>`
+const CharacterContainer = styled.div`
   cursor: pointer;
-  background-image: url(${({ imageSrc }) => imageSrc});
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: bottom center;
-  height: 100%;
   position: relative;
+  width: 400px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+`
+
+const CharacterImage = styled.img`
+  object-fit: contain;
+  object-position: bottom center;
+  height: 80%;
 `
 
 const CharacterName = styled.img`
-  width: 200px;
+  height: 60px;
   object-fit: contain;
   position: absolute;
   left: 50%;
@@ -62,9 +74,10 @@ const CharacterName = styled.img`
 
 const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
   const setGameConfig = useSetRecoilState(gameConfigAtom)
+  const userConfig = useRecoilValue(userConfigSelector)
   const [config, setConfig] = useState({
     swiper: null as any,
-    slidesPerView: (window.innerWidth / 375) as number,
+    slidesPerView: (window.innerWidth / 400) as number,
   })
 
   const onCharacterClick = (characterName: string) => (e: React.MouseEvent) => {
@@ -91,13 +104,27 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
     })
   }, [])
 
+  const targetGender = {
+    male:
+      userConfig.sexualOrientation === "both" ||
+      (userConfig.gender === "male" && userConfig.sexualOrientation === "same") ||
+      (userConfig.gender === "female" && userConfig.sexualOrientation === "opposite"),
+    female:
+      userConfig.sexualOrientation === "both" ||
+      (userConfig.gender === "female" && userConfig.sexualOrientation === "same") ||
+      (userConfig.gender === "male" && userConfig.sexualOrientation === "opposite"),
+  }
   const characters = useMemo(
     () => [
-      { name: "debug", image: DebugResource, nameImage: DebugNameResource },
-      { name: "amy_male", image: AmyResource, nameImage: AmyNameResource },
-      { name: "amy_female", image: AmyResource, nameImage: AmyNameResource },
-      { name: "bella", image: BellaResource, nameImage: BellaNameResource },
-      { name: "clair", image: ClairResource, nameImage: ClairNameResource },
+      { name: "debug", image: DebugResource, nameImage: DebugNameResource, isShow: process.env.NODE_ENV === "development" },
+      { name: "amy_male", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "male" },
+      { name: "amy_female", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "female" },
+      { name: "bella", image: BellaResource, nameImage: BellaNameResource, isShow: targetGender.female },
+      { name: "clair", image: ClairResource, nameImage: ClairNameResource, isShow: targetGender.female },
+      { name: "andrew", image: AndrewResource, nameImage: AndrewNameResource, isShow: targetGender.male },
+      { name: "brian_male", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "male" },
+      { name: "brian_female", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "female" },
+      { name: "carl", image: CarlResource, nameImage: CarlNameResource, isShow: targetGender.male },
     ],
     [],
   )
@@ -105,21 +132,17 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
   return (
     <Container>
       <ChoiceAlert src={ChoiceAlertResource}></ChoiceAlert>
-      <CharacterSet
-        // navigation
-        pagination={{ clickable: true }}
-        spaceBetween={50}
-        slidesPerView={config.slidesPerView}
-        centeredSlides
-        onSwiper={(swiper) => setConfig((config) => ({ ...config, swiper }))}
-      >
-        {characters.map(({ name, image, nameImage }) => (
-          <SwiperSlide key={name}>
-            <CharacterImage onClick={onCharacterClick(name)} imageSrc={image}>
-              <CharacterName src={nameImage}></CharacterName>
-            </CharacterImage>
-          </SwiperSlide>
-        ))}
+      <CharacterSet pagination={{ clickable: true }} spaceBetween={50} slidesPerView={config.slidesPerView} centeredSlides onSwiper={(swiper) => setConfig((config) => ({ ...config, swiper }))}>
+        {characters
+          .filter((character) => character.isShow)
+          .map(({ name, image, nameImage }) => (
+            <SwiperSlide key={name}>
+              <CharacterContainer onClick={onCharacterClick(name)}>
+                <CharacterImage src={image} />
+                <CharacterName src={nameImage}></CharacterName>
+              </CharacterContainer>
+            </SwiperSlide>
+          ))}
       </CharacterSet>
     </Container>
   )

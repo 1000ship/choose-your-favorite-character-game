@@ -38,12 +38,14 @@ const SkipButton = styled.img`
   z-index: 1;
 `
 
+export type CharacterName = "amy_male" | "amy_female" | "bella" | "clair" | "andrew" | "brian_male" | "brian_female" | "carl"
+
 const VideoPage: React.FC<RouteComponentProps> = (props) => {
   const {
     history,
     location: { pathname },
   } = props
-  const characterName = pathname.replace("/video/", "")
+  const characterName = pathname.replace("/video/", "") as CharacterName
   const setGameConfig = useSetRecoilState(gameConfigAtom)
 
   const onBackClick = (e: React.MouseEvent) => {
@@ -52,22 +54,19 @@ const VideoPage: React.FC<RouteComponentProps> = (props) => {
   }
 
   const onSkipClick = (e: React.MouseEvent) => {
-    let bgmFile
-    switch (characterName) {
-      case "amy":
-        bgmFile = BGM_AMY
-        break
-      case "bella":
-        bgmFile = BGM_BELLA
-        break
-      case "clair":
-        bgmFile = BGM_CLAIR
-        break
-    }
     setGameConfig((gameConfig) => ({ ...gameConfig, characterName }))
-    if (bgmFile) BGMPlayer.play(bgmFile)
-    SoundPlayer.play_old("Amy", "iphone sound.mp3")
     history.push(`/game/${characterName}`)
+  }
+
+  const extensionDictionary = {
+    amy_male: "mov",
+    amy_female: "mov",
+    bella: "mov",
+    clair: "mov",
+    andrew: "mp4",
+    brian_male: "mp4",
+    brian_female: "mp4",
+    carl: "mp4",
   }
 
   return (
@@ -75,7 +74,7 @@ const VideoPage: React.FC<RouteComponentProps> = (props) => {
       <BackButton onClick={onBackClick} src={BackButtonResource}></BackButton>
       <SkipButton onClick={onSkipClick} src={SkipButtonResource}></SkipButton>
       <VideoView autoPlay controls>
-        <source src={`./res/videos/${characterName}.mov`} type="video/mp4" />
+        <source src={`./res/videos/${characterName}.${extensionDictionary[characterName]}`} type="video/mp4" />
       </VideoView>
     </Container>
   )
