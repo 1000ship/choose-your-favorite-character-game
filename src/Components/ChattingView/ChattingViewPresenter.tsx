@@ -150,7 +150,7 @@ const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({ chatList,
             ></RightMessage>
           ),
         )}
-        {!isGameOver && gameScene.options?.length && gameScene.sceneType !== "ending" && <OptionMessage selectOption={selectOption}></OptionMessage>}
+        {(!isGameOver && gameScene.options?.length && gameScene.sceneType !== "ending" && <OptionMessage selectOption={selectOption}></OptionMessage>) || null}
       </Contents>
     </Container>
   )

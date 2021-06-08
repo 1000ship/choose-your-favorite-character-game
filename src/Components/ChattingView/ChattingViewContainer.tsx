@@ -32,7 +32,7 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
   }
 
   useEffect(() => {
-    setChatList((chatList) => (gameScene.sceneScript?.length ? [...chatList, { who: "left", message: gameScene.sceneScript }] : chatList))
+    setChatList((chatList) => (gameScene.sceneScript?.length ? [...chatList, { who: "left", message: gameScene.sceneScript, isEnding: gameScene.sceneType === "ending" }] : chatList))
     if (gameScene.options.length === 0) {
       const nextScene = gameConfig?.scenes?.find((each) => each.sceneId === gameScene.nextSceneId)
       if (nextScene) setGameScene(nextScene)

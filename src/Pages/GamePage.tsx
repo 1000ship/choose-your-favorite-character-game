@@ -25,6 +25,7 @@ const GamePage: React.FC<RouteComponentProps> = (props) => {
   useSound()
   useEffect(() => {
     //  for debug
+    // const initScene = gameConfig.scenes?.find((each) => each.sceneId === "#7-3")
     const initScene = gameConfig?.scenes?.length ? gameConfig.scenes[0] : null
     if (initScene) {
       setGameScene((gameScene) => ({ ...gameScene, ...initScene }))
