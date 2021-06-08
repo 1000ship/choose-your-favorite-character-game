@@ -114,20 +114,17 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
       (userConfig.gender === "female" && userConfig.sexualOrientation === "same") ||
       (userConfig.gender === "male" && userConfig.sexualOrientation === "opposite"),
   }
-  const characters = useMemo(
-    () => [
-      { name: "debug", image: DebugResource, nameImage: DebugNameResource, isShow: process.env.NODE_ENV === "development" },
-      { name: "amy_male", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "male" },
-      { name: "amy_female", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "female" },
-      { name: "bella", image: BellaResource, nameImage: BellaNameResource, isShow: targetGender.female },
-      { name: "clair", image: ClairResource, nameImage: ClairNameResource, isShow: targetGender.female },
-      { name: "andrew", image: AndrewResource, nameImage: AndrewNameResource, isShow: targetGender.male },
-      { name: "brian_male", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "male" },
-      { name: "brian_female", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "female" },
-      { name: "carl", image: CarlResource, nameImage: CarlNameResource, isShow: targetGender.male },
-    ],
-    [],
-  )
+  const characters = [
+    { name: "debug", image: DebugResource, nameImage: DebugNameResource, isShow: process.env.NODE_ENV === "development" },
+    { name: "amy_male", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "male" },
+    { name: "amy_female", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "female" },
+    { name: "bella", image: BellaResource, nameImage: BellaNameResource, isShow: targetGender.female },
+    { name: "clair", image: ClairResource, nameImage: ClairNameResource, isShow: targetGender.female },
+    { name: "andrew", image: AndrewResource, nameImage: AndrewNameResource, isShow: targetGender.male },
+    { name: "brian_male", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "male" },
+    { name: "brian_female", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "female" },
+    { name: "carl", image: CarlResource, nameImage: CarlNameResource, isShow: targetGender.male },
+  ]
 
   return (
     <Container>

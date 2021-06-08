@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react"
 import { RouteComponentProps, withRouter } from "react-router-dom"
-import { useRecoilState, useSetRecoilState } from "recoil"
+import { useRecoilState } from "recoil"
 import styled from "styled-components"
 import OptionMessage from "../Components/ChattingView/OptionMessage"
 import { userConfigSelector } from "../Constant/selectors"
