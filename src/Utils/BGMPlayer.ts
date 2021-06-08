@@ -5,6 +5,7 @@ const BGMPlayer = {
     try {
       if (bgm) bgm.pause()
     } catch {}
+    console.log(path)
     bgm = new Audio()
     bgm.loop = true
     bgm.src = path

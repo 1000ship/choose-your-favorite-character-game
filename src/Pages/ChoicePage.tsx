@@ -19,6 +19,7 @@ import BrianNameResource from "../Resources/Images/brian_name.png"
 import CarlResource from "../Resources/Images/carl.png"
 import CarlNameResource from "../Resources/Images/carl_name.png"
 import ChoiceAlertResource from "../Resources/Images/choice_alert.png"
+import ChoiceAlert2Resource from "../Resources/Images/choice_alert_2.png"
 import ClairResource from "../Resources/Images/clair.png"
 import ClairNameResource from "../Resources/Images/clair_name.png"
 import DebugResource from "../Resources/Images/debug.png"
@@ -120,11 +121,11 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
         { name: "debug", image: DebugResource, nameImage: DebugNameResource, isShow: process.env.NODE_ENV === "development" },
         { name: "amy_male", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "male" },
         { name: "amy_female", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "female" },
-        { name: "bella", image: BellaResource, nameImage: BellaNameResource, isShow: targetGender.female },
-        { name: "clair", image: ClairResource, nameImage: ClairNameResource, isShow: targetGender.female },
         { name: "andrew", image: AndrewResource, nameImage: AndrewNameResource, isShow: targetGender.male },
+        { name: "bella", image: BellaResource, nameImage: BellaNameResource, isShow: targetGender.female },
         { name: "brian_male", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "male" },
         { name: "brian_female", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "female" },
+        { name: "clair", image: ClairResource, nameImage: ClairNameResource, isShow: targetGender.female },
         { name: "carl", image: CarlResource, nameImage: CarlNameResource, isShow: targetGender.male },
       ].filter((character) => character.isShow),
     [userConfig],
@@ -132,7 +133,7 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
 
   return (
     <Container>
-      <ChoiceAlert src={ChoiceAlertResource}></ChoiceAlert>
+      <ChoiceAlert src={characters.length >= 6 ? ChoiceAlert2Resource : ChoiceAlertResource}></ChoiceAlert>
       <CharacterSet pagination={{ clickable: true }} spaceBetween={50} slidesPerView={config.slidesPerView} centeredSlides onSwiper={(swiper) => setConfig((config) => ({ ...config, swiper }))}>
         {characters.map(({ name, image, nameImage }) => (
           <SwiperSlide key={name}>

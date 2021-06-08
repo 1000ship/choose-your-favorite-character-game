@@ -5,6 +5,7 @@ import styled from "styled-components"
 import OptionMessage from "../Components/ChattingView/OptionMessage"
 import { userConfigSelector } from "../Constant/selectors"
 import CYFCLogoImage from "../Resources/Images/cyfc_top_logo.png"
+import { sleep } from "../Utils/api"
 import useScriptParser from "../Utils/useScriptParser"
 
 const AppBarHeight = 80
@@ -94,39 +95,41 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
   const { history } = props
   const scriptParser = useScriptParser()
 
-  console.log(userConfig)
   const sameGenderLabel = useMemo(() => {
     return userConfig.gender === "male" ? "게이" : "레즈비언"
   }, [userConfig.gender])
-  let qna = [
-    { question: "당신의 이름은?", options: [{ answer: "나의 이름은 {input:name}" }] },
-    {
-      question: "당신의 성별은?",
-      options: [
-        { answer: "남자", key: "gender", value: "male" },
-        { answer: "여자", key: "gender", value: "female" },
-      ],
-    },
-    {
-      question: "당신의 성지향성은?",
-      options: [
-        { answer: "헤테로", key: "sexualOrientation", value: "opposite" },
-        { answer: sameGenderLabel, key: "sexualOrientation", value: "same" },
-        { answer: "바이섹슈얼", key: "sexualOrientation", value: "both" },
-      ],
-    },
-    {
-      question: "당신의 직업은?",
-      options: [
-        { answer: "학생", key: "job", value: "student" },
-        { answer: "유학생", key: "job", value: "international" },
-        { answer: "취준생", key: "job", value: "yet" },
-        { answer: "직장인", key: "job", value: "officer" },
-        { answer: "{input:job}" },
-      ],
-    },
-    { question: "당신의 사진을 찍어주세요.", options: [{ answer: "📷", camera: true }] },
-  ]
+  const qna = useMemo(
+    () => [
+      { question: "당신의 이름은?", options: [{ answer: "나의 이름은 {input:name}" }] },
+      {
+        question: "당신의 성별은?",
+        options: [
+          { answer: "남자", key: "gender", value: "male" },
+          { answer: "여자", key: "gender", value: "female" },
+        ],
+      },
+      {
+        question: "당신의 성지향성은?",
+        options: [
+          { answer: "헤테로", key: "sexualOrientation", value: "opposite" },
+          { answer: sameGenderLabel, key: "sexualOrientation", value: "same" },
+          { answer: "바이섹슈얼", key: "sexualOrientation", value: "both" },
+        ],
+      },
+      {
+        question: "당신의 직업은?",
+        options: [
+          { answer: "학생", key: "job", value: "student" },
+          { answer: "유학생", key: "job", value: "international" },
+          { answer: "취준생", key: "job", value: "yet" },
+          { answer: "직장인", key: "job", value: "officer" },
+          { answer: "{input:job}" },
+        ],
+      },
+      { question: "당신의 사진을 찍어주세요.", options: [{ answer: "📷 촬영하기", camera: true }] },
+    ],
+    [sameGenderLabel],
+  )
 
   const [state, setState] = useState({
     chatList: [
@@ -139,7 +142,7 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
     step: 0 as number,
   })
 
-  const selectOption = (i: number, inputData: any = {}) => {
+  const selectOption = async (i: number, inputData: any = {}) => {
     for (let key in inputData) setUserConfig((userConfig) => ({ ...userConfig, [key]: inputData[key] }))
     const selectedOption = state.options[i]
     if (["key", "value"].every((each) => each in selectedOption)) {
@@ -155,8 +158,14 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
     }
     setState((state) => ({
       ...state,
-      chatList: [...state.chatList, { who: "right", message: `${state.options[i].answer}` }, { who: "left", message: `${qna[state.step + 1].question}` }],
-      options: qna[state.step + 1].options,
+      chatList: [...state.chatList, { who: "right", message: `${state.options[i].answer}` }],
+      options: [],
+    }))
+    await sleep(800)
+    setState((state) => ({
+      ...state,
+      chatList: [...state.chatList, { who: "left", message: `${qna[state.step + 1].question}` }],
+      options: [...qna[state.step + 1].options],
       step: state.step + 1,
     }))
   }

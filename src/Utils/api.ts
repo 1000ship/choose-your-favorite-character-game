@@ -27,3 +27,5 @@ export const endingCounter = {
     localStorage.setItem(ENDING_COUNTER_STORAGE_KEY, "{}")
   },
 }
+
+export const sleep = (delay: number) => new Promise((resolve) => setTimeout(() => resolve(undefined), delay))
