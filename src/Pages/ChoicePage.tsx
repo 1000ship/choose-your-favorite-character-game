@@ -114,32 +114,34 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
       (userConfig.gender === "female" && userConfig.sexualOrientation === "same") ||
       (userConfig.gender === "male" && userConfig.sexualOrientation === "opposite"),
   }
-  const characters = [
-    { name: "debug", image: DebugResource, nameImage: DebugNameResource, isShow: process.env.NODE_ENV === "development" },
-    { name: "amy_male", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "male" },
-    { name: "amy_female", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "female" },
-    { name: "bella", image: BellaResource, nameImage: BellaNameResource, isShow: targetGender.female },
-    { name: "clair", image: ClairResource, nameImage: ClairNameResource, isShow: targetGender.female },
-    { name: "andrew", image: AndrewResource, nameImage: AndrewNameResource, isShow: targetGender.male },
-    { name: "brian_male", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "male" },
-    { name: "brian_female", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "female" },
-    { name: "carl", image: CarlResource, nameImage: CarlNameResource, isShow: targetGender.male },
-  ]
+  const characters = useMemo(
+    () =>
+      [
+        { name: "debug", image: DebugResource, nameImage: DebugNameResource, isShow: process.env.NODE_ENV === "development" },
+        { name: "amy_male", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "male" },
+        { name: "amy_female", image: AmyResource, nameImage: AmyNameResource, isShow: targetGender.female && userConfig.gender === "female" },
+        { name: "bella", image: BellaResource, nameImage: BellaNameResource, isShow: targetGender.female },
+        { name: "clair", image: ClairResource, nameImage: ClairNameResource, isShow: targetGender.female },
+        { name: "andrew", image: AndrewResource, nameImage: AndrewNameResource, isShow: targetGender.male },
+        { name: "brian_male", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "male" },
+        { name: "brian_female", image: BrianResource, nameImage: BrianNameResource, isShow: targetGender.male && userConfig.gender === "female" },
+        { name: "carl", image: CarlResource, nameImage: CarlNameResource, isShow: targetGender.male },
+      ].filter((character) => character.isShow),
+    [userConfig],
+  )
 
   return (
     <Container>
       <ChoiceAlert src={ChoiceAlertResource}></ChoiceAlert>
       <CharacterSet pagination={{ clickable: true }} spaceBetween={50} slidesPerView={config.slidesPerView} centeredSlides onSwiper={(swiper) => setConfig((config) => ({ ...config, swiper }))}>
-        {characters
-          .filter((character) => character.isShow)
-          .map(({ name, image, nameImage }) => (
-            <SwiperSlide key={name}>
-              <CharacterContainer onClick={onCharacterClick(name)}>
-                <CharacterImage src={image} />
-                <CharacterName src={nameImage}></CharacterName>
-              </CharacterContainer>
-            </SwiperSlide>
-          ))}
+        {characters.map(({ name, image, nameImage }) => (
+          <SwiperSlide key={name}>
+            <CharacterContainer onClick={onCharacterClick(name)}>
+              <CharacterImage src={image} />
+              <CharacterName src={nameImage}></CharacterName>
+            </CharacterContainer>
+          </SwiperSlide>
+        ))}
       </CharacterSet>
     </Container>
   )
