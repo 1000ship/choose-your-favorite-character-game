@@ -11,7 +11,7 @@ const Container = styled.div`
   left: 10%;
   bottom: 30px;
   width: 80%;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     left: 0;
     bottom: 0;
     width: 100%;
@@ -28,7 +28,7 @@ const Contents = styled.div`
   display: flex;
   flex-direction: column;
   margin: 3% 10%;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     margin: 3% 6px;
   }
 `
@@ -37,7 +37,7 @@ const NameText = styled.span`
   font-size: 44px;
   margin-bottom: 20px;
   color: #662d91;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     margin-bottom: 10px;
     font-size: 24px;
   }
@@ -46,7 +46,7 @@ const TalkText = styled.span`
   font-size: 36px;
   margin-left: 10px;
   color: black;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     font-size: 20px;
   }
 `

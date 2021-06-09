@@ -6,7 +6,10 @@ import { SceneOption } from "../../Constant/types"
 import useScriptParser from "../../Utils/useScriptParser"
 
 const Container = styled.div``
-const OptionList = styled.ul``
+const OptionList = styled.ul`
+  list-style: disc;
+  padding-left: 20px;
+`
 const OptionItem = styled.li`
   font-size: 36px;
   cursor: pointer;
@@ -15,7 +18,7 @@ const OptionItem = styled.li`
   &:hover {
     font-weight: 600;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     font-size: 20px;
   }
 `

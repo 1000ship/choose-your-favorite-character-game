@@ -48,7 +48,7 @@ const LeftMessage = styled.span`
   border-radius: 15px 15px 15px 3px;
   background-image: linear-gradient(#e86ecb, #a21ccb);
   color: white;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     font-size: 2em;
   }
 
@@ -71,7 +71,7 @@ const RightMessage = styled.span`
   border-radius: 15px 15px 3px 15px;
   border-image-slice: 1;
   color: #662d91;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     font-size: 2em;
   }
 
@@ -100,7 +100,7 @@ const EndingMessage = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     font-size: 2em;
   }
 `

@@ -11,7 +11,6 @@ const MeetViewContainer: React.FC = () => {
 
   const stepFromScript = useCallback(
     (e: React.MouseEvent) => {
-      console.log(123)
       if (gameOver) return
 
       if (gameScene?.options?.length === 0) {

@@ -32,12 +32,17 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
   }
 
   useEffect(() => {
-    setChatList((chatList) => (gameScene.sceneScript?.length ? [...chatList, { who: "left", message: gameScene.sceneScript, isEnding: gameScene.sceneType === "ending" }] : chatList))
+    setChatList((chatList) => {
+      // 채팅 중복 방지 임시처리
+      return gameScene.sceneScript?.length > 0 && !chatList.find((chat) => chat.message === gameScene.sceneScript)
+        ? [...chatList, { who: "left", message: gameScene.sceneScript, isEnding: gameScene.sceneType === "ending" }]
+        : chatList
+    })
     if (gameScene.options.length === 0) {
       const nextScene = gameConfig?.scenes?.find((each) => each.sceneId === gameScene.nextSceneId)
       if (nextScene) setGameScene(nextScene)
     }
-  }, [gameScene, gameConfig, setGameScene])
+  }, [gameScene, gameConfig.scenes, setGameScene])
 
   useEffect(() => {
     window.scrollTo({ top: document.body.scrollHeight })

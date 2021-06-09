@@ -14,6 +14,7 @@ const Container = styled.div`
   background-image: linear-gradient(#ee609c, #b565d9);
   display: flex;
   justify-content: center;
+  overflow: hidden;
 `
 
 const VideoView = styled.video`

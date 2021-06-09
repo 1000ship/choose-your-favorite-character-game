@@ -4,7 +4,9 @@ import styled from "styled-components"
 import { gameSceneSelector } from "../../Constant/selectors"
 import ChatBox from "./ChatBox"
 
-const Container = styled.div``
+const Container = styled.div`
+  overflow: hidden;
+`
 
 const BackgroundImage = styled.div<{ imageSrc: string }>`
   width: 100%;
@@ -17,18 +19,15 @@ const BackgroundImage = styled.div<{ imageSrc: string }>`
   background-size: cover;
 `
 
-const CharacterImage = styled.div<{ imageSrc: string }>`
-  width: 100%;
-  height: 100%;
+const CharacterImage = styled.img`
+  height: 90%;
   position: absolute;
-  left: 0;
+  left: 50%;
   bottom: 0;
-  background-image: url("${({ imageSrc }) => imageSrc}");
-  background-position: bottom;
-  background-size: contain;
-  background-repeat: no-repeat;
+  object-position: bottom;
+  object-fit: contain;
   transform-origin: bottom center;
-  transform: scale(1.1);
+  transform: scale(1.1) translate(-50%, 0);
 `
 
 export interface MeetViewPresenterProps {
@@ -64,9 +63,9 @@ const MeetViewPresenter: React.FC<MeetViewPresenterProps> = ({ stepFromScript, s
   }, [gameScene.backgroundImagePath, gameScene])
 
   return (
-    <Container onClick={gameScene.step === "script" ? stepFromScript : gameScene.step === "reaction" ? stepFromReaction : undefined}>
+    <Container onClick={gameScene.step === "script" ? stepFromScript : gameScene.step === "reaction" ? stepFromReaction : stepFromScript}>
       {state.backgroundImagePath.length && <BackgroundImage imageSrc={state.backgroundImagePath || ""}></BackgroundImage>}
-      {state.characterImagePath.length && <CharacterImage imageSrc={state.characterImagePath || ""}></CharacterImage>}
+      {state.characterImagePath.length && <CharacterImage src={state.characterImagePath || ""}></CharacterImage>}
       <ChatBox selectOption={selectOption}></ChatBox>
     </Container>
   )
