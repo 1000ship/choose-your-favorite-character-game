@@ -49,6 +49,7 @@ const CharacterSet = styled.div`
   flex: 1;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: stretch;
 `
 
