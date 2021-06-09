@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/choose-your-favorite-character-game/static/css/main.77c226e1.chunk.css",
-    "main.js": "/choose-your-favorite-character-game/static/js/main.5d44fa8d.chunk.js",
-    "main.js.map": "/choose-your-favorite-character-game/static/js/main.5d44fa8d.chunk.js.map",
+    "main.js": "/choose-your-favorite-character-game/static/js/main.81037dcf.chunk.js",
+    "main.js.map": "/choose-your-favorite-character-game/static/js/main.81037dcf.chunk.js.map",
     "runtime-main.js": "/choose-your-favorite-character-game/static/js/runtime-main.cdf2f3ec.js",
     "runtime-main.js.map": "/choose-your-favorite-character-game/static/js/runtime-main.cdf2f3ec.js.map",
     "static/css/2.3863b943.chunk.css": "/choose-your-favorite-character-game/static/css/2.3863b943.chunk.css",
     "static/js/2.154efeaf.chunk.js": "/choose-your-favorite-character-game/static/js/2.154efeaf.chunk.js",
     "static/js/2.154efeaf.chunk.js.map": "/choose-your-favorite-character-game/static/js/2.154efeaf.chunk.js.map",
     "index.html": "/choose-your-favorite-character-game/index.html",
-    "precache-manifest.af65b5491c95d3bfb5fbfc21fc5e24c2.js": "/choose-your-favorite-character-game/precache-manifest.af65b5491c95d3bfb5fbfc21fc5e24c2.js",
+    "precache-manifest.49c76bedfca6b1a10395a19f96d1648e.js": "/choose-your-favorite-character-game/precache-manifest.49c76bedfca6b1a10395a19f96d1648e.js",
     "service-worker.js": "/choose-your-favorite-character-game/service-worker.js",
     "static/css/2.3863b943.chunk.css.map": "/choose-your-favorite-character-game/static/css/2.3863b943.chunk.css.map",
     "static/css/main.77c226e1.chunk.css.map": "/choose-your-favorite-character-game/static/css/main.77c226e1.chunk.css.map",
@@ -17,8 +17,8 @@
     "static/media/amy.png": "/choose-your-favorite-character-game/static/media/amy.06dae45f.png",
     "static/media/andrew.png": "/choose-your-favorite-character-game/static/media/andrew.db6e9986.png",
     "static/media/bella.png": "/choose-your-favorite-character-game/static/media/bella.a8fa5aee.png",
-    "static/media/brian.png": "/choose-your-favorite-character-game/static/media/brian.06a11d51.png",
-    "static/media/carl.png": "/choose-your-favorite-character-game/static/media/carl.12f3e59d.png",
+    "static/media/brian.png": "/choose-your-favorite-character-game/static/media/brian.12f3e59d.png",
+    "static/media/carl.png": "/choose-your-favorite-character-game/static/media/carl.06a11d51.png",
     "static/media/choice_alert.png": "/choose-your-favorite-character-game/static/media/choice_alert.45a25373.png",
     "static/media/choice_alert_2.png": "/choose-your-favorite-character-game/static/media/choice_alert_2.271bcd36.png",
     "static/media/clair.png": "/choose-your-favorite-character-game/static/media/clair.ebad63aa.png",
@@ -32,6 +32,6 @@
     "static/css/2.3863b943.chunk.css",
     "static/js/2.154efeaf.chunk.js",
     "static/css/main.77c226e1.chunk.css",
-    "static/js/main.5d44fa8d.chunk.js"
+    "static/js/main.81037dcf.chunk.js"
   ]
 }

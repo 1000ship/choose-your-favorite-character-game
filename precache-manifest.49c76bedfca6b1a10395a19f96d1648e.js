@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a196c04d5cd5380030d7597ad3451e4c",
+    "revision": "e23c078a5ed6a43a3850729a7457f732",
     "url": "/choose-your-favorite-character-game/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/choose-your-favorite-character-game/static/css/2.3863b943.chunk.css"
   },
   {
-    "revision": "7186d9ae4b703e0175f5",
+    "revision": "362145f4518106ffc63d",
     "url": "/choose-your-favorite-character-game/static/css/main.77c226e1.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/choose-your-favorite-character-game/static/js/2.154efeaf.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7186d9ae4b703e0175f5",
-    "url": "/choose-your-favorite-character-game/static/js/main.5d44fa8d.chunk.js"
+    "revision": "362145f4518106ffc63d",
+    "url": "/choose-your-favorite-character-game/static/js/main.81037dcf.chunk.js"
   },
   {
     "revision": "013e563f83fb200ad84e",
@@ -40,12 +40,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/choose-your-favorite-character-game/static/media/bella.a8fa5aee.png"
   },
   {
-    "revision": "06a11d51a072c9d7fe105fa4747171fb",
-    "url": "/choose-your-favorite-character-game/static/media/brian.06a11d51.png"
+    "revision": "12f3e59d283c97480f8853dca42d93c0",
+    "url": "/choose-your-favorite-character-game/static/media/brian.12f3e59d.png"
   },
   {
-    "revision": "12f3e59d283c97480f8853dca42d93c0",
-    "url": "/choose-your-favorite-character-game/static/media/carl.12f3e59d.png"
+    "revision": "06a11d51a072c9d7fe105fa4747171fb",
+    "url": "/choose-your-favorite-character-game/static/media/carl.06a11d51.png"
   },
   {
     "revision": "45a25373456e765c1857c5fe7834d138",
