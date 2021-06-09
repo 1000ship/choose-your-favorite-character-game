@@ -1,11 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useCallback, useMemo } from "react"
 import { RouteComponentProps, withRouter } from "react-router-dom"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 import styled from "styled-components"
-import "swiper/components/navigation/navigation.scss"
-import "swiper/components/pagination/pagination.scss"
-import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/swiper.scss"
 import { gameConfigAtom } from "../Constant/atoms"
 import { userConfigSelector } from "../Constant/selectors"
 import AmyResource from "../Resources/Images/amy.png"
@@ -36,74 +32,59 @@ const Container = styled.div`
 `
 
 const ChoiceAlert = styled.img`
-  width: 85%;
-  position: absolute;
-  top: 4%;
-  left: 50%;
-  transform: translate(-50%, 0px);
+  align-self: center;
+  width: 80%;
+  flex: 0 0 15vh;
+  object-fit: contain;
+  object-position: center;
+  @media (max-width: 512px) {
+    width: 95%;
+  }
 `
 
-const CharacterSet = styled(Swiper)`
-  width: 100%;
-  height: 100%;
+const CharacterSet = styled.div`
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: 100vw;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
 `
 
-const CharacterContainer = styled.div`
+const Character = styled.div`
+  flex: 0 0 300px;
   cursor: pointer;
   position: relative;
-  width: 400px;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-end;
 `
 
 const CharacterImage = styled.img`
+  height: 100%;
   object-fit: contain;
   object-position: bottom center;
-  height: 80%;
 `
 
 const CharacterName = styled.img`
-  height: 45px;
+  height: 44px;
   object-fit: contain;
   position: absolute;
   left: 50%;
-  bottom: 0;
-  transform: translate(-50%, -200%);
+  bottom: 10%;
+  transform: translate(-50%, 0px);
 `
 
 const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
   const setGameConfig = useSetRecoilState(gameConfigAtom)
   const userConfig = useRecoilValue(userConfigSelector)
-  const [config, setConfig] = useState({
-    swiper: null as any,
-    slidesPerView: (window.innerWidth / 400) as number,
-  })
 
   const onCharacterClick = (characterName: string) => (e: React.MouseEvent) => {
-    if (!config?.swiper) return
-    const { activeIndex } = config?.swiper as any
-    const targetIndex = characters.findIndex(({ name }) => name === characterName)
-    if (targetIndex < 0) return
-    if (activeIndex !== targetIndex) {
-      config.swiper.slideTo(targetIndex)
-    } else if (characterName === "debug") {
-      setGameConfig((gameConfig) => ({ ...gameConfig, characterName }))
-      history.push(`/game/debug`)
-      BGMPlayer.pause()
-    } else {
-      setGameConfig((gameConfig) => ({ ...gameConfig, characterName }))
-      history.push(`/video/${characterName}`)
-      BGMPlayer.pause()
-    }
+    setGameConfig((gameConfig) => ({ ...gameConfig, characterName }))
+    history.push(characterName === "debug" ? `/game/debug` : `/video/${characterName}`)
+    BGMPlayer.pause()
   }
-
-  useEffect(() => {
-    window.addEventListener("resize", (e) => {
-      setConfig((config) => ({ ...config, slidesPerView: window.innerWidth / 375 }))
-    })
-  }, [])
 
   const targetGender = {
     male:
@@ -115,6 +96,7 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
       (userConfig.gender === "female" && userConfig.sexualOrientation === "same") ||
       (userConfig.gender === "male" && userConfig.sexualOrientation === "opposite"),
   }
+
   const characters = useMemo(
     () =>
       [
@@ -131,18 +113,34 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
     [userConfig],
   )
 
+  const characterSetRef = useCallback((characterSet: HTMLDivElement) => {
+    if (!characterSet) return
+    characterSet.scrollTo({
+      left: characterSet.scrollWidth / 2 - window.outerWidth / 2,
+    })
+
+    function transformScroll(event: any) {
+      if (!event.deltaY) return
+      characterSet.scrollLeft += event.deltaY + event.deltaX
+      event.preventDefault()
+    }
+
+    characterSet.addEventListener("wheel", transformScroll)
+    return () => characterSet.removeEventListener("wheel", transformScroll)
+  }, [])
+
   return (
     <Container>
-      <ChoiceAlert src={characters.length >= 6 ? ChoiceAlert2Resource : ChoiceAlertResource}></ChoiceAlert>
-      <CharacterSet pagination={{ clickable: true }} spaceBetween={50} slidesPerView={config.slidesPerView} centeredSlides onSwiper={(swiper) => setConfig((config) => ({ ...config, swiper }))}>
+      <ChoiceAlert src={characters.length >= 6 ? ChoiceAlert2Resource : ChoiceAlertResource} alt={`You have matched with ${characters.length} people!`}></ChoiceAlert>
+      <CharacterSet ref={characterSetRef}>
+        <div style={{ flexShrink: 0, flexBasis: 30 }}></div>
         {characters.map(({ name, image, nameImage }) => (
-          <SwiperSlide key={name}>
-            <CharacterContainer onClick={onCharacterClick(name)}>
-              <CharacterImage src={image} />
-              <CharacterName src={nameImage}></CharacterName>
-            </CharacterContainer>
-          </SwiperSlide>
+          <Character onClick={onCharacterClick(name)}>
+            <CharacterImage src={image} alt={name} />
+            <CharacterName src={nameImage} alt={name}></CharacterName>
+          </Character>
         ))}
+        <div style={{ flexShrink: 0, flexBasis: 30 }}></div>
       </CharacterSet>
     </Container>
   )
