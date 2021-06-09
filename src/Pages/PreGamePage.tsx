@@ -161,10 +161,14 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
       chatList: [...state.chatList, { who: "right", message: `${state.options[i].answer}` }],
       options: [],
     }))
-    await sleep(800)
+    await sleep(1000)
     setState((state) => ({
       ...state,
       chatList: [...state.chatList, { who: "left", message: `${qna[state.step + 1].question}` }],
+    }))
+    await sleep(1000)
+    setState((state) => ({
+      ...state,
       options: [...qna[state.step + 1].options],
       step: state.step + 1,
     }))

@@ -20,6 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build:dev": "NODE_ENV=development react-scripts build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -41,6 +42,7 @@
       "last 1 safari version"
     ]
   },
+  "homepage": "https://1000ship.github.io/choose-your-favorite-character-game",
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/node": "^15.0.1",
