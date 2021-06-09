@@ -65,12 +65,12 @@ const CharacterImage = styled.img`
 `
 
 const CharacterName = styled.img`
-  height: 60px;
+  height: 45px;
   object-fit: contain;
   position: absolute;
   left: 50%;
   bottom: 0;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -200%);
 `
 
 const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {

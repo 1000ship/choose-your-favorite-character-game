@@ -1,9 +1,10 @@
-import React, { useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { RouteComponentProps, withRouter } from "react-router-dom"
 import { useRecoilState } from "recoil"
 import styled from "styled-components"
 import OptionMessage from "../Components/ChattingView/OptionMessage"
 import { userConfigSelector } from "../Constant/selectors"
+import { Chat, SceneOption } from "../Constant/types"
 import CYFCLogoImage from "../Resources/Images/cyfc_top_logo.png"
 import { sleep } from "../Utils/api"
 import useScriptParser from "../Utils/useScriptParser"
@@ -82,22 +83,11 @@ const RightMessage = styled.span`
   }
 `
 
-/*
-당신의 이름은?
-당신의 성별은?
-당신의 성지향성은? -- 헤테로 / 게이 / 레즈비언 / 바이섹슈얼
-당신의 직업은? -- 학생 / 유학생 / 취준생 / 직장인 / (직접 입력)
-당신의 사진을 찍어주세요
-*/
-
 const PreGamePage: React.FC<RouteComponentProps> = (props) => {
   const [userConfig, setUserConfig] = useRecoilState(userConfigSelector)
   const { history } = props
   const scriptParser = useScriptParser()
 
-  const sameGenderLabel = useMemo(() => {
-    return userConfig.gender === "male" ? "게이" : "레즈비언"
-  }, [userConfig.gender])
   const qna = useMemo(
     () => [
       { question: "당신의 이름은?", options: [{ answer: "나의 이름은 {input:name}" }] },
@@ -112,7 +102,7 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
         question: "당신의 성지향성은?",
         options: [
           { answer: "헤테로", key: "sexualOrientation", value: "opposite" },
-          { answer: sameGenderLabel, key: "sexualOrientation", value: "same" },
+          { answer: userConfig.gender === "male" ? "게이" : "레즈비언", key: "sexualOrientation", value: "same" },
           { answer: "바이섹슈얼", key: "sexualOrientation", value: "both" },
         ],
       },
@@ -128,17 +118,12 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
       },
       { question: "당신의 사진을 찍어주세요.", options: [{ answer: "📷 촬영하기", camera: true }] },
     ],
-    [sameGenderLabel],
+    [userConfig.gender],
   )
 
   const [state, setState] = useState({
-    chatList: [
-      {
-        who: "left",
-        message: qna[0].question,
-      },
-    ],
-    options: qna[0].options,
+    chatList: [] as Chat[],
+    options: [] as SceneOption[],
     step: 0 as number,
   })
 
@@ -164,15 +149,17 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
     await sleep(1000)
     setState((state) => ({
       ...state,
-      chatList: [...state.chatList, { who: "left", message: `${qna[state.step + 1].question}` }],
-    }))
-    await sleep(1000)
-    setState((state) => ({
-      ...state,
-      options: [...qna[state.step + 1].options],
       step: state.step + 1,
     }))
   }
+
+  useEffect(() => {
+    setState((state) => ({
+      ...state,
+      chatList: [...state.chatList, { who: "left", message: `${qna[state.step].question}` }],
+    }))
+    sleep(1000).then(() => setState((state) => ({ ...state, options: qna[state.step].options })))
+  }, [state.step])
 
   const onLogoClick = (e: React.MouseEvent) => history.push("/")
 
