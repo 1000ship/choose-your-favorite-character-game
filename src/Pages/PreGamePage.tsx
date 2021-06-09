@@ -156,7 +156,7 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
       chatList: [...state.chatList, { who: "left", message: `${qna[state.step].question}` }],
     }))
     sleep(1000).then(() => setState((state) => ({ ...state, options: qna[state.step].options })))
-  }, [state.step, qna])
+  }, [state.step])
 
   const onLogoClick = (e: React.MouseEvent) => history.push("/")
 
