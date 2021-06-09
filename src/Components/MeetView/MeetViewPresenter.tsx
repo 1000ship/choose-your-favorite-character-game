@@ -51,7 +51,7 @@ const MeetViewPresenter: React.FC<MeetViewPresenterProps> = ({ stepFromScript, s
     } else {
       setState((state) => ({ ...state, characterImagePath: "" }))
     }
-  }, [gameScene.characterImagePath])
+  }, [gameScene.characterImagePath, gameScene])
 
   useEffect(() => {
     if (gameScene.backgroundImagePath && gameScene.backgroundImagePath.length > 0) {
@@ -61,7 +61,7 @@ const MeetViewPresenter: React.FC<MeetViewPresenterProps> = ({ stepFromScript, s
     } else {
       setState((state) => ({ ...state, backgroundImagePath: "" }))
     }
-  }, [gameScene.backgroundImagePath])
+  }, [gameScene.backgroundImagePath, gameScene])
 
   return (
     <Container onClick={gameScene.step === "script" ? stepFromScript : gameScene.step === "reaction" ? stepFromReaction : undefined}>

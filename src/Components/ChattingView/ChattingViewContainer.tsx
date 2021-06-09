@@ -37,7 +37,7 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
       const nextScene = gameConfig?.scenes?.find((each) => each.sceneId === gameScene.nextSceneId)
       if (nextScene) setGameScene(nextScene)
     }
-  }, [gameScene.sceneScript])
+  }, [gameScene, gameConfig, setGameScene])
 
   useEffect(() => {
     window.scrollTo({ top: document.body.scrollHeight })

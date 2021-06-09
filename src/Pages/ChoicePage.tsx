@@ -110,7 +110,7 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
         { name: "clair", image: ClairResource, nameImage: ClairNameResource, isShow: targetGender.female },
         { name: "carl", image: CarlResource, nameImage: CarlNameResource, isShow: targetGender.male },
       ].filter((character) => character.isShow),
-    [userConfig],
+    [userConfig, targetGender],
   )
 
   const characterSetRef = useCallback((characterSet: HTMLDivElement) => {

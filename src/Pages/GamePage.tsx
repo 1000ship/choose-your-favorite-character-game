@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { RouteComponentProps, withRouter } from "react-router"
+import { RouteComponentProps, useHistory } from "react-router"
 import { useRecoilState, useResetRecoilState } from "recoil"
 import ChattingView from "../Components/ChattingView"
 import GameOverModal from "../Components/GameOverModal"
@@ -10,8 +10,8 @@ import { gameConfigSelector, gameSceneSelector } from "../Constant/selectors"
 import BGMPlayer from "../Utils/BGMPlayer"
 import { useBGM, useSound } from "../Utils/Hook"
 
-const GamePage: React.FC<RouteComponentProps> = (props) => {
-  const { history } = props
+const GamePage: React.FC<RouteComponentProps> = () => {
+  const history = useHistory()
   const [gameConfig, setGameConfig] = useRecoilState(gameConfigSelector)
   const [isGameOver, setGameOver] = useRecoilState(gameOverAtom)
   const [gameScene, setGameScene] = useRecoilState(gameSceneSelector)
@@ -68,4 +68,4 @@ const GamePage: React.FC<RouteComponentProps> = (props) => {
   )
 }
 
-export default withRouter(GamePage)
+export default GamePage

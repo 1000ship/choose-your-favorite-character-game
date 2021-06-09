@@ -9,7 +9,6 @@ export function useSound() {
   useEffect(() => {
     const path = gameScene.sceneSoundPath ?? ""
     if (!path.length) return
-    // console.log(gameScene.sceneSoundPath, "목소리 재생");
     SoundPlayer.play(path)
   }, [gameScene.sceneSoundPath])
 }
@@ -17,8 +16,7 @@ export function useSound() {
 export function useBGM() {
   const gameScene = useRecoilValue(gameSceneSelector)
   useEffect(() => {
-    if (!gameScene.backgroundSound.length) return
-    // console.log(gameScene.backgroundSoundPath, "배경음악 재생")
+    if (!gameScene.backgroundSound?.length) return
     BGMPlayer.play(gameScene.backgroundSoundPath as string)
   }, [gameScene.backgroundSoundPath, gameScene.backgroundSound])
 }

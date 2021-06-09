@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { RouteComponentProps, withRouter } from "react-router-dom"
 import { useRecoilState } from "recoil"
 import styled from "styled-components"
@@ -88,38 +88,35 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
   const { history } = props
   const scriptParser = useScriptParser()
 
-  const qna = useMemo(
-    () => [
-      { question: "당신의 이름은?", options: [{ answer: "나의 이름은 {input:name}" }] },
-      {
-        question: "당신의 성별은?",
-        options: [
-          { answer: "남자", key: "gender", value: "male" },
-          { answer: "여자", key: "gender", value: "female" },
-        ],
-      },
-      {
-        question: "당신의 성지향성은?",
-        options: [
-          { answer: "헤테로", key: "sexualOrientation", value: "opposite" },
-          { answer: userConfig.gender === "male" ? "게이" : "레즈비언", key: "sexualOrientation", value: "same" },
-          { answer: "바이섹슈얼", key: "sexualOrientation", value: "both" },
-        ],
-      },
-      {
-        question: "당신의 직업은?",
-        options: [
-          { answer: "학생", key: "job", value: "student" },
-          { answer: "유학생", key: "job", value: "international" },
-          { answer: "취준생", key: "job", value: "yet" },
-          { answer: "직장인", key: "job", value: "officer" },
-          { answer: "{input:job}" },
-        ],
-      },
-      { question: "당신의 사진을 찍어주세요.", options: [{ answer: "📷 촬영하기", camera: true }] },
-    ],
-    [userConfig.gender],
-  )
+  const qna = [
+    { question: "당신의 이름은?", options: [{ answer: "나의 이름은 {input:name}" }] },
+    {
+      question: "당신의 성별은?",
+      options: [
+        { answer: "남자", key: "gender", value: "male" },
+        { answer: "여자", key: "gender", value: "female" },
+      ],
+    },
+    {
+      question: "당신의 성지향성은?",
+      options: [
+        { answer: "헤테로", key: "sexualOrientation", value: "opposite" },
+        { answer: userConfig.gender === "male" ? "게이" : "레즈비언", key: "sexualOrientation", value: "same" },
+        { answer: "바이섹슈얼", key: "sexualOrientation", value: "both" },
+      ],
+    },
+    {
+      question: "당신의 직업은?",
+      options: [
+        { answer: "학생", key: "job", value: "student" },
+        { answer: "유학생", key: "job", value: "international" },
+        { answer: "취준생", key: "job", value: "yet" },
+        { answer: "직장인", key: "job", value: "officer" },
+        { answer: "{input:job}" },
+      ],
+    },
+    { question: "당신의 사진을 찍어주세요.", options: [{ answer: "📷 촬영하기", camera: true }] },
+  ]
 
   const [state, setState] = useState({
     chatList: [] as Chat[],
@@ -159,7 +156,7 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
       chatList: [...state.chatList, { who: "left", message: `${qna[state.step].question}` }],
     }))
     sleep(1000).then(() => setState((state) => ({ ...state, options: qna[state.step].options })))
-  }, [state.step])
+  }, [state.step, qna])
 
   const onLogoClick = (e: React.MouseEvent) => history.push("/")
 
