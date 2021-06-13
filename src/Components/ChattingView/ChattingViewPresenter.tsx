@@ -103,14 +103,26 @@ const EndingMessage = styled.span`
   @media (min-width: 1024px) {
     font-size: 2em;
   }
+
+  animation-duration: 1s;
+  animation-name: slide-right;
+  @keyframes slide-right {
+    from {
+      transform: translate(-150%, 0);
+    }
+    to {
+      transform: translate(0, 0);
+    }
+  }
 `
 
 export interface ChattingViewPresenterProps {
   chatList: Chat[]
   selectOption: Function
   onLogoClick: React.MouseEventHandler<HTMLElement>
+  selectable: boolean
 }
-const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({ chatList, selectOption, onLogoClick }) => {
+const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({ chatList, selectOption, onLogoClick, selectable }) => {
   const gameScene = useRecoilValue(gameSceneSelector)
   const isGameOver = useRecoilValue(gameOverAtom)
   const scriptParser = useScriptParser()
@@ -150,7 +162,7 @@ const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({ chatList,
             ></RightMessage>
           ),
         )}
-        {(!isGameOver && gameScene.options?.length && gameScene.sceneType !== "ending" && <OptionMessage selectOption={selectOption}></OptionMessage>) || null}
+        {(!isGameOver && selectable && gameScene.options?.length && gameScene.sceneType !== "ending" && <OptionMessage selectOption={selectOption}></OptionMessage>) || null}
       </Contents>
     </Container>
   )

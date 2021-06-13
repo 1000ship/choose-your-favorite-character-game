@@ -7,6 +7,7 @@ import MeetView from "../Components/MeetView"
 import { BGM_MAIN } from "../Constant"
 import { gameOverAtom } from "../Constant/atoms"
 import { gameConfigSelector, gameSceneSelector } from "../Constant/selectors"
+import { Scene } from "../Constant/types"
 import BGMPlayer from "../Utils/BGMPlayer"
 import { useBGM, useSound } from "../Utils/Hook"
 
@@ -24,7 +25,13 @@ const GamePage: React.FC<RouteComponentProps> = () => {
   useBGM()
   useSound()
   useEffect(() => {
-    const initScene = gameConfig?.scenes?.length ? gameConfig.scenes[0] : null
+    let initScene: Scene | null
+    if (process.env.NODE_ENV === "development") {
+      const FIRST_SCENE_ID: string = ""
+      initScene = gameConfig.scenes?.find((each) => each.sceneId === FIRST_SCENE_ID) ?? (gameConfig.scenes?.length ? gameConfig.scenes[0] : null)
+    } else {
+      initScene = gameConfig?.scenes?.length ? gameConfig.scenes[0] : null
+    }
     if (initScene) {
       setGameScene((gameScene) => ({ ...gameScene, ...initScene }))
     }

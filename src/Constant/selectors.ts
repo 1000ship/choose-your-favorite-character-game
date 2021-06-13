@@ -28,7 +28,8 @@ export const gameSceneSelector = selector<Scene>({
   get({ get }) {
     const gameConfig = get(gameConfigAtom)
     const gameScene = get(gameSceneAtom)
-    console.log(gameScene)
+
+    if (process.env.NODE_ENV === "development") console.log(gameScene)
 
     let characterImagePath = `./res/characters/${gameConfig.characterName}/character/${gameScene.characterImage}`
     let backgroundImagePath = `./res/characters/${gameConfig.characterName}/background/${gameScene.backgroundImage}`
