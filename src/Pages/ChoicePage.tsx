@@ -142,6 +142,7 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
           if (10 >= scrollView.scrollLeft) {
             setAutoScroll((state) => ({ ...state, to: "right" }))
             scrollView.removeEventListener("wheel", transformScroll)
+            scrollView.removeEventListener("touchmove", transformScroll)
           } else {
             _id = requestAnimationFrame(tickAutoScroll)
           }
@@ -151,6 +152,7 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
           if (totalScroll - 10 <= scrollView.scrollLeft) {
             setAutoScroll((state) => ({ ...state, to: "left" }))
             scrollView.removeEventListener("wheel", transformScroll)
+            scrollView.removeEventListener("touchmove", transformScroll)
           } else {
             _id = requestAnimationFrame(tickAutoScroll)
           }
@@ -163,6 +165,7 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
           if (_id) cancelAnimationFrame(_id)
           setAutoScroll((state) => ({ ...state, enabled: false }))
           scrollView.removeEventListener("wheel", transformScroll)
+          scrollView.removeEventListener("touchmove", transformScroll)
         } else {
           if (!event.deltaY) return
           scrollView.scrollLeft += event.deltaY + event.deltaX
@@ -171,8 +174,10 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
       }
 
       scrollView.addEventListener("wheel", transformScroll)
+      scrollView.addEventListener("touchmove", transformScroll)
       return () => {
         scrollView.removeEventListener("wheel", transformScroll)
+        scrollView.removeEventListener("touchmove", transformScroll)
       }
     },
     [autoScroll],
