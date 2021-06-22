@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { RouteComponentProps, withRouter } from "react-router-dom"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 import styled from "styled-components"
@@ -42,36 +42,45 @@ const ChoiceAlert = styled.img`
   }
 `
 
-const CharacterSet = styled.div`
+const ScrollView = styled.div`
+  flex: 1;
   overflow-x: scroll;
   overflow-y: hidden;
-  width: 100vw;
-  flex: 1;
+  display: flex;
+`
+
+const CharacterSet = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: stretch;
 `
 
 const Character = styled.div`
-  flex: 0 0 300px;
-  cursor: pointer;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  width: 60vh;
+  flex-shrink: 0;
+  height: 100%;
+  overflow: visible;
+  cursor: pointer;
 `
 
 const CharacterImage = styled.img`
+  width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   object-position: bottom center;
 `
 
 const CharacterName = styled.img`
-  height: 44px;
-  object-fit: contain;
   position: absolute;
+  max-width: 100%;
+  object-fit: contain;
+  height: 10vh;
   left: 50%;
   bottom: 10%;
   transform: translate(-50%, 0px);
@@ -86,6 +95,11 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
     history.push(characterName === "debug" ? `/game/debug` : `/video/${characterName}`)
     BGMPlayer.pause()
   }
+
+  const [autoScroll, setAutoScroll] = useState({
+    enabled: true,
+    to: "right" as "left" | "right",
+  })
 
   const targetGender = {
     male:
@@ -114,35 +128,71 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
     [userConfig, targetGender],
   )
 
-  const characterSetRef = useCallback((characterSet: HTMLDivElement) => {
-    if (!characterSet) return
-    characterSet.scrollTo({
-      left: characterSet.scrollWidth / 2 - window.outerWidth / 2,
-    })
+  // 굉장히 복잡함.. 리팩토링..
+  const scrollViewRef = useCallback(
+    (scrollView: HTMLDivElement) => {
+      if (!scrollView) return
+      const totalScroll = scrollView.scrollWidth - scrollView.offsetWidth
 
-    function transformScroll(event: any) {
-      if (!event.deltaY) return
-      characterSet.scrollLeft += event.deltaY + event.deltaX
-      event.preventDefault()
-    }
+      var _id: number | null = null
+      function tickAutoScroll() {
+        if (autoScroll.to === "left") {
+          const dx = Math.max((scrollView.scrollLeft - 0) * 0.01, 1)
+          scrollView.scrollBy(-dx, 0)
+          if (10 >= scrollView.scrollLeft) {
+            setAutoScroll((state) => ({ ...state, to: "right" }))
+            scrollView.removeEventListener("wheel", transformScroll)
+          } else {
+            _id = requestAnimationFrame(tickAutoScroll)
+          }
+        } else if (autoScroll.to === "right") {
+          const dx = Math.max((totalScroll - scrollView.scrollLeft) * 0.01, 1)
+          scrollView.scrollBy(dx, 0)
+          if (totalScroll - 10 <= scrollView.scrollLeft) {
+            setAutoScroll((state) => ({ ...state, to: "left" }))
+            scrollView.removeEventListener("wheel", transformScroll)
+          } else {
+            _id = requestAnimationFrame(tickAutoScroll)
+          }
+        }
+      }
+      if (autoScroll.enabled) requestAnimationFrame(tickAutoScroll)
 
-    characterSet.addEventListener("wheel", transformScroll)
-    return () => characterSet.removeEventListener("wheel", transformScroll)
-  }, [])
+      function transformScroll(event: any) {
+        if (autoScroll.enabled) {
+          if (_id) cancelAnimationFrame(_id)
+          setAutoScroll((state) => ({ ...state, enabled: false }))
+          scrollView.removeEventListener("wheel", transformScroll)
+        } else {
+          if (!event.deltaY) return
+          scrollView.scrollLeft += event.deltaY + event.deltaX
+          event.preventDefault()
+        }
+      }
+
+      scrollView.addEventListener("wheel", transformScroll)
+      return () => {
+        scrollView.removeEventListener("wheel", transformScroll)
+      }
+    },
+    [autoScroll],
+  )
 
   return (
     <Container>
-      <ChoiceAlert src={characters.length >= 6 ? ChoiceAlert2Resource : ChoiceAlertResource} alt={`You have matched with ${characters.length} people!`}></ChoiceAlert>
-      <CharacterSet ref={characterSetRef}>
-        <div style={{ flexShrink: 0, flexBasis: 30 }}></div>
-        {characters.map(({ name, image, nameImage }) => (
-          <Character onClick={onCharacterClick(name)}>
-            <CharacterImage src={image} alt={name} />
-            <CharacterName src={nameImage} alt={name}></CharacterName>
-          </Character>
-        ))}
-        <div style={{ flexShrink: 0, flexBasis: 30 }}></div>
-      </CharacterSet>
+      <ChoiceAlert style={{ height: "5vh" }} src={characters.length >= 6 ? ChoiceAlert2Resource : ChoiceAlertResource} alt={`You have matched with ${characters.length} people!`}></ChoiceAlert>
+      <ScrollView ref={scrollViewRef}>
+        <div style={{ width: "20vw" }}></div>
+        <CharacterSet>
+          {characters.map(({ name, image, nameImage }) => (
+            <Character key={name} onClick={onCharacterClick(name)}>
+              <CharacterImage src={image} alt={name} />
+              <CharacterName src={nameImage} alt={name}></CharacterName>
+            </Character>
+          ))}
+        </CharacterSet>
+        <div style={{ width: "20vw" }}></div>
+      </ScrollView>
     </Container>
   )
 }

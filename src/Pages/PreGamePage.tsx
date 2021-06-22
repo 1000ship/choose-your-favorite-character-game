@@ -24,6 +24,7 @@ const AppBar = styled.div`
   height: ${AppBarHeight}px;
   border-bottom: 2px solid #bcbcbc;
   background-color: white;
+  z-index: 10;
 `
 const LogoImage = styled.img`
   height: 80%;
@@ -143,7 +144,7 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
       chatList: [...state.chatList, { who: "right", message: `${state.options[i].answer}` }],
       options: [],
     }))
-    await sleep(1000)
+    if (process.env.NODE_ENV !== "development") await sleep(1000)
     setState((state) => ({
       ...state,
       step: state.step + 1,
@@ -155,7 +156,8 @@ const PreGamePage: React.FC<RouteComponentProps> = (props) => {
       ...state,
       chatList: [...state.chatList, { who: "left", message: `${qna[state.step].question}` }],
     }))
-    sleep(1000).then(() => setState((state) => ({ ...state, options: qna[state.step].options })))
+    if (process.env.NODE_ENV !== "development") sleep(1000).then(() => setState((state) => ({ ...state, options: qna[state.step].options })))
+    else setState((state) => ({ ...state, options: qna[state.step].options }))
   }, [state.step])
 
   const onLogoClick = (e: React.MouseEvent) => history.push("/")
