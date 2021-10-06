@@ -1,6 +1,7 @@
-import React from "react"
-import styled from "styled-components"
-import BackgroundResource from "../Resources/Images/gameover.png"
+import React from 'react';
+import styled from 'styled-components';
+
+import BackgroundResource from '../Resources/Images/gameover.png';
 
 const Container = styled.div`
   position: fixed;
@@ -25,11 +26,11 @@ const Container = styled.div`
       opacity: 1;
     }
   }
-`
+`;
 const BackgroundImage = styled.img`
   width: 100%;
   object-fit: contain;
-`
+`;
 const Content = styled.div`
   position: fixed;
   top: 0;
@@ -41,7 +42,7 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 const GameOverText = styled.div`
   font-weight: 600;
   font-size: 2.4em;
@@ -49,10 +50,10 @@ const GameOverText = styled.div`
   @media (min-width: 768px) {
     font-size: 4em;
   }
-`
+`;
 const ButtonGroup = styled.div`
   display: flex;
-`
+`;
 const Button = styled.div`
   background-image: linear-gradient(#ee609c, #b565d9);
   border-radius: 10px;
@@ -67,22 +68,22 @@ const Button = styled.div`
   @media (min-width: 768px) {
     font-size: 1.5em;
   }
-`
+`;
 
 export interface GameOverModalProps {
-  isOpened: boolean
-  resetGame: Function
-  exitGame: Function
+  isOpened: boolean;
+  resetGame: Function;
+  exitGame: Function;
 }
 const GameOverModal: React.FC<GameOverModalProps> = (props) => {
-  const { isOpened, resetGame, exitGame } = props
-  const onResetClick = (e: React.MouseEvent) => resetGame()
-  const onOtherGameClick = (e: React.MouseEvent) => exitGame()
+  const { isOpened, resetGame, exitGame } = props;
+  const onResetClick = (e: React.MouseEvent) => resetGame();
+  const onOtherGameClick = (e: React.MouseEvent) => exitGame();
   return (
     <>
       {isOpened && (
         <Container>
-          <BackgroundImage src={BackgroundResource}></BackgroundImage>
+          <BackgroundImage src={BackgroundResource} />
           <Content>
             <GameOverText>GAME OVER</GameOverText>
             <ButtonGroup>
@@ -93,7 +94,7 @@ const GameOverModal: React.FC<GameOverModalProps> = (props) => {
         </Container>
       )}
     </>
-  )
-}
+  );
+};
 
-export default GameOverModal
+export default GameOverModal;

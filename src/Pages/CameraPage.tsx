@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react"
-import styled from "styled-components"
-import { RouteComponentProps, withRouter } from "react-router-dom"
+import React, { useState, useEffect } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-`
+`;
 
 const VideoView = styled.video`
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-`
+`;
 
 const Flash = styled.div`
   position: fixed;
@@ -29,46 +29,46 @@ const Flash = styled.div`
       opacity: 1;
     }
   }
-`
+`;
 
 const CameraPage: React.FC<RouteComponentProps> = (props) => {
-  const { history } = props
-  const [flash, setFlash] = useState(false)
+  const { history } = props;
+  const [flash, setFlash] = useState(false);
 
-  var errorCallback: NavigatorUserMediaErrorCallback = function (e: MediaStreamError) {
-    setTimeout(() => history.push("/choice"), 1500)
-  }
+  const errorCallback: any = function () {
+    setTimeout(() => history.push('/choice'), 1500);
+  };
 
   useEffect(() => {
-    if (navigator?.getUserMedia) {
-      navigator.getUserMedia(
+    if ((navigator as any)?.getUserMedia) {
+      (navigator as any).getUserMedia(
         { video: true },
-        function (localMediaStream) {
-          var video = document.querySelector("video") as HTMLVideoElement
-          video.srcObject = localMediaStream
+        function (localMediaStream: any) {
+          const video = document.querySelector('video') as HTMLVideoElement;
+          video.srcObject = localMediaStream;
           video.onloadedmetadata = function (e) {
             // Ready to go. Do some stuff.
-            video.play()
-          }
+            video.play();
+          };
         },
         errorCallback,
-      )
+      );
     }
-  })
+  });
 
   const onShotClick = () => {
-    var video = document.querySelector("video") as HTMLVideoElement
-    video.pause()
-    setFlash(true)
-    setTimeout(() => history.push("/choice"), 1500)
-  }
+    const video = document.querySelector('video') as HTMLVideoElement;
+    video.pause();
+    setFlash(true);
+    setTimeout(() => history.push('/choice'), 1500);
+  };
 
   return (
     <Container onClick={onShotClick}>
-      <VideoView></VideoView>
-      {flash && <Flash></Flash>}
+      <VideoView />
+      {flash && <Flash />}
     </Container>
-  )
-}
+  );
+};
 
-export default withRouter(CameraPage)
+export default withRouter(CameraPage);

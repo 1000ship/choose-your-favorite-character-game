@@ -1,16 +1,22 @@
-import React from "react"
-import "./App.css"
-import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom"
-import OpeningPage from "./Pages/OpeningPage"
-import ChoicePage from "./Pages/ChoicePage"
-import GamePage from "./Pages/GamePage"
-import GlobalStyles from "./GlobalStyles"
-import PreGamePage from "./Pages/PreGamePage"
-import AdminPage from "./Pages/AdminPage"
-import VideoPage from "./Pages/VideoPage"
-import InfoPage from "./Pages/InfoPage"
-import CameraPage from "./Pages/CameraPage"
-import { RecoilRoot } from "recoil"
+import React from 'react';
+import './App.css';
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+
+import GlobalStyles from './GlobalStyles';
+import AdminPage from './Pages/AdminPage';
+import CameraPage from './Pages/CameraPage';
+import ChoicePage from './Pages/ChoicePage';
+import GamePage from './Pages/GamePage';
+import InfoPage from './Pages/InfoPage';
+import OpeningPage from './Pages/OpeningPage';
+import PreGamePage from './Pages/PreGamePage';
+import VideoPage from './Pages/VideoPage';
 
 function App() {
   return (
@@ -19,20 +25,20 @@ function App() {
       <React.Suspense fallback={<h1>Loading...</h1>}>
         <Router>
           <Switch>
-            <Route path="/camera" component={CameraPage}></Route>
-            <Route path="/choice" component={ChoicePage}></Route>
-            <Route path="/pre-game" component={PreGamePage}></Route>
+            <Route path="/camera" component={CameraPage} />
+            <Route path="/choice" component={ChoicePage} />
+            <Route path="/pre-game" component={PreGamePage} />
             <Route path="/game" component={GamePage} />
-            <Route path="/video" component={VideoPage}></Route>
-            <Route path="/info" component={InfoPage}></Route>
-            <Route path="/admin" component={AdminPage}></Route>
-            <Route path="/" component={OpeningPage}></Route>
+            <Route path="/video" component={VideoPage} />
+            <Route path="/info" component={InfoPage} />
+            <Route path="/admin" component={AdminPage} />
+            <Route path="/" component={OpeningPage} />
             <Redirect to="/" />
           </Switch>
         </Router>
       </React.Suspense>
     </RecoilRoot>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,3 +1,3 @@
-import MeetViewContainer from "./MeetViewContainer"
+import MeetViewContainer from './MeetViewContainer';
 
-export default MeetViewContainer
+export default MeetViewContainer;

@@ -1,3 +1,3 @@
-import ChattingViewContainer from "./ChattingViewContainer"
+import ChattingViewContainer from './ChattingViewContainer';
 
-export default ChattingViewContainer
+export default ChattingViewContainer;

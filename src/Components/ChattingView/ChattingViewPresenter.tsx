@@ -1,16 +1,18 @@
-import React, { useCallback } from "react"
-import { useRecoilValue } from "recoil"
-import styled from "styled-components"
-import { gameOverAtom } from "../../Constant/atoms"
-import { gameSceneSelector } from "../../Constant/selectors"
-import { Chat } from "../../Constant/types"
-import CYFCLogoImage from "../../Resources/Images/cyfc_top_logo.png"
-import useScriptParser from "../../Utils/useScriptParser"
-import OptionMessage from "./OptionMessage"
+import React, { useCallback } from 'react';
+import { useRecoilValue } from 'recoil';
+import styled from 'styled-components';
 
-const AppBarHeight = 80
+import { gameOverAtom } from '../../Constant/atoms';
+import { gameSceneSelector } from '../../Constant/selectors';
+import { Chat } from '../../Constant/types';
+import CYFCLogoImage from '../../Resources/Images/cyfc_top_logo.png';
+import useScriptParser from '../../Utils/useScriptParser';
 
-const Container = styled.div``
+import OptionMessage from './OptionMessage';
+
+const AppBarHeight = 80;
+
+const Container = styled.div``;
 
 const AppBar = styled.div`
   position: fixed;
@@ -23,11 +25,11 @@ const AppBar = styled.div`
   height: ${AppBarHeight}px;
   border-bottom: 2px solid #bcbcbc;
   background-color: white;
-`
+`;
 const LogoImage = styled.img`
   height: 80%;
   cursor: pointer;
-`
+`;
 
 const Contents = styled.div`
   display: flex;
@@ -36,11 +38,11 @@ const Contents = styled.div`
   margin-top: ${AppBarHeight}px;
   overflow-x: hidden;
   overflow-y: scroll;
-`
+`;
 const DateText = styled.span`
   color: #939393;
   margin: 10px;
-`
+`;
 const LeftMessage = styled.span`
   align-self: flex-start;
   margin: 5px;
@@ -62,7 +64,7 @@ const LeftMessage = styled.span`
       transform: translate(0, 0);
     }
   }
-`
+`;
 const RightMessage = styled.span`
   align-self: flex-end;
   margin: 5px;
@@ -85,7 +87,7 @@ const RightMessage = styled.span`
       transform: translate(0, 0);
     }
   }
-`
+`;
 
 const EndingMessage = styled.span`
   align-self: flex-end;
@@ -114,27 +116,32 @@ const EndingMessage = styled.span`
       transform: translate(0, 0);
     }
   }
-`
+`;
 
 export interface ChattingViewPresenterProps {
-  chatList: Chat[]
-  selectOption: Function
-  onLogoClick: React.MouseEventHandler<HTMLElement>
-  selectable: boolean
+  chatList: Chat[];
+  selectOption: Function;
+  onLogoClick: React.MouseEventHandler<HTMLElement>;
+  selectable: boolean;
 }
-const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({ chatList, selectOption, onLogoClick, selectable }) => {
-  const gameScene = useRecoilValue(gameSceneSelector)
-  const isGameOver = useRecoilValue(gameOverAtom)
-  const scriptParser = useScriptParser()
+const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({
+  chatList,
+  selectOption,
+  onLogoClick,
+  selectable,
+}) => {
+  const gameScene = useRecoilValue(gameSceneSelector);
+  const isGameOver = useRecoilValue(gameOverAtom);
+  const scriptParser = useScriptParser();
 
   const messageContentsRef = useCallback((el) => {
-    if (el) window.scrollTo(0, window.outerHeight)
-  }, [])
+    if (el) window.scrollTo(0, window.outerHeight);
+  }, []);
 
   return (
     <Container>
       <AppBar>
-        <LogoImage src={CYFCLogoImage} alt="CYFC" onClick={onLogoClick}></LogoImage>
+        <LogoImage src={CYFCLogoImage} alt="CYFC" onClick={onLogoClick} />
       </AppBar>
       <Contents ref={messageContentsRef}>
         <DateText>오늘</DateText>
@@ -145,27 +152,33 @@ const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({ chatList,
               dangerouslySetInnerHTML={{
                 __html: scriptParser.getText(message),
               }}
-            ></EndingMessage>
-          ) : who === "left" ? (
+            />
+          ) : who === 'left' ? (
             <LeftMessage
               key={i}
               dangerouslySetInnerHTML={{
                 __html: scriptParser.getText(message),
               }}
-            ></LeftMessage>
+            />
           ) : (
             <RightMessage
               key={i}
               dangerouslySetInnerHTML={{
                 __html: scriptParser.getText(message, true),
               }}
-            ></RightMessage>
+            />
           ),
         )}
-        {(!isGameOver && selectable && gameScene.options?.length && gameScene.sceneType !== "ending" && <OptionMessage selectOption={selectOption}></OptionMessage>) || null}
+        {(!isGameOver &&
+          selectable &&
+          gameScene.options?.length &&
+          gameScene.sceneType !== 'ending' && (
+            <OptionMessage selectOption={selectOption} />
+          )) ||
+          null}
       </Contents>
     </Container>
-  )
-}
+  );
+};
 
-export default ChattingViewPresenter
+export default ChattingViewPresenter;

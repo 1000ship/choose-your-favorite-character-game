@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react"
-import { useRecoilValue } from "recoil"
-import styled from "styled-components"
-import { gameSceneSelector } from "../../Constant/selectors"
-import ChatBox from "./ChatBox"
+import React, { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import styled from 'styled-components';
+
+import { gameSceneSelector } from '../../Constant/selectors';
+
+import ChatBox from './ChatBox';
 
 const Container = styled.div`
   overflow: hidden;
-`
+`;
 
 const BackgroundImage = styled.div<{ imageSrc: string }>`
   width: 100%;
@@ -14,10 +16,10 @@ const BackgroundImage = styled.div<{ imageSrc: string }>`
   position: absolute;
   left: 0;
   top: 0;
-  background-image: url("${({ imageSrc }) => imageSrc}");
+  background-image: url('${({ imageSrc }) => imageSrc}');
   background-position: center;
   background-size: cover;
-`
+`;
 
 const CharacterImage = styled.img`
   height: 90%;
@@ -28,47 +30,77 @@ const CharacterImage = styled.img`
   object-fit: contain;
   transform-origin: bottom center;
   transform: scale(1.1) translate(-50%, 0);
-`
+`;
 
 export interface MeetViewPresenterProps {
-  stepFromScript: React.MouseEventHandler
-  stepFromReaction: React.MouseEventHandler
-  selectOption: Function
+  stepFromScript: React.MouseEventHandler;
+  stepFromReaction: React.MouseEventHandler;
+  selectOption: Function;
 }
-const MeetViewPresenter: React.FC<MeetViewPresenterProps> = ({ stepFromScript, stepFromReaction, selectOption }) => {
-  const gameScene = useRecoilValue(gameSceneSelector)
+const MeetViewPresenter: React.FC<MeetViewPresenterProps> = ({
+  stepFromScript,
+  stepFromReaction,
+  selectOption,
+}) => {
+  const gameScene = useRecoilValue(gameSceneSelector);
   const [state, setState] = useState({
-    backgroundImagePath: "",
-    characterImagePath: "",
-  })
+    backgroundImagePath: '',
+    characterImagePath: '',
+  });
 
   useEffect(() => {
-    if (gameScene.characterImagePath && gameScene.characterImagePath.length > 0) {
-      const imgTag = document.createElement("img")
-      imgTag.src = gameScene.characterImagePath as string
-      imgTag.onload = (e) => setState((state) => ({ ...state, characterImagePath: gameScene?.characterImagePath ?? "" }))
+    if (
+      gameScene.characterImagePath &&
+      gameScene.characterImagePath.length > 0
+    ) {
+      const imgTag = document.createElement('img');
+      imgTag.src = gameScene.characterImagePath as string;
+      imgTag.onload = (e) =>
+        setState((state) => ({
+          ...state,
+          characterImagePath: gameScene?.characterImagePath ?? '',
+        }));
     } else {
-      setState((state) => ({ ...state, characterImagePath: "" }))
+      setState((state) => ({ ...state, characterImagePath: '' }));
     }
-  }, [gameScene.characterImagePath, gameScene])
+  }, [gameScene.characterImagePath, gameScene]);
 
   useEffect(() => {
-    if (gameScene.backgroundImagePath && gameScene.backgroundImagePath.length > 0) {
-      const imgTag = document.createElement("img")
-      imgTag.src = gameScene.backgroundImagePath as string
-      imgTag.onload = (e) => setState((state) => ({ ...state, backgroundImagePath: gameScene?.backgroundImagePath ?? "" }))
+    if (
+      gameScene.backgroundImagePath &&
+      gameScene.backgroundImagePath.length > 0
+    ) {
+      const imgTag = document.createElement('img');
+      imgTag.src = gameScene.backgroundImagePath as string;
+      imgTag.onload = (e) =>
+        setState((state) => ({
+          ...state,
+          backgroundImagePath: gameScene?.backgroundImagePath ?? '',
+        }));
     } else {
-      setState((state) => ({ ...state, backgroundImagePath: "" }))
+      setState((state) => ({ ...state, backgroundImagePath: '' }));
     }
-  }, [gameScene.backgroundImagePath, gameScene])
+  }, [gameScene.backgroundImagePath, gameScene]);
 
   return (
-    <Container onClick={gameScene.step === "script" ? stepFromScript : gameScene.step === "reaction" ? stepFromReaction : stepFromScript}>
-      {state.backgroundImagePath.length && <BackgroundImage imageSrc={state.backgroundImagePath || ""}></BackgroundImage>}
-      {state.characterImagePath.length && <CharacterImage src={state.characterImagePath || ""}></CharacterImage>}
-      <ChatBox selectOption={selectOption}></ChatBox>
+    <Container
+      onClick={
+        gameScene.step === 'script'
+          ? stepFromScript
+          : gameScene.step === 'reaction'
+          ? stepFromReaction
+          : stepFromScript
+      }
+    >
+      {state.backgroundImagePath.length && (
+        <BackgroundImage imageSrc={state.backgroundImagePath || ''} />
+      )}
+      {state.characterImagePath.length && (
+        <CharacterImage src={state.characterImagePath || ''} />
+      )}
+      <ChatBox selectOption={selectOption} />
     </Container>
-  )
-}
+  );
+};
 
-export default MeetViewPresenter
+export default MeetViewPresenter;
