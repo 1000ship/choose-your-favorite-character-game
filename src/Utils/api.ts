@@ -1,8 +1,12 @@
-import { DEBUG_LINK, ENDING_COUNTER_STORAGE_KEY } from '../Constant';
+import {
+  DEBUG_LINK,
+  ENDING_COUNTER_STORAGE_KEY,
+  RESOURCE_PATH,
+} from '../Constant';
 
 export const loadScript = async (characterName: string) => {
   try {
-    let filePath = `./res/characters/${characterName}/script.txt`;
+    let filePath = `${RESOURCE_PATH}/characters/${characterName}/script.txt`;
     if (characterName === 'debug')
       filePath = `${DEBUG_LINK}/${characterName}/script.txt`;
     const data = await fetch(filePath);

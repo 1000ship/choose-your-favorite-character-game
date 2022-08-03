@@ -1,3 +1,5 @@
+import { RESOURCE_PATH } from '../Constant';
+
 let sound: HTMLAudioElement;
 
 const SoundPlayer = {
@@ -7,7 +9,7 @@ const SoundPlayer = {
       if (sound) sound.pause();
     } catch {}
     sound = new Audio();
-    sound.src = `./res/sounds/${folderName}/${fileName}`;
+    sound.src = `${RESOURCE_PATH}/sounds/${folderName}/${fileName}`;
     sound.play();
   },
   play: (path: string) => {

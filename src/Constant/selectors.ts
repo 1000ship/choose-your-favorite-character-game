@@ -11,7 +11,7 @@ import {
 } from './atoms';
 import { IGameConfig, Scene } from './types';
 
-import { DEBUG_LINK } from '.';
+import { DEBUG_LINK, RESOURCE_PATH } from '.';
 
 export const gameConfigSelector = selector<IGameConfig>({
   key: 'gameConfigSelector',
@@ -39,10 +39,10 @@ export const gameSceneSelector = selector<Scene>({
 
     if (process.env.NODE_ENV === 'development') console.log(gameScene);
 
-    let characterImagePath = `./res/characters/${gameConfig.characterName}/character/${gameScene.characterImage}`;
-    let backgroundImagePath = `./res/characters/${gameConfig.characterName}/background/${gameScene.backgroundImage}`;
-    let sceneSoundPath = `./res/characters/${gameConfig.characterName}/sound/${gameScene.sceneSound}`;
-    let backgroundSoundPath = `./res/characters/${gameConfig.characterName}/bgm/${gameScene.backgroundSound}`;
+    let characterImagePath = `${RESOURCE_PATH}/characters/${gameConfig.characterName}/character/${gameScene.characterImage}`;
+    let backgroundImagePath = `${RESOURCE_PATH}/characters/${gameConfig.characterName}/background/${gameScene.backgroundImage}`;
+    let sceneSoundPath = `${RESOURCE_PATH}/characters/${gameConfig.characterName}/sound/${gameScene.sceneSound}`;
+    let backgroundSoundPath = `${RESOURCE_PATH}/characters/${gameConfig.characterName}/bgm/${gameScene.backgroundSound}`;
 
     // 디버깅 처리
     if (gameConfig.characterName === 'debug') {

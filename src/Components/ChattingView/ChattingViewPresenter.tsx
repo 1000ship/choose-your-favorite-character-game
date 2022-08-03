@@ -134,7 +134,7 @@ const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({
   const isGameOver = useRecoilValue(gameOverAtom);
   const scriptParser = useScriptParser();
 
-  const messageContentsRef = useCallback((el) => {
+  const messageContentsRef = useCallback((el: HTMLDivElement) => {
     if (el) window.scrollTo(0, window.outerHeight);
   }, []);
 

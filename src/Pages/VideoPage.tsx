@@ -3,7 +3,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { BGM_MAIN } from '../Constant';
+import { BGM_MAIN, RESOURCE_PATH } from '../Constant';
 import { gameConfigAtom } from '../Constant/atoms';
 import BackButtonResource from '../Resources/Images/statement_back.png';
 import SkipButtonResource from '../Resources/Images/video_skip.png';
@@ -68,10 +68,10 @@ const VideoPage: React.FC<RouteComponentProps> = (props) => {
   };
 
   const extensionDictionary = {
-    amy_male: 'mov',
-    amy_female: 'mov',
-    bella: 'mov',
-    clair: 'mov',
+    amy_male: 'mp4',
+    amy_female: 'mp4',
+    bella: 'mp4',
+    clair: 'mp4',
     andrew: 'mp4',
     brian_male: 'mp4',
     brian_female: 'mp4',
@@ -84,7 +84,7 @@ const VideoPage: React.FC<RouteComponentProps> = (props) => {
       <SkipButton onClick={onSkipClick} src={SkipButtonResource} />
       <VideoView autoPlay controls>
         <source
-          src={`./res/videos/${characterName}.${extensionDictionary[characterName]}`}
+          src={`${RESOURCE_PATH}/videos/${characterName}.${extensionDictionary[characterName]}`}
           type="video/mp4"
         />
       </VideoView>
