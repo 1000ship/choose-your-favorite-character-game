@@ -1,32 +1,25 @@
 {
   "files": {
-    "main.css": "/choose-your-favorite-character-game/static/css/main.bab391dc.chunk.css",
-    "main.js": "/choose-your-favorite-character-game/static/js/main.d95a60fa.chunk.js",
-    "main.js.map": "/choose-your-favorite-character-game/static/js/main.d95a60fa.chunk.js.map",
-    "runtime-main.js": "/choose-your-favorite-character-game/static/js/runtime-main.0ad1d496.js",
-    "runtime-main.js.map": "/choose-your-favorite-character-game/static/js/runtime-main.0ad1d496.js.map",
-    "static/js/2.cf3763e8.chunk.js": "/choose-your-favorite-character-game/static/js/2.cf3763e8.chunk.js",
-    "static/js/2.cf3763e8.chunk.js.map": "/choose-your-favorite-character-game/static/js/2.cf3763e8.chunk.js.map",
+    "main.css": "/choose-your-favorite-character-game/static/css/main.1253d953.css",
+    "main.js": "/choose-your-favorite-character-game/static/js/main.62a89666.js",
+    "static/media/andrew.png": "/choose-your-favorite-character-game/static/media/andrew.e83b998e88e023a3f7c3.png",
+    "static/media/brian.png": "/choose-your-favorite-character-game/static/media/brian.6769744dca4076582597.png",
+    "static/media/amy.png": "/choose-your-favorite-character-game/static/media/amy.c4eb53208f1e8a18b617.png",
+    "static/media/carl.png": "/choose-your-favorite-character-game/static/media/carl.d2945d71baa83d59c258.png",
+    "static/media/bella.png": "/choose-your-favorite-character-game/static/media/bella.15f151766ae2ca74f3f5.png",
+    "static/media/clair.png": "/choose-your-favorite-character-game/static/media/clair.cd0356c3819c2fb55c94.png",
+    "static/media/pointer.png": "/choose-your-favorite-character-game/static/media/pointer.dd2b9ce27fc46157e076.png",
+    "static/media/cyfc_top_logo.png": "/choose-your-favorite-character-game/static/media/cyfc_top_logo.49be1114e9d59ee1199a.png",
+    "static/media/debug.png": "/choose-your-favorite-character-game/static/media/debug.5687dbfe0a728aa3a655.png",
+    "static/media/gameover.png": "/choose-your-favorite-character-game/static/media/gameover.2a6d3dea8382b877daa5.png",
+    "static/media/choice_alert_2.png": "/choose-your-favorite-character-game/static/media/choice_alert_2.21357ebe5153583e8663.png",
+    "static/media/choice_alert.png": "/choose-your-favorite-character-game/static/media/choice_alert.8d9706c8e776967a8b22.png",
     "index.html": "/choose-your-favorite-character-game/index.html",
-    "static/css/main.bab391dc.chunk.css.map": "/choose-your-favorite-character-game/static/css/main.bab391dc.chunk.css.map",
-    "static/js/2.cf3763e8.chunk.js.LICENSE.txt": "/choose-your-favorite-character-game/static/js/2.cf3763e8.chunk.js.LICENSE.txt",
-    "static/media/amy.c4eb5320.png": "/choose-your-favorite-character-game/static/media/amy.c4eb5320.png",
-    "static/media/andrew.e83b998e.png": "/choose-your-favorite-character-game/static/media/andrew.e83b998e.png",
-    "static/media/bella.15f15176.png": "/choose-your-favorite-character-game/static/media/bella.15f15176.png",
-    "static/media/brian.6769744d.png": "/choose-your-favorite-character-game/static/media/brian.6769744d.png",
-    "static/media/carl.d2945d71.png": "/choose-your-favorite-character-game/static/media/carl.d2945d71.png",
-    "static/media/choice_alert.8d9706c8.png": "/choose-your-favorite-character-game/static/media/choice_alert.8d9706c8.png",
-    "static/media/choice_alert_2.21357ebe.png": "/choose-your-favorite-character-game/static/media/choice_alert_2.21357ebe.png",
-    "static/media/clair.cd0356c3.png": "/choose-your-favorite-character-game/static/media/clair.cd0356c3.png",
-    "static/media/cyfc_top_logo.49be1114.png": "/choose-your-favorite-character-game/static/media/cyfc_top_logo.49be1114.png",
-    "static/media/debug.5687dbfe.png": "/choose-your-favorite-character-game/static/media/debug.5687dbfe.png",
-    "static/media/gameover.2a6d3dea.png": "/choose-your-favorite-character-game/static/media/gameover.2a6d3dea.png",
-    "static/media/pointer.dd2b9ce2.png": "/choose-your-favorite-character-game/static/media/pointer.dd2b9ce2.png"
+    "main.1253d953.css.map": "/choose-your-favorite-character-game/static/css/main.1253d953.css.map",
+    "main.62a89666.js.map": "/choose-your-favorite-character-game/static/js/main.62a89666.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.0ad1d496.js",
-    "static/js/2.cf3763e8.chunk.js",
-    "static/css/main.bab391dc.chunk.css",
-    "static/js/main.d95a60fa.chunk.js"
+    "static/css/main.1253d953.css",
+    "static/js/main.62a89666.js"
   ]
 }
