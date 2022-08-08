@@ -41,16 +41,16 @@ export const gameSceneSelector = selector<Scene>({
 
     let characterImagePath = encodeURI(
       `${RESOURCE_PATH}/characters/${gameConfig.characterName}/character/${gameScene.characterImage}`,
-    );
+    ).replaceAll('#', '%23');
     let backgroundImagePath = encodeURI(
       `${RESOURCE_PATH}/characters/${gameConfig.characterName}/background/${gameScene.backgroundImage}`,
-    );
+    ).replaceAll('#', '%23');
     let sceneSoundPath = encodeURI(
       `${RESOURCE_PATH}/characters/${gameConfig.characterName}/sound/${gameScene.sceneSound}`,
-    );
+    ).replaceAll('#', '%23');
     let backgroundSoundPath = encodeURI(
       `${RESOURCE_PATH}/characters/${gameConfig.characterName}/bgm/${gameScene.backgroundSound}`,
-    );
+    ).replaceAll('#', '%23');
 
     // 디버깅 처리
     if (gameConfig.characterName === 'debug') {
