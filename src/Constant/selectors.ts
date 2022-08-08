@@ -39,10 +39,18 @@ export const gameSceneSelector = selector<Scene>({
 
     if (process.env.NODE_ENV === 'development') console.log(gameScene);
 
-    let characterImagePath = `${RESOURCE_PATH}/characters/${gameConfig.characterName}/character/${gameScene.characterImage}`;
-    let backgroundImagePath = `${RESOURCE_PATH}/characters/${gameConfig.characterName}/background/${gameScene.backgroundImage}`;
-    let sceneSoundPath = `${RESOURCE_PATH}/characters/${gameConfig.characterName}/sound/${gameScene.sceneSound}`;
-    let backgroundSoundPath = `${RESOURCE_PATH}/characters/${gameConfig.characterName}/bgm/${gameScene.backgroundSound}`;
+    let characterImagePath = encodeURI(
+      `${RESOURCE_PATH}/characters/${gameConfig.characterName}/character/${gameScene.characterImage}`,
+    );
+    let backgroundImagePath = encodeURI(
+      `${RESOURCE_PATH}/characters/${gameConfig.characterName}/background/${gameScene.backgroundImage}`,
+    );
+    let sceneSoundPath = encodeURI(
+      `${RESOURCE_PATH}/characters/${gameConfig.characterName}/sound/${gameScene.sceneSound}`,
+    );
+    let backgroundSoundPath = encodeURI(
+      `${RESOURCE_PATH}/characters/${gameConfig.characterName}/bgm/${gameScene.backgroundSound}`,
+    );
 
     // 디버깅 처리
     if (gameConfig.characterName === 'debug') {
