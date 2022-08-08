@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/choose-your-favorite-character-game/static/css/main.1253d953.css",
-    "main.js": "/choose-your-favorite-character-game/static/js/main.62a89666.js",
+    "main.js": "/choose-your-favorite-character-game/static/js/main.56688014.js",
     "static/media/andrew.png": "/choose-your-favorite-character-game/static/media/andrew.e83b998e88e023a3f7c3.png",
     "static/media/brian.png": "/choose-your-favorite-character-game/static/media/brian.6769744dca4076582597.png",
     "static/media/amy.png": "/choose-your-favorite-character-game/static/media/amy.c4eb53208f1e8a18b617.png",
@@ -16,10 +16,10 @@
     "static/media/choice_alert.png": "/choose-your-favorite-character-game/static/media/choice_alert.8d9706c8e776967a8b22.png",
     "index.html": "/choose-your-favorite-character-game/index.html",
     "main.1253d953.css.map": "/choose-your-favorite-character-game/static/css/main.1253d953.css.map",
-    "main.62a89666.js.map": "/choose-your-favorite-character-game/static/js/main.62a89666.js.map"
+    "main.56688014.js.map": "/choose-your-favorite-character-game/static/js/main.56688014.js.map"
   },
   "entrypoints": [
     "static/css/main.1253d953.css",
-    "static/js/main.62a89666.js"
+    "static/js/main.56688014.js"
   ]
 }
