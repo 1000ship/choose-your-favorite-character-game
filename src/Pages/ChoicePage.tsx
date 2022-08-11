@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { RESOURCE_PATH } from '../Constant';
 
 import { gameConfigAtom } from '../Constant/atoms';
 import { userConfigSelector } from '../Constant/selectors';
@@ -122,57 +123,57 @@ const ChoicePage: React.FC<RouteComponentProps> = ({ history }) => {
   const characters = useMemo(
     () =>
       [
-        {
-          name: 'debug',
-          image: DebugResource,
-          nameImage: DebugNameResource,
-          isShow: process.env.NODE_ENV === 'development',
-        },
+        // {
+        //   name: 'debug',
+        //   image: DebugResource,
+        //   nameImage: DebugNameResource,
+        //   isShow: process.env.NODE_ENV === 'development',
+        // },
         {
           name: 'amy_male',
-          image: AmyResource,
+          image: `${RESOURCE_PATH}/characters/amy_male/preview.png`,
           nameImage: AmyNameResource,
           isShow: targetGender.female && userConfig.gender === 'male',
         },
         {
           name: 'amy_female',
-          image: AmyResource,
+          image: `${RESOURCE_PATH}/characters/amy_female/preview.png`,
           nameImage: AmyNameResource,
           isShow: targetGender.female && userConfig.gender === 'female',
         },
         {
           name: 'andrew',
-          image: AndrewResource,
+          image: `${RESOURCE_PATH}/characters/andrew/preview.png`,
           nameImage: AndrewNameResource,
           isShow: targetGender.male,
         },
         {
           name: 'bella',
-          image: BellaResource,
+          image: `${RESOURCE_PATH}/characters/bella/preview.png`,
           nameImage: BellaNameResource,
           isShow: targetGender.female,
         },
         {
           name: 'brian_male',
-          image: BrianResource,
+          image: `${RESOURCE_PATH}/characters/brian_male/preview.png`,
           nameImage: BrianNameResource,
           isShow: targetGender.male && userConfig.gender === 'male',
         },
         {
           name: 'brian_female',
-          image: BrianResource,
+          image: `${RESOURCE_PATH}/characters/brian_female/preview.png`,
           nameImage: BrianNameResource,
           isShow: targetGender.male && userConfig.gender === 'female',
         },
         {
           name: 'clair',
-          image: ClairResource,
+          image: `${RESOURCE_PATH}/characters/clair/preview.png`,
           nameImage: ClairNameResource,
           isShow: targetGender.female,
         },
         {
           name: 'carl',
-          image: CarlResource,
+          image: `${RESOURCE_PATH}/characters/carl/preview.png`,
           nameImage: CarlNameResource,
           isShow: targetGender.male,
         },
