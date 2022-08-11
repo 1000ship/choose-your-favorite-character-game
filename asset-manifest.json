@@ -1,25 +1,18 @@
 {
   "files": {
     "main.css": "/choose-your-favorite-character-game/static/css/main.1253d953.css",
-    "main.js": "/choose-your-favorite-character-game/static/js/main.56688014.js",
-    "static/media/andrew.png": "/choose-your-favorite-character-game/static/media/andrew.e83b998e88e023a3f7c3.png",
-    "static/media/brian.png": "/choose-your-favorite-character-game/static/media/brian.6769744dca4076582597.png",
-    "static/media/amy.png": "/choose-your-favorite-character-game/static/media/amy.c4eb53208f1e8a18b617.png",
-    "static/media/carl.png": "/choose-your-favorite-character-game/static/media/carl.d2945d71baa83d59c258.png",
-    "static/media/bella.png": "/choose-your-favorite-character-game/static/media/bella.15f151766ae2ca74f3f5.png",
-    "static/media/clair.png": "/choose-your-favorite-character-game/static/media/clair.cd0356c3819c2fb55c94.png",
+    "main.js": "/choose-your-favorite-character-game/static/js/main.1441e321.js",
     "static/media/pointer.png": "/choose-your-favorite-character-game/static/media/pointer.dd2b9ce27fc46157e076.png",
     "static/media/cyfc_top_logo.png": "/choose-your-favorite-character-game/static/media/cyfc_top_logo.49be1114e9d59ee1199a.png",
-    "static/media/debug.png": "/choose-your-favorite-character-game/static/media/debug.5687dbfe0a728aa3a655.png",
     "static/media/gameover.png": "/choose-your-favorite-character-game/static/media/gameover.2a6d3dea8382b877daa5.png",
     "static/media/choice_alert_2.png": "/choose-your-favorite-character-game/static/media/choice_alert_2.21357ebe5153583e8663.png",
     "static/media/choice_alert.png": "/choose-your-favorite-character-game/static/media/choice_alert.8d9706c8e776967a8b22.png",
     "index.html": "/choose-your-favorite-character-game/index.html",
     "main.1253d953.css.map": "/choose-your-favorite-character-game/static/css/main.1253d953.css.map",
-    "main.56688014.js.map": "/choose-your-favorite-character-game/static/js/main.56688014.js.map"
+    "main.1441e321.js.map": "/choose-your-favorite-character-game/static/js/main.1441e321.js.map"
   },
   "entrypoints": [
     "static/css/main.1253d953.css",
-    "static/js/main.56688014.js"
+    "static/js/main.1441e321.js"
   ]
 }
