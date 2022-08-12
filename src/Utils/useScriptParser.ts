@@ -20,7 +20,7 @@ const useScriptParser = () => {
         /{input:\w*}/g,
         `
         <span style='
-          border: 1px solid #777; color: #777; border-radius: 4px; margin: 2px 4px; padding: 2px 4px;
+          border: 1px solid #333; color: #333; border-radius: 4px; margin: 2px 4px; padding: 2px 4px;
           text-align: center; cursor: text;
         '>
          직접 입력
