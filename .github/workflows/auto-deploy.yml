@@ -17,6 +17,13 @@ jobs:
       - name: Checkout source code.
         uses: actions/checkout@v2
 
+      - name: create env file
+        run: |
+          touch .env
+          cat << EOF >> .env
+          ${{ secrets.ENV }}
+          EOF
+
       - name: Install Yarn
         run: npm install -g yarn
 
