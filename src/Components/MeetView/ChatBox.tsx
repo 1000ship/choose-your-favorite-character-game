@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { MEET_STEP_OPTION, MEET_STEP_REACTION } from '../../Constant';
 import { gameSceneSelector } from '../../Constant/selectors';
@@ -44,12 +44,26 @@ const NameText = styled.span`
     font-size: 24px;
   }
 `;
-const TalkText = styled.span`
-  font-size: 36px;
+const TalkText = styled.span<{ smallText?: boolean }>`
+  ${({ smallText }) =>
+    smallText
+      ? css`
+          font-size: 24px;
+        `
+      : css`
+          font-size: 36px;
+        `}
   margin-left: 10px;
   color: black;
   @media (max-width: 1024px) {
-    font-size: 20px;
+    ${({ smallText }) =>
+      smallText
+        ? css`
+            font-size: 16px;
+          `
+        : css`
+            font-size: 20px;
+          `}
   }
 `;
 
@@ -74,6 +88,13 @@ const ChatBox: React.FC<ChatBoxProps> = ({ selectOption }) => {
               />
             )}
             <TalkText
+              smallText={
+                scriptParser.getText(
+                  gameScene?.step === MEET_STEP_REACTION
+                    ? gameScene.selectedOption?.reaction ?? ''
+                    : gameScene.sceneScript,
+                )?.length > 50
+              }
               dangerouslySetInnerHTML={{
                 __html: scriptParser.getText(
                   gameScene?.step === MEET_STEP_REACTION
