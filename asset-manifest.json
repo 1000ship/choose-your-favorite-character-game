@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/choose-your-favorite-character-game/static/css/main.1253d953.css",
-    "main.js": "/choose-your-favorite-character-game/static/js/main.4650620c.js",
+    "main.js": "/choose-your-favorite-character-game/static/js/main.c71df633.js",
     "static/media/pointer.png": "/choose-your-favorite-character-game/static/media/pointer.dd2b9ce27fc46157e076.png",
     "static/media/cyfc_top_logo.png": "/choose-your-favorite-character-game/static/media/cyfc_top_logo.49be1114e9d59ee1199a.png",
     "static/media/gameover.png": "/choose-your-favorite-character-game/static/media/gameover.2a6d3dea8382b877daa5.png",
@@ -9,10 +9,10 @@
     "static/media/choice_alert.png": "/choose-your-favorite-character-game/static/media/choice_alert.8d9706c8e776967a8b22.png",
     "index.html": "/choose-your-favorite-character-game/index.html",
     "main.1253d953.css.map": "/choose-your-favorite-character-game/static/css/main.1253d953.css.map",
-    "main.4650620c.js.map": "/choose-your-favorite-character-game/static/js/main.4650620c.js.map"
+    "main.c71df633.js.map": "/choose-your-favorite-character-game/static/js/main.c71df633.js.map"
   },
   "entrypoints": [
     "static/css/main.1253d953.css",
-    "static/js/main.4650620c.js"
+    "static/js/main.c71df633.js"
   ]
 }
