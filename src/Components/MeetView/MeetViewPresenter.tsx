@@ -53,8 +53,10 @@ const MeetViewPresenter: React.FC<MeetViewPresenterProps> = ({
       gameScene.characterImagePath &&
       gameScene.characterImagePath.length > 0
     ) {
-      if (gameScene.characterImagePath.trim().toLowerCase() === 'x')
+      if (gameScene.characterImagePath.trim().toLowerCase() === 'x') {
         setState((state) => ({ ...state, characterImagePath: '' }));
+        return;
+      }
 
       const imgTag = document.createElement('img');
       imgTag.src = gameScene.characterImagePath as string;
