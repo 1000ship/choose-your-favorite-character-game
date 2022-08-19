@@ -17,6 +17,8 @@ import InfoPage from './Pages/InfoPage';
 import OpeningPage from './Pages/OpeningPage';
 import PreGamePage from './Pages/PreGamePage';
 import VideoPage from './Pages/VideoPage';
+import { Slide, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -36,6 +38,9 @@ function App() {
             <Redirect to="/" />
           </Switch>
         </Router>
+        {process.env.NODE_ENV === 'development' && (
+          <ToastContainer autoClose={3000} transition={Slide} />
+        )}
       </React.Suspense>
     </RecoilRoot>
   );

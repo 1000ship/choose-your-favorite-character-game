@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 
 import ChattingView from '../Components/ChattingView';
@@ -23,21 +24,24 @@ const GamePage: React.FC<RouteComponentProps> = () => {
     viewType: 'text' as 'text' | 'meet',
   });
 
-  useBGM();
+  const { manuallyPlay } = useBGM();
+  useEffect(() => {
+    window.addEventListener('click', manuallyPlay);
+    return () => window.removeEventListener('click', manuallyPlay);
+  }, [manuallyPlay]);
   useSound();
+
   useEffect(() => {
     let initScene: Scene | null;
     if (process.env.NODE_ENV === 'development') {
-      const FIRST_SCENE_ID: string = '';
-      initScene =
+      const FIRST_SCENE_ID: string | null = null;
+      initScene ??=
         gameConfig.scenes?.find((each) => each.sceneId === FIRST_SCENE_ID) ??
-        (gameConfig.scenes?.length ? gameConfig.scenes[0] : null);
-    } else {
-      initScene = gameConfig?.scenes?.length ? gameConfig.scenes[0] : null;
+        null;
     }
-    if (initScene) {
+    initScene ??= gameConfig?.scenes?.length ? gameConfig.scenes[0] : null;
+    if (initScene)
       setGameScene((gameScene) => ({ ...gameScene, ...initScene }));
-    }
   }, [gameConfig, setGameScene]);
 
   useEffect(() => {
@@ -82,7 +86,7 @@ const GamePage: React.FC<RouteComponentProps> = () => {
         <ChattingView />
       ) : layoutConfig.viewType === 'meet' ? (
         <MeetView />
-      ) : null}
+      ) : undefined}
       <GameOverModal
         isOpened={isGameOver ?? false}
         resetGame={resetGame}

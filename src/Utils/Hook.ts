@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
 
 import { gameSceneSelector } from '../Constant/selectors';
@@ -16,9 +17,21 @@ export function useSound() {
 }
 
 export function useBGM() {
+  const [didManuallyPlay, setDidManuallyPlay] = useState(false);
+
   const gameScene = useRecoilValue(gameSceneSelector);
   useEffect(() => {
     if (!gameScene.backgroundSound?.length) return;
+    if (process.env.NODE_ENV === 'development')
+      toast.info(`BGM : ${gameScene.backgroundSound}`);
     BGMPlayer.play(gameScene.backgroundSoundPath as string);
   }, [gameScene.backgroundSoundPath, gameScene.backgroundSound]);
+
+  return {
+    manuallyPlay: () => {
+      if (didManuallyPlay) return;
+      BGMPlayer.play(gameScene.backgroundSoundPath as string);
+      setDidManuallyPlay(true);
+    },
+  };
 }

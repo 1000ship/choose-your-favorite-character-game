@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   DEBUG_LINK,
   ENDING_COUNTER_STORAGE_KEY,
@@ -7,6 +8,9 @@ import {
 export const loadScript = async (characterName: string) => {
   try {
     let filePath = `${RESOURCE_PATH}/characters/${characterName}/script.txt`;
+    if (process.env.NODE_ENV === 'development')
+      toast.info(`Script File Path : ${filePath}`);
+
     if (characterName === 'debug')
       filePath = `${DEBUG_LINK}/${characterName}/script.txt`;
     const data = await fetch(filePath);

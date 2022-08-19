@@ -12,12 +12,17 @@ import {
 import { IGameConfig, Scene } from './types';
 
 import { DEBUG_LINK, RESOURCE_PATH } from '.';
+import { toast } from 'react-toastify';
 
 export const gameConfigSelector = selector<IGameConfig>({
   key: 'gameConfigSelector',
   async get({ get }) {
     const gameConfig = get(gameConfigAtom);
     let scenes = [];
+
+    if (process.env.NODE_ENV === 'development')
+      toast.info(`CharacterName : ${gameConfig.characterName}`);
+
     if (gameConfig?.scenes?.length) scenes = gameConfig.scenes;
     else if (gameConfig.characterName.length > 0)
       scenes = await loadScript(gameConfig.characterName);

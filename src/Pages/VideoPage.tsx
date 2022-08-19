@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { BGM_MAIN, RESOURCE_PATH } from '../Constant';
 import { gameConfigAtom } from '../Constant/atoms';
+import { isAndroid, isiOS } from '../Constant/environment';
 import BackButtonResource from '../Resources/Images/statement_back.png';
 import SkipButtonResource from '../Resources/Images/video_skip.png';
 import BGMPlayer from '../Utils/BGMPlayer';
