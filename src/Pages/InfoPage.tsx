@@ -39,11 +39,13 @@ const BackButton = styled.img`
 const InfoPage: React.FC<RouteComponentProps> = ({ history }) => {
   const MAIN_TEXT = (
     <>
-      <b>{`New Country Kid, <Choose your favorite character>, 2020.`}</b>
+      <b>{`노지원, <Choose your favorite character>, 2022.`}</b>
       <br />
-      Choose your favorite character between Amy, Bella, Clair.
+      Choose your favorite character between Amy, Andrew, Bella, Brian, Clair,
+      and Carl
       <br />
-      Amy, Bella, Clair 중 당신이 가장 마음에 드는 캐릭터를 선택하십시오.
+      Amy, Andrew, Bella, Brian, Clair, 그리고 Carl 중 당신이 가장 마음에 드는
+      캐릭터를 선택하십시오.
     </>
   );
 
