@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { gameOverAtom } from '../../Constant/atoms';
@@ -75,9 +76,11 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
 
     if (gameScene.options.length === 0) {
       // 선택지가 없는 경우, 자동 씬 재생
-      if (nextScene) {
+      if (nextScene && nextScene.sceneType === 'text') {
         const sleepTime = nextScene?.sceneType === 'text' ? 1500 : 4000;
         sleep(sleepTime).then(() => {
+          if (process.env.NODE_ENV === 'development')
+            toast.info('선택지가 없는 경우, 자동 씬 재생');
           setGameScene(nextScene);
         });
       }

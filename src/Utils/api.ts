@@ -44,4 +44,9 @@ export const endingCounter = {
 };
 
 export const sleep = (delay: number) =>
-  new Promise((resolve) => setTimeout(() => resolve(undefined), delay));
+  new Promise((resolve) =>
+    setTimeout(
+      () => resolve(undefined),
+      process.env.NODE_ENV === 'development' ? 100 : delay,
+    ),
+  );

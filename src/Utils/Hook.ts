@@ -13,6 +13,9 @@ export function useSound() {
   useEffect(() => {
     const path = gameScene.sceneSoundPath ?? '';
     if (!path.length) return;
+
+    if (process.env.NODE_ENV === 'development')
+      toast.info(`Sound Path : ${path}`);
     SoundPlayer.play(path);
   }, [gameScene.sceneSoundPath]);
 }
