@@ -11,7 +11,7 @@ import SoundPlayer from './SoundPlayer';
 export function useSound() {
   const gameScene = useRecoilValue(gameSceneSelector);
   useEffect(() => {
-    const path = gameScene.sceneSoundPath ?? '';
+    const path = gameScene.sceneSoundPath?.trim() ?? '';
     if (!path.length) return;
 
     if (process.env.NODE_ENV === 'development')
@@ -21,7 +21,7 @@ export function useSound() {
 
   return {
     manuallyPlay: () => {
-      const path = gameScene.sceneSoundPath ?? '';
+      const path = gameScene.sceneSoundPath?.trim() ?? '';
       if (!path.length) return;
 
       SoundPlayer.play(path);

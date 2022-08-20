@@ -50,9 +50,12 @@ export const gameSceneSelector = selector<Scene>({
     let backgroundImagePath = encodeURI(
       `${RESOURCE_PATH}/characters/${gameConfig.characterName}/background/${gameScene.backgroundImage}`,
     ).replaceAll('#', '%23');
-    let sceneSoundPath = encodeURI(
-      `${RESOURCE_PATH}/characters/${gameConfig.characterName}/sound/${gameScene.sceneSound}`,
-    ).replaceAll('#', '%23');
+    let sceneSoundPath =
+      gameScene.sceneSound && gameScene.sceneSound.length > 0
+        ? encodeURI(
+            `${RESOURCE_PATH}/characters/${gameConfig.characterName}/sound/${gameScene.sceneSound}`,
+          ).replaceAll('#', '%23')
+        : '';
     let backgroundSoundPath = encodeURI(
       `${RESOURCE_PATH}/characters/${gameConfig.characterName}/bgm/${gameScene.backgroundSound}`,
     ).replaceAll('#', '%23');
