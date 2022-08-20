@@ -13,7 +13,7 @@ export const loadScript = async (characterName: string) => {
 
     if (characterName === 'debug')
       filePath = `${DEBUG_LINK}/${characterName}/script.txt`;
-    const data = await fetch(filePath);
+    const data = await fetch(filePath, { cache: 'no-cache' });
     const scenes = await data.json();
     return scenes;
   } catch (error) {
