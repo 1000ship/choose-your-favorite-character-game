@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
-import { isAndroid, isiOS } from '../Constant/environment';
+import { isiOS } from '../Constant/environment';
 
 import { gameSceneSelector } from '../Constant/selectors';
 
@@ -18,6 +18,15 @@ export function useSound() {
       toast.info(`Sound Path : ${path}`);
     SoundPlayer.play(path);
   }, [gameScene.sceneSoundPath]);
+
+  return {
+    manuallyPlay: () => {
+      const path = gameScene.sceneSoundPath ?? '';
+      if (!path.length) return;
+
+      SoundPlayer.play(path);
+    },
+  };
 }
 
 export function useBGM() {

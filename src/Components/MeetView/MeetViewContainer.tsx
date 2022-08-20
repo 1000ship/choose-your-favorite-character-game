@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { toast } from 'react-toastify';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { gameOverAtom } from '../../Constant/atoms';
@@ -9,7 +10,13 @@ import {
 
 import MeetViewPresenter from './MeetViewPresenter';
 
-const MeetViewContainer: React.FC = () => {
+interface MeetViewContainerProps {
+  playSound: () => void;
+}
+
+const MeetViewContainer: React.FC<MeetViewContainerProps> = (props) => {
+  const { playSound } = props;
+
   const gameConfig = useRecoilValue(gameConfigSelector);
   const [gameScene, setGameScene] = useRecoilState(gameSceneSelector);
   const gameOver = useRecoilValue(gameOverAtom);
@@ -55,6 +62,14 @@ const MeetViewContainer: React.FC = () => {
             // 다음 장면으로 넘어가되, 대사가 없으면 바로 선택지로 이동
             setGameScene({ ...nextScene, step: 'option' });
           } else {
+            // 모바일 웹 목소리 재생--------
+            if (nextScene.sceneSound) {
+              if (process.env.NODE_ENV === 'development')
+                toast.info('사용자 음성을 재생합니다. ' + nextScene.sceneSound);
+              playSound();
+            }
+            // ----------------------------
+
             setGameScene({ ...nextScene, step: 'script' });
           }
         }
@@ -88,6 +103,15 @@ const MeetViewContainer: React.FC = () => {
               // 다음 장면으로 넘어가되, 대사가 없으면 바로 선택지로 이동
               return { ...nextScene, step: 'option' };
             }
+
+            // 모바일 웹 목소리 재생 ------------------
+            if (nextScene.sceneSound) {
+              if (process.env.NODE_ENV === 'development')
+                toast.info('사용자 음성을 재생합니다. ' + nextScene.sceneSound);
+              playSound();
+            }
+            // -------------------------------------
+
             return { ...nextScene, step: 'script' };
           }
         }

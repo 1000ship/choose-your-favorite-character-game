@@ -29,7 +29,8 @@ const GamePage: React.FC<RouteComponentProps> = () => {
     window.addEventListener('click', manuallyPlay);
     return () => window.removeEventListener('click', manuallyPlay);
   }, [manuallyPlay]);
-  useSound();
+
+  const { manuallyPlay: playSound } = useSound();
 
   useEffect(() => {
     let initScene: Scene | null;
@@ -85,7 +86,7 @@ const GamePage: React.FC<RouteComponentProps> = () => {
       {layoutConfig.viewType === 'text' ? (
         <ChattingView />
       ) : layoutConfig.viewType === 'meet' ? (
-        <MeetView />
+        <MeetView playSound={playSound} />
       ) : undefined}
       <GameOverModal
         isOpened={isGameOver ?? false}
