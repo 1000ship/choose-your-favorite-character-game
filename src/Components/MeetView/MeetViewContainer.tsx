@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { gameOverAtom } from '../../Constant/atoms';
+import { isiOS } from '../../Constant/environment';
 import {
   gameConfigSelector,
   gameSceneSelector,
@@ -11,7 +12,7 @@ import {
 import MeetViewPresenter from './MeetViewPresenter';
 
 interface MeetViewContainerProps {
-  playSound: () => void;
+  playSound: (path: string) => void;
 }
 
 const MeetViewContainer: React.FC<MeetViewContainerProps> = (props) => {
@@ -35,6 +36,14 @@ const MeetViewContainer: React.FC<MeetViewContainerProps> = (props) => {
             // 다음 장면으로 넘어가되, 대사가 없으면 바로 선택지로 이동
             setGameScene({ ...nextScene, step: 'option' });
           } else {
+            // 모바일 웹 목소리 재생--------
+            if (nextScene.sceneSound) {
+              if (process.env.NODE_ENV === 'development')
+                toast.info('사용자 음성을 재생합니다. ' + nextScene.sceneSound);
+              if (isiOS) setTimeout(() => playSound(nextScene.sceneSound), 100);
+            }
+            // ----------------------------
+
             setGameScene({ ...nextScene, step: 'script' });
           }
         }
@@ -66,7 +75,7 @@ const MeetViewContainer: React.FC<MeetViewContainerProps> = (props) => {
             if (nextScene.sceneSound) {
               if (process.env.NODE_ENV === 'development')
                 toast.info('사용자 음성을 재생합니다. ' + nextScene.sceneSound);
-              playSound();
+              if (isiOS) setTimeout(() => playSound(nextScene.sceneSound), 100);
             }
             // ----------------------------
 
@@ -108,7 +117,7 @@ const MeetViewContainer: React.FC<MeetViewContainerProps> = (props) => {
             if (nextScene.sceneSound) {
               if (process.env.NODE_ENV === 'development')
                 toast.info('사용자 음성을 재생합니다. ' + nextScene.sceneSound);
-              playSound();
+              if (isiOS) setTimeout(() => playSound(nextScene.sceneSound), 100);
             }
             // -------------------------------------
 

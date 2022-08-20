@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
+import { RESOURCE_PATH } from '../Constant';
 import { isiOS } from '../Constant/environment';
 
-import { gameSceneSelector } from '../Constant/selectors';
+import { gameConfigSelector, gameSceneSelector } from '../Constant/selectors';
 
 import BGMPlayer from './BGMPlayer';
 import SoundPlayer from './SoundPlayer';
 
 export function useSound() {
+  const gameConfig = useRecoilValue(gameConfigSelector);
   const gameScene = useRecoilValue(gameSceneSelector);
   useEffect(() => {
     const path = gameScene.sceneSoundPath?.trim() ?? '';
@@ -20,10 +22,14 @@ export function useSound() {
   }, [gameScene.sceneSoundPath]);
 
   return {
-    manuallyPlay: () => {
-      const path = gameScene.sceneSoundPath?.trim() ?? '';
+    manuallyPlay: (link: string) => {
+      const path =
+        link.length > 0
+          ? encodeURI(
+              `${RESOURCE_PATH}/characters/${gameConfig.characterName}/sound/${link}`,
+            ).replaceAll('#', '%23')
+          : '';
       if (!path.length) return;
-
       SoundPlayer.play(path);
     },
   };
