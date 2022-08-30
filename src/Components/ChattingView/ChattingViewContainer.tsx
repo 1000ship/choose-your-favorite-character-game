@@ -96,7 +96,9 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
       }
     } else {
       // 선택지가 있다면, 선택가능하게 설정
-      setSelectable(true);
+      sleep(1000).then(() => {
+        setSelectable(true);
+      });
     }
   }, [gameScene, gameConfig.scenes, setGameScene]);
 
