@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { gameConfigAtom } from '../../Constant/atoms';
 
-import { gameSceneSelector } from '../../Constant/selectors';
+import {
+  gameConfigSelector,
+  gameSceneSelector,
+} from '../../Constant/selectors';
 
 import ChatBox from './ChatBox';
 
@@ -21,7 +25,7 @@ const BackgroundImage = styled.div<{ imageSrc: string }>`
   background-size: cover;
 `;
 
-const CharacterImage = styled.img`
+const CharacterImage = styled.img<{ scale: number }>`
   height: 90%;
   position: absolute;
   left: 50%;
@@ -29,7 +33,7 @@ const CharacterImage = styled.img`
   object-position: bottom;
   object-fit: contain;
   transform-origin: bottom center;
-  transform: scale(1.1) translate(-50%, 0);
+  transform: translateX(-50%) scale(${({ scale }) => scale});
 `;
 
 export interface MeetViewPresenterProps {
@@ -37,11 +41,13 @@ export interface MeetViewPresenterProps {
   stepFromReaction: React.MouseEventHandler;
   selectOption: Function;
 }
+
 const MeetViewPresenter: React.FC<MeetViewPresenterProps> = ({
   stepFromScript,
   stepFromReaction,
   selectOption,
 }) => {
+  const gameConfig = useRecoilValue(gameConfigSelector);
   const gameScene = useRecoilValue(gameSceneSelector);
   const [state, setState] = useState({
     backgroundImagePath: '',
@@ -101,7 +107,16 @@ const MeetViewPresenter: React.FC<MeetViewPresenterProps> = ({
         <BackgroundImage imageSrc={state.backgroundImagePath || ''} />
       )}
       {state.characterImagePath.length && (
-        <CharacterImage src={state.characterImagePath || ''} />
+        <CharacterImage
+          src={state.characterImagePath || ''}
+          scale={
+            ['amy_female', 'amy_male', 'bella', 'clair'].includes(
+              gameConfig.characterName,
+            )
+              ? 1.3
+              : 1.1
+          }
+        />
       )}
       <ChatBox selectOption={selectOption} />
     </Container>
