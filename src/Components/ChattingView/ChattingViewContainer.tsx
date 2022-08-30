@@ -34,6 +34,7 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
       if (answer?.length) result.push({ who: 'right', message: answer });
       return result;
     });
+
     // 대기 후 응답 출력
     await sleep(1000);
     setChatList((chatList) => {
@@ -55,7 +56,8 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
   };
 
   useEffect(() => {
-    if (gameConfig.sceneType !== 'text') return;
+    if (gameScene.sceneType !== 'text') return;
+
     setChatList((chatList) => {
       // 채팅 중복 방지 임시처리
       return gameScene.sceneScript?.length > 0 &&
@@ -76,12 +78,20 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
 
     if (gameScene.options.length === 0) {
       // 선택지가 없는 경우, 자동 씬 재생
-      if (nextScene && nextScene.sceneType === 'text') {
+      if (nextScene) {
         const sleepTime = nextScene?.sceneType === 'text' ? 1500 : 4000;
         sleep(sleepTime).then(() => {
           if (process.env.NODE_ENV === 'development')
             toast.info('선택지가 없는 경우, 자동 씬 재생');
-          setGameScene(nextScene);
+          setGameScene({
+            ...nextScene,
+            step:
+              nextScene.sceneType === 'meet'
+                ? nextScene.sceneScript.length === 0
+                  ? 'option'
+                  : 'script'
+                : undefined,
+          });
         });
       }
     } else {

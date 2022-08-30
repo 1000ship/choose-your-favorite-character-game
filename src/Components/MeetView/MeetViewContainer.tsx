@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
@@ -21,6 +21,33 @@ const MeetViewContainer: React.FC<MeetViewContainerProps> = (props) => {
   const gameConfig = useRecoilValue(gameConfigSelector);
   const [gameScene, setGameScene] = useRecoilState(gameSceneSelector);
   const gameOver = useRecoilValue(gameOverAtom);
+
+  useEffect(() => {
+    if (gameScene.sceneType !== 'meet') return;
+
+    // 대사 없으면 자동으로 다음으로 이동
+    if (gameScene.sceneScript.length === 0) {
+      const nextScene = gameConfig.scenes?.find(
+        (scene) => scene.sceneId === gameScene?.nextSceneId,
+      );
+      if (nextScene) {
+        if (nextScene.sceneScript?.length === 0) {
+          // 다음 장면으로 넘어가되, 대사가 없으면 바로 선택지로 이동
+          setGameScene({ ...nextScene, step: 'option' });
+        } else {
+          // 모바일 웹 목소리 재생--------
+          if (nextScene.sceneSound) {
+            if (process.env.NODE_ENV === 'development')
+              toast.info('사용자 음성을 재생합니다. ' + nextScene.sceneSound);
+            if (isiOS) setTimeout(() => playSound(nextScene.sceneSound), 100);
+          }
+          // ----------------------------
+
+          setGameScene({ ...nextScene, step: 'script' });
+        }
+      }
+    }
+  }, [gameScene, gameConfig]);
 
   const stepFromScript = useCallback(
     (e: React.MouseEvent) => {
