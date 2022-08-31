@@ -1,13 +1,11 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-
 import { gameOverAtom } from '../../Constant/atoms';
 import { gameSceneSelector } from '../../Constant/selectors';
 import { Chat } from '../../Constant/types';
 import CYFCLogoImage from '../../Resources/Images/cyfc_top_logo.png';
 import useScriptParser from '../../Utils/useScriptParser';
-
 import OptionMessage from './OptionMessage';
 
 const AppBarHeight = 80;
@@ -36,8 +34,9 @@ const Contents = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: ${AppBarHeight}px;
+  width: 100vw;
   overflow-x: hidden;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 `;
 const DateText = styled.span`
   color: #939393;
@@ -134,16 +133,12 @@ const ChattingViewPresenter: React.FC<ChattingViewPresenterProps> = ({
   const isGameOver = useRecoilValue(gameOverAtom);
   const scriptParser = useScriptParser();
 
-  const messageContentsRef = useCallback((el: HTMLDivElement) => {
-    if (el) window.scrollTo(0, window.outerHeight);
-  }, []);
-
   return (
     <Container>
       <AppBar>
         <LogoImage src={CYFCLogoImage} alt="CYFC" onClick={onLogoClick} />
       </AppBar>
-      <Contents ref={messageContentsRef}>
+      <Contents>
         <DateText>오늘</DateText>
         {chatList.map(({ who, message, isEnding }, i) =>
           isEnding ? (

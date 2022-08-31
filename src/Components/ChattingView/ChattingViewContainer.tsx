@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import animateScrollTo from 'animated-scroll-to';
+import React, { useEffect, useMemo, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -10,6 +11,7 @@ import {
 } from '../../Constant/selectors';
 import { Chat } from '../../Constant/types';
 import { sleep } from '../../Utils/api';
+import debounce from '../../Utils/debounce';
 
 import ChattingViewPresenter from './ChattingViewPresenter';
 
@@ -102,9 +104,21 @@ const ChattingViewContainer: React.FC<RouteComponentProps> = ({ history }) => {
     }
   }, [gameScene, gameConfig.scenes, setGameScene]);
 
+  const scrollToDown = useMemo(
+    () =>
+      debounce(() => {
+        animateScrollTo(document.body.scrollHeight, {
+          speed: 1000,
+          minDuration: 1000,
+          maxDuration: 1000,
+        });
+      }, 100),
+    [],
+  );
+
   useEffect(() => {
-    window.scrollTo({ top: document.body.scrollHeight });
-  }, [chatList]);
+    scrollToDown();
+  }, [chatList, selectable, scrollToDown]);
 
   const onLogoClick = (e: React.MouseEvent) => {
     if (isGameOver) return;
